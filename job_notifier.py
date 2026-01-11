@@ -1,8 +1,12 @@
 """
-Job notification system - detects new jobs and prepares email notifications.
+Job notification system - detects new jobs and sends email notifications.
 """
 
 import json
+import os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from pathlib import Path
 from datetime import datetime
 from dataclasses import dataclass
@@ -10,6 +14,10 @@ from dataclasses import dataclass
 
 JOBS_FILE = Path(__file__).parent / "jobs.json"
 SEEN_JOBS_FILE = Path(__file__).parent / "seen_jobs.json"
+
+EMAIL_ADDRESS = "danik.hollatz@t-online.de"
+SMTP_SERVER = "securesmtp.t-online.de"
+SMTP_PORT = 587
 
 
 @dataclass
@@ -93,6 +101,49 @@ def print_new_jobs(jobs: list[NewJob]) -> None:
         print()
 
 
+def send_email(jobs: list[NewJob], password: str) -> bool:
+    """Send email with new jobs."""
+    if not jobs:
+        return False
+
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = f"Quality Jobs: {len(jobs)} new position(s) found!"
+    msg["From"] = EMAIL_ADDRESS
+    msg["To"] = EMAIL_ADDRESS
+
+    # Plain text version
+    text = f"{len(jobs)} new job(s) found:\n\n"
+    for job in jobs:
+        text += f"- {job.title} at {job.company}\n  {job.url}\n\n"
+
+    # HTML version
+    html = f"""
+    <html>
+    <body>
+    <h2>{len(jobs)} new job(s) found!</h2>
+    <ul>
+    {"".join(f'<li><a href="{job.url}"><b>{job.title}</b></a> at {job.company} ({job.location})</li>' for job in jobs)}
+    </ul>
+    <p><a href="https://dankopenko.github.io/QualityJobs/">View all jobs</a></p>
+    </body>
+    </html>
+    """
+
+    msg.attach(MIMEText(text, "plain"))
+    msg.attach(MIMEText(html, "html"))
+
+    try:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.starttls()
+            server.login(EMAIL_ADDRESS, password)
+            server.send_message(msg)
+        print("Email sent successfully!")
+        return True
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+        return False
+
+
 def initialize_seen_jobs() -> None:
     """Mark all current jobs as seen (for initial setup)."""
     all_jobs = load_jobs()
@@ -111,5 +162,12 @@ if __name__ == "__main__":
         print_new_jobs(new_jobs)
 
         if new_jobs:
+            # Send email if password is available
+            password = os.environ.get("EMAIL_PASSWORD")
+            if password:
+                send_email(new_jobs, password)
+            else:
+                print("(EMAIL_PASSWORD not set, skipping email)")
+
             mark_jobs_as_seen(new_jobs)
             print("(Jobs marked as seen for next run)")
