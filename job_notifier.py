@@ -15,8 +15,8 @@ from dataclasses import dataclass
 JOBS_FILE = Path(__file__).parent / "jobs.json"
 SEEN_JOBS_FILE = Path(__file__).parent / "seen_jobs.json"
 
-EMAIL_ADDRESS = "danik.hollatz@t-online.de"
-SMTP_SERVER = "securesmtp.t-online.de"
+EMAIL_ADDRESS = "danko.penko@gmail.com"
+SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
 
