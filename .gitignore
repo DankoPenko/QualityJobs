@@ -4,4 +4,3 @@ __pycache__/
 .venv/
 venv/
 *.egg-info/
-seen_jobs.json
