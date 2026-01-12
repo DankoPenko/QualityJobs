@@ -7,7 +7,18 @@ Usage:
 """
 
 import json
+from pathlib import Path
 from scrapers import AmazonScraper, DeliveryHeroScraper, BoltScraper, ZalandoScraper, HelloFreshScraper, N26Scraper, Auto1Scraper, SAPScraper
+
+
+def load_existing_jobs(filepath: str) -> dict[str, dict]:
+    """Load existing jobs and return a dict keyed by job ID."""
+    path = Path(filepath)
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        jobs = json.load(f)
+    return {str(job.get("id", "")): job for job in jobs if job.get("id")}
 
 
 def main():
@@ -15,6 +26,12 @@ def main():
     print("Job Scraper - Germany ML/AI Jobs")
     print("=" * 80)
     print()
+
+    output_file = "jobs.json"
+
+    # Load existing jobs to preserve scraped_at for known jobs
+    existing_jobs = load_existing_jobs(output_file)
+    print(f"Loaded {len(existing_jobs)} existing jobs from {output_file}")
 
     # Initialize scrapers
     scrapers = [
@@ -47,9 +64,25 @@ def main():
     print(f"TOTAL: {len(all_jobs)} jobs found across {len(scrapers)} companies")
     print("=" * 80)
 
-    # Save to JSON first (before printing which may fail on Windows with Unicode)
-    output_file = "jobs.json"
-    jobs_data = [job.to_dict() for job in all_jobs]
+    # Convert to dicts, preserving scraped_at for existing jobs
+    jobs_data = []
+    new_count = 0
+    for job in all_jobs:
+        job_dict = job.to_dict()
+        job_id = str(job_dict.get("id", ""))
+
+        if job_id in existing_jobs:
+            # Preserve original scraped_at timestamp
+            job_dict["scraped_at"] = existing_jobs[job_id].get("scraped_at", job_dict["scraped_at"])
+        else:
+            new_count += 1
+
+        jobs_data.append(job_dict)
+
+    print(f"New jobs: {new_count}")
+
+    # Sort by scraped_at descending (newest first)
+    jobs_data.sort(key=lambda x: x.get("scraped_at", ""), reverse=True)
 
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(jobs_data, f, indent=2, ensure_ascii=False)
