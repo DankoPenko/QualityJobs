@@ -7,8 +7,11 @@ Usage:
 """
 
 import json
+from datetime import datetime
 from pathlib import Path
 from scrapers import AmazonScraper, DeliveryHeroScraper, BoltScraper, ZalandoScraper, HelloFreshScraper, N26Scraper, Auto1Scraper, SAPScraper
+
+ARCHIVE_FILE = "archived_jobs.json"
 
 
 def load_existing_jobs(filepath: str) -> dict[str, dict]:
@@ -19,6 +22,44 @@ def load_existing_jobs(filepath: str) -> dict[str, dict]:
     with open(path, "r", encoding="utf-8") as f:
         jobs = json.load(f)
     return {str(job.get("id", "")): job for job in jobs if job.get("id")}
+
+
+def load_archived_jobs() -> list[dict]:
+    """Load archived jobs from archive file."""
+    path = Path(ARCHIVE_FILE)
+    if not path.exists():
+        return []
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_archived_jobs(jobs: list[dict]) -> None:
+    """Save archived jobs to archive file."""
+    with open(ARCHIVE_FILE, "w", encoding="utf-8") as f:
+        json.dump(jobs, f, indent=2, ensure_ascii=False)
+
+
+def archive_stale_jobs(existing_jobs: dict[str, dict], current_job_ids: set[str]) -> int:
+    """Move jobs that no longer appear in scrape results to archive."""
+    stale_ids = set(existing_jobs.keys()) - current_job_ids
+    if not stale_ids:
+        return 0
+
+    archived = load_archived_jobs()
+    archived_ids = {str(job.get("id", "")) for job in archived}
+    now = datetime.now().isoformat()
+
+    for job_id in stale_ids:
+        if job_id not in archived_ids:
+            job = existing_jobs[job_id].copy()
+            job["archived_at"] = now
+            archived.append(job)
+
+    # Sort by archived_at descending (most recently archived first)
+    archived.sort(key=lambda x: x.get("archived_at", ""), reverse=True)
+    save_archived_jobs(archived)
+
+    return len(stale_ids)
 
 
 def main():
@@ -80,6 +121,12 @@ def main():
         jobs_data.append(job_dict)
 
     print(f"New jobs: {new_count}")
+
+    # Archive jobs that are no longer returned by scrapers
+    current_job_ids = {str(job_dict.get("id", "")) for job_dict in jobs_data}
+    archived_count = archive_stale_jobs(existing_jobs, current_job_ids)
+    if archived_count > 0:
+        print(f"Archived jobs: {archived_count}")
 
     # Sort by scraped_at descending (newest first)
     jobs_data.sort(key=lambda x: x.get("scraped_at", ""), reverse=True)
