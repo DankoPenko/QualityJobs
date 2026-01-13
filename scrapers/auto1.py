@@ -60,16 +60,23 @@ class Auto1Scraper(BaseScraper):
 
         # Filter for Germany + ML/DS jobs
         germany_count = 0
+        filtered_jobs = []
         for job_data in jobs_data:
             country = job_data.get("location", {}).get("country", "")
 
             if country == "de":
                 germany_count += 1
                 if self._is_ml_ds_job(job_data):
-                    job = self._parse_job(job_data)
-                    all_jobs.append(job)
+                    filtered_jobs.append(job_data)
 
-        print(f"  [{self.company_name}] Germany jobs: {germany_count}, ML/DS jobs: {len(all_jobs)}")
+        print(f"  [{self.company_name}] Germany jobs: {germany_count}, ML/DS jobs: {len(filtered_jobs)}")
+
+        # Fetch descriptions for filtered jobs
+        print(f"  [{self.company_name}] Fetching descriptions for {len(filtered_jobs)} jobs...")
+        for job_data in filtered_jobs:
+            description = self._fetch_job_description(job_data.get("id", ""))
+            job = self._parse_job(job_data, description)
+            all_jobs.append(job)
 
         # Sort by released date (newest first)
         all_jobs.sort(key=lambda j: self._parse_date(j.posted_date), reverse=True)
@@ -79,7 +86,26 @@ class Auto1Scraper(BaseScraper):
 
         return all_jobs
 
-    def _parse_job(self, data: dict) -> Job:
+    def _fetch_job_description(self, job_id: str) -> Optional[str]:
+        """Fetch full job description from the job detail API."""
+        if not job_id:
+            return None
+        try:
+            url = f"{self.base_url}/{job_id}"
+            response = self._make_request(url)
+            data = response.json()
+            # Extract description from jobAd sections
+            job_ad = data.get("jobAd", {})
+            sections = job_ad.get("sections", {})
+            job_desc = sections.get("jobDescription", {})
+            description_html = job_desc.get("text", "")
+            if description_html:
+                return self._clean_html(description_html)
+        except Exception:
+            pass
+        return None
+
+    def _parse_job(self, data: dict, description: Optional[str] = None) -> Job:
         """Parse raw job data into a Job object."""
         location = data.get("location", {})
         city = location.get("city", "")
@@ -97,6 +123,7 @@ class Auto1Scraper(BaseScraper):
             updated_time=None,
             source=self.__class__.__name__,
             department=data.get("department", {}).get("label"),
+            description=description,
         )
 
     @staticmethod
