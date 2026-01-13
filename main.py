@@ -9,7 +9,7 @@ Usage:
 import json
 from datetime import datetime
 from pathlib import Path
-from scrapers import AmazonScraper, DeliveryHeroScraper, BoltScraper, ZalandoScraper, HelloFreshScraper, N26Scraper, Auto1Scraper, SAPScraper
+from scrapers import AmazonScraper, DeliveryHeroScraper, BoltScraper, ZalandoScraper, HelloFreshScraper, N26Scraper, Auto1Scraper, SAPScraper, SnapchatScraper
 
 ARCHIVE_FILE = "archived_jobs.json"
 
@@ -84,6 +84,7 @@ def main():
         N26Scraper(country_code="DEU"),
         Auto1Scraper(country_code="DEU"),
         SAPScraper(country_code="DEU"),
+        SnapchatScraper(country_code="DEU"),
     ]
 
     all_jobs = []

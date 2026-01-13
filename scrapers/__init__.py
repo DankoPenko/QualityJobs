@@ -7,5 +7,6 @@ from .hellofresh import HelloFreshScraper
 from .n26 import N26Scraper
 from .auto1 import Auto1Scraper
 from .sap import SAPScraper
+from .snapchat import SnapchatScraper
 
-__all__ = ["BaseScraper", "AmazonScraper", "DeliveryHeroScraper", "BoltScraper", "ZalandoScraper", "HelloFreshScraper", "N26Scraper", "Auto1Scraper", "SAPScraper"]
+__all__ = ["BaseScraper", "AmazonScraper", "DeliveryHeroScraper", "BoltScraper", "ZalandoScraper", "HelloFreshScraper", "N26Scraper", "Auto1Scraper", "SAPScraper", "SnapchatScraper"]
