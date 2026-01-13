@@ -99,7 +99,7 @@ class AmazonScraper(BaseScraper):
             updated_time=data.get("updated_time"),
             source=self.__class__.__name__,
             job_type=data.get("job_schedule_type"),
-            description=data.get("description_short"),
+            description=data.get("description"),
         )
 
     @staticmethod
