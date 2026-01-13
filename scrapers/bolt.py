@@ -115,6 +115,10 @@ class BoltScraper(BaseScraper):
             if len(parts) >= 1:
                 city = parts[0]
 
+        # Extract description from content field (HTML)
+        content = data.get("content", "")
+        description = self._clean_html(content) if content else None
+
         return Job(
             id=str(data.get("id", "")),
             title=data.get("title", ""),
@@ -127,6 +131,7 @@ class BoltScraper(BaseScraper):
             updated_time=data.get("updated_at"),
             source=self.__class__.__name__,
             department=department,
+            description=description,
         )
 
     @staticmethod

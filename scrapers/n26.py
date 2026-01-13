@@ -53,7 +53,8 @@ class N26Scraper(BaseScraper):
         print(f"  [{self.company_name}] Fetching jobs from Greenhouse API...")
 
         try:
-            response = self._make_request(self.base_url)
+            params = {"content": "true"}  # Include job content/description
+            response = self._make_request(self.base_url, params=params)
             data = response.json()
         except Exception as e:
             print(f"  [{self.company_name}] Error: {e}")
@@ -87,6 +88,10 @@ class N26Scraper(BaseScraper):
         """Parse raw job data into a Job object."""
         location = data.get("location", {}).get("name", "")
 
+        # Extract description from content field (HTML)
+        content = data.get("content", "")
+        description = self._clean_html(content) if content else None
+
         return Job(
             id=str(data.get("id", "")),
             title=data.get("title", ""),
@@ -98,6 +103,7 @@ class N26Scraper(BaseScraper):
             posted_date=data.get("first_published"),
             updated_time=data.get("updated_at"),
             source=self.__class__.__name__,
+            description=description,
         )
 
     @staticmethod
