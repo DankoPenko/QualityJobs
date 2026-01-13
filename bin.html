@@ -49,12 +49,25 @@
             align-items: center;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             border-left: 3px solid #999;
+            position: relative;
         }
         .job-item:hover {
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
         .job-info {
             flex: 1;
+        }
+        .job-logo {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            object-fit: contain;
+            background: #f9f9f9;
+            padding: 2px;
+            opacity: 0.6;
         }
         .job-title {
             color: #666;
@@ -139,6 +152,23 @@
             });
         }
 
+        const companyDomains = {
+            'Amazon': 'amazon.com',
+            'SAP': 'sap.com',
+            'Zalando': 'zalando.com',
+            'AUTO1 Group': 'auto1-group.com',
+            'Delivery Hero': 'deliveryhero.com',
+            'Snapchat': 'snap.com',
+            'HelloFresh': 'hellofresh.com',
+            'Bolt': 'bolt.eu',
+            'N26': 'n26.com'
+        };
+
+        function getCompanyLogo(company) {
+            const domain = companyDomains[company];
+            return domain ? `https://logo.clearbit.com/${domain}` : null;
+        }
+
         async function loadJobs() {
             const jobList = document.getElementById('job-list');
             const jobCount = document.getElementById('job-count');
@@ -163,7 +193,9 @@
                     return;
                 }
 
-                jobList.innerHTML = jobs.map(job => `
+                jobList.innerHTML = jobs.map(job => {
+                    const logoUrl = getCompanyLogo(job.company);
+                    return `
                     <li class="job-item">
                         <div class="job-info">
                             <a href="${job.url}" class="job-title" target="_blank" rel="noopener">${job.title}</a>
@@ -171,8 +203,9 @@
                             <div class="job-location">${job.location || ''}</div>
                             <div class="job-archived">Archived: ${formatDate(job.archived_at)}</div>
                         </div>
+                        ${logoUrl ? `<img src="${logoUrl}" alt="${job.company}" class="job-logo" onerror="this.style.display='none'">` : ''}
                     </li>
-                `).join('');
+                `}).join('');
 
             } catch (error) {
                 jobList.innerHTML = `<li class="error">Error loading archived jobs: ${error.message}</li>`;

@@ -92,6 +92,17 @@
         .job-info {
             flex: 1;
         }
+        .job-logo {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            object-fit: contain;
+            background: #f9f9f9;
+            padding: 2px;
+        }
         .job-title {
             color: #0066cc;
             text-decoration: none;
@@ -277,6 +288,26 @@
             });
         }
 
+        const companyDomains = {
+            'Amazon': 'amazon.com',
+            'SAP': 'sap.com',
+            'Zalando': 'zalando.com',
+            'AUTO1 Group': 'auto1-group.com',
+            'Delivery Hero': 'deliveryhero.com',
+            'Snapchat': 'snap.com',
+            'HelloFresh': 'hellofresh.com',
+            'Bolt': 'bolt.eu',
+            'N26': 'n26.com'
+        };
+
+        function getCompanyLogo(company) {
+            const domain = companyDomains[company];
+            if (domain) {
+                return `https://logo.clearbit.com/${domain}`;
+            }
+            return null;
+        }
+
         function getCompanyCounts(jobs) {
             const counts = {};
             jobs.forEach(job => {
@@ -364,7 +395,9 @@
                 return;
             }
 
-            jobList.innerHTML = filteredJobs.map(job => `
+            jobList.innerHTML = filteredJobs.map(job => {
+                const logoUrl = getCompanyLogo(job.company);
+                return `
                 <li class="job-item${job.description ? ' has-description' : ''}">
                     <div class="job-info">
                         <a href="${job.url}" class="job-title" target="_blank" rel="noopener">${job.title}</a>
@@ -372,9 +405,10 @@
                         <div class="job-location">${job.location || ''}</div>
                         <div class="job-scraped">Scraped: ${formatDate(job.scraped_at)}</div>
                     </div>
+                    ${logoUrl ? `<img src="${logoUrl}" alt="${job.company}" class="job-logo" onerror="this.style.display='none'">` : ''}
                     ${job.description ? `<div class="job-tooltip">${job.description}</div>` : ''}
                 </li>
-            `).join('');
+            `}).join('');
         }
 
         async function loadJobs() {
