@@ -33,8 +33,24 @@ class SnapchatScraper(BaseScraper):
         "vienna", "austria", "wien"
     ]
 
+    # Vienna locations (stricter ML/AI filtering)
+    VIENNA_LOCATIONS = ["vienna", "austria", "wien"]
+
+    # Strict ML/AI keywords for Vienna
+    STRICT_ML_AI_KEYWORDS = ["machine learning", "ml ", " ml", "ai ", " ai"]
+
     # Location search terms for API
     LOCATION_SEARCHES = ["Germany", "London", "Austria"]
+
+    def _is_vienna_job(self, job_data: dict) -> bool:
+        """Check if job is located in Vienna/Austria."""
+        location = job_data.get("primary_location", "").lower()
+        offices = job_data.get("offices", [])
+        for office in offices:
+            loc = office.get("location", "").lower()
+            if any(t in loc for t in self.VIENNA_LOCATIONS):
+                return True
+        return any(t in location for t in self.VIENNA_LOCATIONS)
 
     def _is_ml_ds_job(self, job_data: dict) -> bool:
         """Check if job is ML/DS related based on title or description."""
@@ -84,10 +100,20 @@ class SnapchatScraper(BaseScraper):
                 if job_id in seen_ids:
                     continue
 
-                if self._is_target_location(job_data) and self._is_ml_ds_job(job_data):
-                    job = self._parse_job(job_data)
-                    all_jobs.append(job)
-                    seen_ids.add(job_id)
+                if not self._is_target_location(job_data):
+                    continue
+
+                # Vienna jobs: stricter ML/AI keyword filter
+                if self._is_vienna_job(job_data):
+                    title = job_data.get("title", "").lower()
+                    if not any(kw in title for kw in self.STRICT_ML_AI_KEYWORDS):
+                        continue
+                elif not self._is_ml_ds_job(job_data):
+                    continue
+
+                job = self._parse_job(job_data)
+                all_jobs.append(job)
+                seen_ids.add(job_id)
 
         print(f"  [{self.company_name}] Total ML/DS jobs found: {len(all_jobs)}")
 
