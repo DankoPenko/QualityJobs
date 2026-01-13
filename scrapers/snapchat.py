@@ -172,6 +172,11 @@ class SnapchatScraper(BaseScraper):
 
         city = location.split(",")[0].strip() if location else ""
 
+        # Try to get description from various possible fields
+        description = data.get("description") or data.get("content") or data.get("summary")
+        if description:
+            description = self._clean_html(description)
+
         return Job(
             id=str(data.get("id", "")),
             title=data.get("title", ""),
@@ -183,4 +188,5 @@ class SnapchatScraper(BaseScraper):
             posted_date=None,
             updated_time=None,
             source=self.__class__.__name__,
+            description=description,
         )

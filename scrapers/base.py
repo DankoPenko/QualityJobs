@@ -1,5 +1,6 @@
 """Base scraper class that all company scrapers inherit from."""
 
+import re
 from abc import ABC, abstractmethod
 from typing import Optional
 import requests
@@ -81,6 +82,37 @@ class BaseScraper(ABC):
         response = self.session.get(url, params=params)
         response.raise_for_status()
         return response
+
+    def _clean_html(self, html: str, max_length: int = 2000) -> str:
+        """
+        Clean HTML content to plain text.
+
+        Args:
+            html: HTML string to clean
+            max_length: Maximum length of output (default 2000 chars)
+
+        Returns:
+            Plain text with HTML tags removed
+        """
+        if not html:
+            return ""
+        # Remove script and style elements
+        text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', html, flags=re.DOTALL | re.IGNORECASE)
+        # Replace common block elements with newlines
+        text = re.sub(r'<(br|p|div|li|h[1-6])[^>]*/?>', '\n', text, flags=re.IGNORECASE)
+        # Remove all remaining HTML tags
+        text = re.sub(r'<[^>]+>', '', text)
+        # Decode common HTML entities
+        text = text.replace('&nbsp;', ' ').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>')
+        text = text.replace('&quot;', '"').replace('&#39;', "'")
+        # Clean up whitespace
+        text = re.sub(r'\n\s*\n', '\n\n', text)
+        text = re.sub(r'[ \t]+', ' ', text)
+        text = text.strip()
+        # Truncate if too long
+        if len(text) > max_length:
+            text = text[:max_length] + "..."
+        return text
 
     def __repr__(self) -> str:
         return f"<{self.__class__.__name__} company='{self.company_name}' country='{self.country_code}'>"

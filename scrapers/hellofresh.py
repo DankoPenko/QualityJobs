@@ -92,6 +92,9 @@ class HelloFreshScraper(BaseScraper):
 
         location = data.get("cityStateCountry", f"{city}, {state}, {country}")
 
+        # Try full description first, fall back to teaser
+        description = data.get("description") or data.get("descriptionTeaser")
+
         return Job(
             id=str(data.get("jobId", "")),
             title=data.get("title", ""),
@@ -104,7 +107,7 @@ class HelloFreshScraper(BaseScraper):
             updated_time=data.get("dateCreated"),
             source=self.__class__.__name__,
             department=data.get("category"),
-            description=data.get("descriptionTeaser"),
+            description=description,
         )
 
     @staticmethod
