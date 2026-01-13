@@ -85,8 +85,7 @@ class DeliveryHeroScraper(BaseScraper):
                     germany_count += 1
                     # Also check if it's ML/DS related
                     if self._is_ml_ds_job(job_data):
-                        job = self._parse_job(job_data)
-                        all_jobs.append(job)
+                        all_jobs.append(job_data)
 
             total_found = data.get("totalFound", 0)
             print(f"  [{self.company_name}] Processed {min(offset + limit, total_found)}/{total_found} jobs")
@@ -98,13 +97,21 @@ class DeliveryHeroScraper(BaseScraper):
 
         print(f"  [{self.company_name}] Germany jobs: {germany_count}, ML/DS jobs: {len(all_jobs)}")
 
+        # Fetch descriptions for filtered jobs
+        print(f"  [{self.company_name}] Fetching descriptions for {len(all_jobs)} jobs...")
+        parsed_jobs: list[Job] = []
+        for job_data in all_jobs:
+            description = self._fetch_job_description(job_data.get("id", ""))
+            job = self._parse_job(job_data, description)
+            parsed_jobs.append(job)
+
         # Sort by posted date (newest first)
-        all_jobs.sort(key=lambda j: self._parse_date(j.posted_date), reverse=True)
+        parsed_jobs.sort(key=lambda j: self._parse_date(j.posted_date), reverse=True)
 
         if max_results:
-            all_jobs = all_jobs[:max_results]
+            parsed_jobs = parsed_jobs[:max_results]
 
-        return all_jobs
+        return parsed_jobs
 
     def _fetch_page(self, offset: int, limit: int) -> dict:
         """Fetch a single page of results from the API."""
@@ -116,7 +123,26 @@ class DeliveryHeroScraper(BaseScraper):
         response = self._make_request(self.base_url, params=params)
         return response.json()
 
-    def _parse_job(self, data: dict) -> Job:
+    def _fetch_job_description(self, job_id: str) -> Optional[str]:
+        """Fetch full job description from the job detail API."""
+        if not job_id:
+            return None
+        try:
+            url = f"{self.base_url}/{job_id}"
+            response = self._make_request(url)
+            data = response.json()
+            # Extract description from jobAd sections
+            job_ad = data.get("jobAd", {})
+            sections = job_ad.get("sections", {})
+            job_desc = sections.get("jobDescription", {})
+            description_html = job_desc.get("text", "")
+            if description_html:
+                return self._clean_html(description_html)
+        except Exception:
+            pass
+        return None
+
+    def _parse_job(self, data: dict, description: Optional[str] = None) -> Job:
         """Parse raw API data into a Job object."""
         location = data.get("location", {})
         department = data.get("department", {})
@@ -133,6 +159,7 @@ class DeliveryHeroScraper(BaseScraper):
             updated_time=None,  # SmartRecruiters doesn't provide this
             source=self.__class__.__name__,
             department=department.get("label") if department else None,
+            description=description,
         )
 
     @staticmethod
