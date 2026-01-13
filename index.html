@@ -112,9 +112,92 @@
             border-radius: 10px;
             font-size: 0.9em;
         }
+        .filter-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        .filter-btn {
+            background: #666;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+        }
+        .filter-btn:hover {
+            background: #555;
+        }
+        .filter-btn.active {
+            background: #0066cc;
+        }
+        .filter-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 8px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            min-width: 200px;
+            display: none;
+            padding: 8px 0;
+        }
+        .filter-menu.show {
+            display: block;
+        }
+        .filter-menu label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .filter-menu label:hover {
+            background: #f5f5f5;
+        }
+        .filter-menu input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .filter-count {
+            margin-left: auto;
+            color: #999;
+            font-size: 0.85em;
+        }
+        .filter-divider {
+            height: 1px;
+            background: #eee;
+            margin: 8px 0;
+        }
+        .filter-menu .select-all {
+            color: #0066cc;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
+    <div class="filter-container" id="filter-container">
+        <button class="filter-btn" id="filter-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+            </svg>
+            Filter
+        </button>
+        <div class="filter-menu" id="filter-menu">
+            <!-- Populated by JavaScript -->
+        </div>
+    </div>
+
     <div class="container">
         <h1>Quality Jobs</h1>
         <p class="subtitle">ML / Data Science Positions in Germany</p>
@@ -133,6 +216,10 @@
     </a>
 
     <script>
+        let allJobs = [];
+        let selectedCompanies = new Set();
+        let menuPinned = false;
+
         function formatDate(isoString) {
             if (!isoString) return '';
             const date = new Date(isoString);
@@ -145,6 +232,104 @@
             });
         }
 
+        function getCompanyCounts(jobs) {
+            const counts = {};
+            jobs.forEach(job => {
+                counts[job.company] = (counts[job.company] || 0) + 1;
+            });
+            return counts;
+        }
+
+        function buildFilterMenu(jobs) {
+            const menu = document.getElementById('filter-menu');
+            const counts = getCompanyCounts(jobs);
+            const companies = Object.keys(counts).sort();
+
+            // Initialize all companies as selected
+            companies.forEach(c => selectedCompanies.add(c));
+
+            let html = `
+                <label class="select-all">
+                    <input type="checkbox" id="select-all" checked>
+                    <span>All Companies</span>
+                    <span class="filter-count">${jobs.length}</span>
+                </label>
+                <div class="filter-divider"></div>
+            `;
+
+            companies.forEach(company => {
+                html += `
+                    <label>
+                        <input type="checkbox" value="${company}" checked class="company-checkbox">
+                        <span>${company}</span>
+                        <span class="filter-count">${counts[company]}</span>
+                    </label>
+                `;
+            });
+
+            menu.innerHTML = html;
+
+            // Event listeners for checkboxes
+            document.getElementById('select-all').addEventListener('change', (e) => {
+                const checkboxes = document.querySelectorAll('.company-checkbox');
+                checkboxes.forEach(cb => {
+                    cb.checked = e.target.checked;
+                    if (e.target.checked) {
+                        selectedCompanies.add(cb.value);
+                    } else {
+                        selectedCompanies.delete(cb.value);
+                    }
+                });
+                renderJobs();
+            });
+
+            document.querySelectorAll('.company-checkbox').forEach(cb => {
+                cb.addEventListener('change', (e) => {
+                    if (e.target.checked) {
+                        selectedCompanies.add(e.target.value);
+                    } else {
+                        selectedCompanies.delete(e.target.value);
+                    }
+                    updateSelectAll();
+                    renderJobs();
+                });
+            });
+        }
+
+        function updateSelectAll() {
+            const checkboxes = document.querySelectorAll('.company-checkbox');
+            const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+            const someChecked = Array.from(checkboxes).some(cb => cb.checked);
+            const selectAll = document.getElementById('select-all');
+            selectAll.checked = allChecked;
+            selectAll.indeterminate = someChecked && !allChecked;
+        }
+
+        function renderJobs() {
+            const jobList = document.getElementById('job-list');
+            const jobCount = document.getElementById('job-count');
+
+            const filteredJobs = allJobs.filter(job => selectedCompanies.has(job.company));
+
+            jobCount.textContent = `${filteredJobs.length} position${filteredJobs.length !== 1 ? 's' : ''}`;
+
+            if (filteredJobs.length === 0) {
+                jobList.innerHTML = '<li class="loading">No jobs match your filter.</li>';
+                return;
+            }
+
+            jobList.innerHTML = filteredJobs.map(job => `
+                <li class="job-item">
+                    <div class="job-info">
+                        <a href="${job.url}" class="job-title" target="_blank" rel="noopener">${job.title}</a>
+                        <div class="job-company">${job.company}</div>
+                        <div class="job-location">${job.location || ''}</div>
+                        <div class="job-scraped">Scraped: ${formatDate(job.scraped_at)}</div>
+                    </div>
+                </li>
+            `).join('');
+        }
+
         async function loadJobs() {
             const jobList = document.getElementById('job-list');
             const jobCount = document.getElementById('job-count');
@@ -153,25 +338,15 @@
                 const response = await fetch('jobs.json');
                 if (!response.ok) throw new Error('Failed to load jobs');
 
-                const jobs = await response.json();
+                allJobs = await response.json();
 
-                jobCount.textContent = `${jobs.length} positions`;
-
-                if (jobs.length === 0) {
+                if (allJobs.length === 0) {
                     jobList.innerHTML = '<li class="loading">No jobs found.</li>';
                     return;
                 }
 
-                jobList.innerHTML = jobs.map(job => `
-                    <li class="job-item">
-                        <div class="job-info">
-                            <a href="${job.url}" class="job-title" target="_blank" rel="noopener">${job.title}</a>
-                            <div class="job-company">${job.company}</div>
-                            <div class="job-location">${job.location || ''}</div>
-                            <div class="job-scraped">Scraped: ${formatDate(job.scraped_at)}</div>
-                        </div>
-                    </li>
-                `).join('');
+                buildFilterMenu(allJobs);
+                renderJobs();
 
             } catch (error) {
                 jobList.innerHTML = `<li class="error">Error loading jobs: ${error.message}</li>`;
@@ -191,6 +366,33 @@
                 // Archive file doesn't exist yet, that's fine
             }
         }
+
+        // Filter menu hover/click behavior
+        const filterContainer = document.getElementById('filter-container');
+        const filterBtn = document.getElementById('filter-btn');
+        const filterMenu = document.getElementById('filter-menu');
+
+        filterBtn.addEventListener('click', () => {
+            menuPinned = !menuPinned;
+            filterBtn.classList.toggle('active', menuPinned);
+            if (menuPinned) {
+                filterMenu.classList.add('show');
+            } else {
+                filterMenu.classList.remove('show');
+            }
+        });
+
+        filterContainer.addEventListener('mouseenter', () => {
+            if (!menuPinned) {
+                filterMenu.classList.add('show');
+            }
+        });
+
+        filterContainer.addEventListener('mouseleave', () => {
+            if (!menuPinned) {
+                filterMenu.classList.remove('show');
+            }
+        });
 
         loadJobs();
         loadArchivedCount();
