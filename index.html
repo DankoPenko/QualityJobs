@@ -142,16 +142,24 @@
             position: absolute;
             top: 100%;
             left: 0;
-            margin-top: 8px;
+            padding-top: 8px;
+            background: transparent;
+            min-width: 200px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+        }
+        .filter-menu-inner {
             background: white;
             border-radius: 8px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-            min-width: 200px;
-            display: none;
             padding: 8px 0;
         }
         .filter-menu.show {
-            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
         .filter-menu label {
             display: flex;
@@ -248,7 +256,7 @@
             // Initialize all companies as selected
             companies.forEach(c => selectedCompanies.add(c));
 
-            let html = `
+            let html = `<div class="filter-menu-inner">
                 <label class="select-all">
                     <input type="checkbox" id="select-all" checked>
                     <span>All Companies</span>
@@ -267,6 +275,7 @@
                 `;
             });
 
+            html += `</div>`;
             menu.innerHTML = html;
 
             // Event listeners for checkboxes
