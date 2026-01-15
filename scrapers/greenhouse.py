@@ -1,4 +1,4 @@
-"""Bolt Jobs scraper using Greenhouse API."""
+"""Generic Greenhouse Jobs scraper - works with any company using Greenhouse."""
 
 from typing import Optional
 from datetime import datetime
@@ -7,15 +7,17 @@ from .base import BaseScraper
 from models import Job
 
 
-class BoltScraper(BaseScraper):
+class GreenhouseScraper(BaseScraper):
     """
-    Scraper for Bolt Jobs (ride-hailing/delivery company).
+    Generic scraper for companies using Greenhouse job boards.
 
-    Uses Greenhouse API. Bolt's board ID is 'boltv2'.
+    Usage:
+        scraper = GreenhouseScraper(
+            company_name="Databricks",
+            board_slug="databricks",
+            domain="databricks.com"
+        )
     """
-
-    company_name = "Bolt"
-    base_url = "https://api.greenhouse.io/v1/boards/boltv2/jobs"
 
     # Keywords for ML/DS job filtering
     ML_DS_KEYWORDS = [
@@ -24,6 +26,21 @@ class BoltScraper(BaseScraper):
         "computer vision", "analytics", "neural", "llm",
         "research scientist", "applied scientist"
     ]
+
+    def __init__(self, company_name: str, board_slug: str, domain: str = "", **kwargs):
+        """
+        Initialize Greenhouse scraper for a specific company.
+
+        Args:
+            company_name: Display name of the company
+            board_slug: Greenhouse board ID (e.g., 'databricks', 'gitlab')
+            domain: Company domain for logo (e.g., 'databricks.com')
+        """
+        self.company_name = company_name
+        self.board_slug = board_slug
+        self.domain = domain
+        self.base_url = f"https://boards-api.greenhouse.io/v1/boards/{board_slug}/jobs"
+        super().__init__(**kwargs)
 
     def _is_ml_ds_job(self, job_data: dict) -> bool:
         """Check if job is ML/DS related based on title and department."""
@@ -38,9 +55,17 @@ class BoltScraper(BaseScraper):
 
         return any(kw in searchable for kw in self.ML_DS_KEYWORDS)
 
+    def _is_germany_job(self, location: str) -> bool:
+        """Check if job location is in Germany or EU-remote eligible."""
+        loc_lower = location.lower()
+        return any(term in loc_lower for term in [
+            "germany", "berlin", "munich", "hamburg", "frankfurt",
+            "emea", "europe", "remote"
+        ])
+
     def fetch_jobs(self, query: str = "data science", max_results: Optional[int] = None) -> list[Job]:
         """
-        Fetch ML/DS jobs from Bolt's Greenhouse API.
+        Fetch ML/DS jobs from Greenhouse API.
 
         Args:
             query: Search query (used for filtering results)
@@ -67,22 +92,13 @@ class BoltScraper(BaseScraper):
             location = job_data.get("location", {})
             loc_name = location.get("name", "") if isinstance(location, dict) else str(location)
 
-            # Check if job is in Germany
-            is_germany = (
-                "Germany" in loc_name or
-                "Berlin" in loc_name or
-                "Munich" in loc_name or
-                "Hamburg" in loc_name
-            )
-
-            if is_germany:
+            if self._is_germany_job(loc_name):
                 germany_count += 1
-                # Also check if it's ML/DS related
                 if self._is_ml_ds_job(job_data):
                     job = self._parse_job(job_data)
                     all_jobs.append(job)
 
-        print(f"  [{self.company_name}] Germany jobs: {germany_count}, ML/DS jobs: {len(all_jobs)}")
+        print(f"  [{self.company_name}] Germany/EU jobs: {germany_count}, ML/DS jobs: {len(all_jobs)}")
 
         # Sort by updated date (newest first)
         all_jobs.sort(key=lambda j: self._parse_date(j.updated_time), reverse=True)
@@ -127,9 +143,9 @@ class BoltScraper(BaseScraper):
             location=loc_name,
             city=city,
             country=country,
-            posted_date=None,  # Greenhouse doesn't provide posting date in list
+            posted_date=None,
             updated_time=data.get("updated_at"),
-            source=self.__class__.__name__,
+            source=f"Greenhouse:{self.board_slug}",
             department=department,
             description=description,
         )
@@ -140,7 +156,6 @@ class BoltScraper(BaseScraper):
         if not date_str:
             return datetime(1900, 1, 1)
         try:
-            # Format: 2025-11-28T08:14:18-05:00
             return datetime.fromisoformat(date_str)
         except ValueError:
             return datetime(1900, 1, 1)
