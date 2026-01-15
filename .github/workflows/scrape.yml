@@ -31,6 +31,9 @@ jobs:
       - name: Check for new jobs and send email
         env:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          WORKER_URL: ${{ secrets.WORKER_URL }}
+          WORKER_SECRET: ${{ secrets.WORKER_SECRET }}
         run: python job_notifier.py
 
       - name: Commit and push if changed

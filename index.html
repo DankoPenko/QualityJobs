@@ -242,6 +242,129 @@
             color: #0066cc;
             font-weight: 500;
         }
+        .subscribe-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.85em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.2s;
+            z-index: 100;
+        }
+        .subscribe-btn:hover {
+            background: #0052a3;
+        }
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 90%;
+            transform: translateY(-20px);
+            transition: transform 0.2s;
+        }
+        .modal-overlay.show .modal {
+            transform: translateY(0);
+        }
+        .modal h2 {
+            margin: 0 0 8px;
+            color: #333;
+        }
+        .modal p {
+            color: #666;
+            margin: 0 0 20px;
+            font-size: 0.9em;
+        }
+        .modal input[type="email"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-bottom: 12px;
+        }
+        .modal input[type="email"]:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .modal-buttons button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .modal-buttons .cancel-btn {
+            background: #f0f0f0;
+            border: none;
+            color: #666;
+        }
+        .modal-buttons .cancel-btn:hover {
+            background: #e0e0e0;
+        }
+        .modal-buttons .submit-btn {
+            background: #0066cc;
+            border: none;
+            color: white;
+        }
+        .modal-buttons .submit-btn:hover {
+            background: #0052a3;
+        }
+        .modal-buttons .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .modal-message {
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: none;
+        }
+        .modal-message.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            display: block;
+        }
+        .modal-message.error {
+            background: #ffebee;
+            color: #c62828;
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -273,6 +396,29 @@
         </svg>
         <span class="bin-count" id="bin-count">0</span>
     </a>
+
+    <button class="subscribe-btn" id="subscribe-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        Subscribe
+    </button>
+
+    <div class="modal-overlay" id="subscribe-modal">
+        <div class="modal">
+            <h2>Get Job Alerts</h2>
+            <p>Receive email notifications when new ML/DS jobs are posted.</p>
+            <div class="modal-message" id="modal-message"></div>
+            <form id="subscribe-form">
+                <input type="email" id="subscribe-email" placeholder="your@email.com" required>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-btn" id="cancel-subscribe">Cancel</button>
+                    <button type="submit" class="submit-btn" id="submit-subscribe">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script>
         let allJobs = [];
@@ -500,6 +646,78 @@
 
         loadJobs();
         loadArchivedCount();
+
+        // Subscribe functionality
+        const WORKER_URL = 'https://qualityjobs-subscriptions.YOUR_SUBDOMAIN.workers.dev';
+
+        const subscribeBtn = document.getElementById('subscribe-btn');
+        const subscribeModal = document.getElementById('subscribe-modal');
+        const subscribeForm = document.getElementById('subscribe-form');
+        const subscribeEmail = document.getElementById('subscribe-email');
+        const cancelSubscribe = document.getElementById('cancel-subscribe');
+        const submitSubscribe = document.getElementById('submit-subscribe');
+        const modalMessage = document.getElementById('modal-message');
+
+        function showModal() {
+            subscribeModal.classList.add('show');
+            subscribeEmail.focus();
+        }
+
+        function hideModal() {
+            subscribeModal.classList.remove('show');
+            subscribeForm.reset();
+            modalMessage.className = 'modal-message';
+            modalMessage.textContent = '';
+        }
+
+        function showMessage(text, type) {
+            modalMessage.textContent = text;
+            modalMessage.className = `modal-message ${type}`;
+        }
+
+        subscribeBtn.addEventListener('click', showModal);
+        cancelSubscribe.addEventListener('click', hideModal);
+
+        subscribeModal.addEventListener('click', (e) => {
+            if (e.target === subscribeModal) hideModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') hideModal();
+        });
+
+        subscribeForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = subscribeEmail.value.trim();
+
+            if (!email) return;
+
+            submitSubscribe.disabled = true;
+            submitSubscribe.textContent = 'Subscribing...';
+
+            try {
+                const response = await fetch(`${WORKER_URL}/subscribe`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage(data.message || 'Subscribed successfully!', 'success');
+                    subscribeForm.reset();
+                    setTimeout(hideModal, 2000);
+                } else {
+                    showMessage(data.error || 'Failed to subscribe', 'error');
+                }
+            } catch (error) {
+                showMessage('Network error. Please try again.', 'error');
+            } finally {
+                submitSubscribe.disabled = false;
+                submitSubscribe.textContent = 'Subscribe';
+            }
+        });
     </script>
 </body>
 </html>
