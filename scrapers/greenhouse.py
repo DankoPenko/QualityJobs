@@ -56,12 +56,25 @@ class GreenhouseScraper(BaseScraper):
         return any(kw in searchable for kw in self.ML_DS_KEYWORDS)
 
     def _is_germany_job(self, location: str) -> bool:
-        """Check if job location is in Germany or EU-remote eligible."""
+        """Check if job location is in Germany (strict matching)."""
         loc_lower = location.lower()
-        return any(term in loc_lower for term in [
-            "germany", "berlin", "munich", "hamburg", "frankfurt",
-            "emea", "europe", "remote"
-        ])
+
+        # Explicit Germany matches
+        germany_terms = ["germany", "berlin", "munich", "hamburg", "frankfurt", "köln", "cologne", "düsseldorf", "stuttgart"]
+        if any(term in loc_lower for term in germany_terms):
+            return True
+
+        # Remote jobs that mention DACH/Germany region
+        if "remote" in loc_lower:
+            dach_terms = ["dach", "germany", "german", "de,", ", de", "(de)"]
+            if any(term in loc_lower for term in dach_terms):
+                return True
+
+        # EMEA only if explicitly includes Germany
+        if "emea" in loc_lower and "germany" in loc_lower:
+            return True
+
+        return False
 
     def fetch_jobs(self, query: str = "data science", max_results: Optional[int] = None) -> list[Job]:
         """
