@@ -1,12 +1,17 @@
 from .base import BaseScraper
+from .greenhouse import GreenhouseScraper
+from .smartrecruiters import SmartRecruitersScraper
 from .amazon import AmazonScraper
-from .deliveryhero import DeliveryHeroScraper
-from .bolt import BoltScraper
 from .zalando import ZalandoScraper
-from .hellofresh import HelloFreshScraper
-from .n26 import N26Scraper
-from .auto1 import Auto1Scraper
 from .sap import SAPScraper
 from .snapchat import SnapchatScraper
 
-__all__ = ["BaseScraper", "AmazonScraper", "DeliveryHeroScraper", "BoltScraper", "ZalandoScraper", "HelloFreshScraper", "N26Scraper", "Auto1Scraper", "SAPScraper", "SnapchatScraper"]
+__all__ = [
+    "BaseScraper",
+    "GreenhouseScraper",
+    "SmartRecruitersScraper",
+    "AmazonScraper",
+    "ZalandoScraper",
+    "SAPScraper",
+    "SnapchatScraper",
+]

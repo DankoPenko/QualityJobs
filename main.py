@@ -9,9 +9,51 @@ Usage:
 import json
 from datetime import datetime
 from pathlib import Path
-from scrapers import AmazonScraper, DeliveryHeroScraper, BoltScraper, ZalandoScraper, HelloFreshScraper, N26Scraper, Auto1Scraper, SAPScraper, SnapchatScraper
+from scrapers import (
+    GreenhouseScraper,
+    SmartRecruitersScraper,
+    AmazonScraper,
+    ZalandoScraper,
+    SAPScraper,
+    SnapchatScraper,
+)
 
 ARCHIVE_FILE = "archived_jobs.json"
+
+# ============================================================================
+# COMPANY CONFIGURATIONS
+# ============================================================================
+
+# Companies using Greenhouse job boards
+GREENHOUSE_COMPANIES = [
+    {"name": "Bolt", "slug": "boltv2", "domain": "bolt.eu"},
+    {"name": "N26", "slug": "n26", "domain": "n26.com"},
+    {"name": "HelloFresh", "slug": "hellofresh", "domain": "hellofresh.com"},
+    # New companies from TrueUp list
+    {"name": "Databricks", "slug": "databricks", "domain": "databricks.com"},
+    {"name": "GitLab", "slug": "gitlab", "domain": "gitlab.com"},
+    {"name": "Canonical", "slug": "canonical", "domain": "canonical.com"},
+    {"name": "Grafana Labs", "slug": "grafanalabs", "domain": "grafana.com"},
+    {"name": "Grammarly", "slug": "grammarly", "domain": "grammarly.com"},
+    {"name": "Vercel", "slug": "vercel", "domain": "vercel.com"},
+    {"name": "Cloudflare", "slug": "cloudflare", "domain": "cloudflare.com"},
+    {"name": "Discord", "slug": "discord", "domain": "discord.com"},
+    {"name": "Stripe", "slug": "stripe", "domain": "stripe.com"},
+    {"name": "Coinbase", "slug": "coinbase", "domain": "coinbase.com"},
+    {"name": "Dropbox", "slug": "dropbox", "domain": "dropbox.com"},
+    {"name": "Reddit", "slug": "reddit", "domain": "reddit.com"},
+    {"name": "Airbnb", "slug": "airbnb", "domain": "airbnb.com"},
+    {"name": "Figma", "slug": "figma", "domain": "figma.com"},
+    {"name": "Datadog", "slug": "datadog", "domain": "datadoghq.com"},
+    {"name": "Elastic", "slug": "elastic", "domain": "elastic.co"},
+    {"name": "Collibra", "slug": "collibra", "domain": "collibra.com"},
+]
+
+# Companies using SmartRecruiters job boards
+SMARTRECRUITERS_COMPANIES = [
+    {"name": "Delivery Hero", "slug": "DeliveryHero", "domain": "deliveryhero.com"},
+    {"name": "AUTO1 Group", "slug": "AUTO1Group", "domain": "auto1-group.com"},
+]
 
 
 def load_existing_jobs(filepath: str) -> dict[str, dict]:
@@ -74,18 +116,34 @@ def main():
     existing_jobs = load_existing_jobs(output_file)
     print(f"Loaded {len(existing_jobs)} existing jobs from {output_file}")
 
-    # Initialize scrapers
-    scrapers = [
+    # Build scrapers list
+    scrapers = []
+
+    # Greenhouse-based companies
+    for company in GREENHOUSE_COMPANIES:
+        scrapers.append(GreenhouseScraper(
+            company_name=company["name"],
+            board_slug=company["slug"],
+            domain=company["domain"],
+            country_code="DEU",
+        ))
+
+    # SmartRecruiters-based companies
+    for company in SMARTRECRUITERS_COMPANIES:
+        scrapers.append(SmartRecruitersScraper(
+            company_name=company["name"],
+            company_slug=company["slug"],
+            domain=company["domain"],
+            country_code="DEU",
+        ))
+
+    # Custom scrapers
+    scrapers.extend([
         AmazonScraper(country_code="DEU"),
-        DeliveryHeroScraper(country_code="DEU"),
-        BoltScraper(country_code="DEU"),
         ZalandoScraper(country_code="DEU"),
-        HelloFreshScraper(country_code="DEU"),
-        N26Scraper(country_code="DEU"),
-        Auto1Scraper(country_code="DEU"),
         SAPScraper(country_code="DEU"),
         SnapchatScraper(country_code="DEU"),
-    ]
+    ])
 
     all_jobs = []
 
