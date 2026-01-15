@@ -96,15 +96,15 @@ class BaseScraper(ABC):
         """
         if not html:
             return ""
+        # Decode HTML entities FIRST (so encoded tags like &lt;strong&gt; become <strong>)
+        text = html.replace('&nbsp;', ' ').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>')
+        text = text.replace('&quot;', '"').replace('&#39;', "'")
         # Remove script and style elements
-        text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', html, flags=re.DOTALL | re.IGNORECASE)
+        text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', text, flags=re.DOTALL | re.IGNORECASE)
         # Replace common block elements with newlines
         text = re.sub(r'<(br|p|div|li|h[1-6])[^>]*/?>', '\n', text, flags=re.IGNORECASE)
         # Remove all remaining HTML tags
         text = re.sub(r'<[^>]+>', '', text)
-        # Decode common HTML entities
-        text = text.replace('&nbsp;', ' ').replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>')
-        text = text.replace('&quot;', '"').replace('&#39;', "'")
         # Clean up whitespace
         text = re.sub(r'\n\s*\n', '\n\n', text)
         text = re.sub(r'[ \t]+', ' ', text)

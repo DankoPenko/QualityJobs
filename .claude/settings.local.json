@@ -13,7 +13,9 @@
       "Bash(gh run:*)",
       "Bash(git -C \"c:\\\\Stuff\\\\Aijobscrapper\" status)",
       "Bash(git -C \"c:\\\\Stuff\\\\Aijobscrapper\" diff --stat)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(git rm:*)",
+      "Bash(xargs git rm:*)"
     ]
   }
 }
