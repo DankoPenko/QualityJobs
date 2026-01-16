@@ -1,5 +1,23 @@
 [
   {
+    "id": "7388194",
+    "title": "Senior Data Scientist",
+    "company": "N26",
+    "url": "https://n26.com/en-eu/careers/positions/7388194?gh_jid=7388194",
+    "location": "Berlin",
+    "city": "Berlin",
+    "country": "Germany",
+    "posted_date": null,
+    "updated_time": "2026-01-15T09:08:08-05:00",
+    "source": "Greenhouse:n26",
+    "scraped_at": "2026-01-12T09:09:45.116510",
+    "description": "About the opportunity\n\nWe are seeking a Senior Data Scientist to build production-ready applications. Our Data Science team develops practical machine learning applications to enable innovative and customer-facing product features.\n\nIn this role, you will:\n\nHave end-to-end responsibility, from data exploration to applying state-of-the-art machine learning techniques and building production-ready applications.\n\nYour work will directly enable innovative solutions in financial crime prevention and credit risk assessment.\n\nDrive your project and work with experienced data scientists, machine learning engineers, and product managers to deliver customer value and allow you to develop your skill-set further.\n\nHave the opportunity to experiment with new tech stacks and project ideas.\n\nWhat you need to be successful:\n\nBachelor’s or Master’s degree with a focus on quantitative disciplines including mathematics, statistics, or computer science.\n\nProven record of implementations in the prototyping, development, and productionizing of machine learning solutions, particularly in banking applications such as fraud detection and credit risk.\n\nDeep, hands-on experience with a variety of modeling techniques, including:\n\nClassification models: (e.g., CatBoost, XGBoost, LightGBM)\n\nRegression models: (e.g., CatBoost, XGBoost, LightGBM)\n\nTime Series Analysis: (e.g., ARIMA, SARIMA, Prophet)\n\nUnsupervised Models: (e.g., clustering, anomaly detection such as Isolation Forest)\n\nStrong programming skills, specifically in Python and SQL.\n\nBasic infrastructure knowledge is needed (e.g., microservices, Docker/containers, CI/CD, GitHub Actions).\n\nFoundational knowledge of Deep Learning is needed, including an understanding of neural networks, transformers, and autoencoders, and experience with frameworks like TensorFlow, Keras, or PyTorch.\n\nGood understanding of common machine learning algorithms and a proven ability to teach and mentor junior data scientists.\n\nYou are creative, organised, self-m...",
+    "salary": null,
+    "job_type": null,
+    "department": "Tech - Data Science",
+    "archived_at": "2026-01-16T22:08:05.466307"
+  },
+  {
     "id": "8345879002",
     "title": "Director, Business Analytics & Insights",
     "company": "GitLab",
