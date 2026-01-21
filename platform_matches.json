@@ -1,0 +1,1291 @@
+{
+  "greenhouse": [
+    {
+      "name": "xAI",
+      "slug": "xAI"
+    },
+    {
+      "name": "Anthropic",
+      "slug": "Anthropic"
+    },
+    {
+      "name": "Lovable",
+      "slug": "Lovable"
+    },
+    {
+      "name": "Black Forest Labs",
+      "slug": "BlackForestLabs"
+    },
+    {
+      "name": "Helsing",
+      "slug": "Helsing"
+    },
+    {
+      "name": "Figure",
+      "slug": "Figure"
+    },
+    {
+      "name": "Fal",
+      "slug": "Fal"
+    },
+    {
+      "name": "Pantheon",
+      "slug": "Pantheon"
+    },
+    {
+      "name": "Applied Intuition",
+      "slug": "AppliedIntuition"
+    },
+    {
+      "name": "Kalshi",
+      "slug": "Kalshi"
+    },
+    {
+      "name": "Databricks",
+      "slug": "Databricks"
+    },
+    {
+      "name": "Astera Labs",
+      "slug": "AsteraLabs"
+    },
+    {
+      "name": "World Labs",
+      "slug": "WorldLabs"
+    },
+    {
+      "name": "Beacon Software",
+      "slug": "BeaconSoftware"
+    },
+    {
+      "name": "Chainguard",
+      "slug": "Chainguard"
+    },
+    {
+      "name": "Cerebras Systems",
+      "slug": "CerebrasSystems"
+    },
+    {
+      "name": "Harmonic",
+      "slug": "Harmonic"
+    },
+    {
+      "name": "CoreWeave",
+      "slug": "CoreWeave"
+    },
+    {
+      "name": "Nubank",
+      "slug": "Nubank"
+    },
+    {
+      "name": "AppLovin",
+      "slug": "AppLovin"
+    },
+    {
+      "name": "Robinhood",
+      "slug": "Robinhood"
+    },
+    {
+      "name": "Lila Sciences",
+      "slug": "LilaSciences"
+    },
+    {
+      "name": "Temporal",
+      "slug": "Temporal"
+    },
+    {
+      "name": "Neuralink",
+      "slug": "Neuralink"
+    },
+    {
+      "name": "NewLimit",
+      "slug": "NewLimit"
+    },
+    {
+      "name": "Firmus",
+      "slug": "Firmus"
+    },
+    {
+      "name": "Quince",
+      "slug": "Quince"
+    },
+    {
+      "name": "Vast",
+      "slug": "Vast"
+    },
+    {
+      "name": "Wayve",
+      "slug": "Wayve"
+    },
+    {
+      "name": "Pacific Fusion",
+      "slug": "PacificFusion"
+    },
+    {
+      "name": "Dream Games",
+      "slug": "DreamGames"
+    },
+    {
+      "name": "Celestial AI",
+      "slug": "CelestialAI"
+    },
+    {
+      "name": "C6 Bank",
+      "slug": "C6Bank"
+    },
+    {
+      "name": "Pomelo Care",
+      "slug": "PomeloCare"
+    },
+    {
+      "name": "PhonePe",
+      "slug": "PhonePe"
+    },
+    {
+      "name": "Upgrade",
+      "slug": "Upgrade"
+    },
+    {
+      "name": "Stripe",
+      "slug": "Stripe"
+    },
+    {
+      "name": "Razor Group",
+      "slug": "razor-group"
+    },
+    {
+      "name": "Coalition",
+      "slug": "Coalition"
+    },
+    {
+      "name": "Samsara",
+      "slug": "Samsara"
+    },
+    {
+      "name": "ClickHouse",
+      "slug": "ClickHouse"
+    },
+    {
+      "name": "Coinbase",
+      "slug": "Coinbase"
+    },
+    {
+      "name": "Orchard",
+      "slug": "Orchard"
+    },
+    {
+      "name": "Apex",
+      "slug": "Apex"
+    },
+    {
+      "name": "Roivant Sciences",
+      "slug": "RoivantSciences"
+    },
+    {
+      "name": "Cribl",
+      "slug": "Cribl"
+    },
+    {
+      "name": "Verkada",
+      "slug": "Verkada"
+    },
+    {
+      "name": "Vercel",
+      "slug": "Vercel"
+    },
+    {
+      "name": "IonQ",
+      "slug": "IonQ"
+    },
+    {
+      "name": "Discord",
+      "slug": "Discord"
+    },
+    {
+      "name": "Redwood Materials",
+      "slug": "RedwoodMaterials"
+    },
+    {
+      "name": "Rubrik",
+      "slug": "Rubrik"
+    },
+    {
+      "name": "Contextual AI",
+      "slug": "ContextualAI"
+    },
+    {
+      "name": "You.com",
+      "slug": "Youcom"
+    },
+    {
+      "name": "ShopMy",
+      "slug": "ShopMy"
+    },
+    {
+      "name": "PsiQuantum",
+      "slug": "PsiQuantum"
+    },
+    {
+      "name": "Mercury",
+      "slug": "Mercury"
+    },
+    {
+      "name": "SoFi",
+      "slug": "SoFi"
+    }
+  ],
+  "smartrecruiters": [
+    {
+      "name": "Perplexity",
+      "slug": "Perplexity"
+    },
+    {
+      "name": "Together",
+      "slug": "Together"
+    },
+    {
+      "name": "Whatnot",
+      "slug": "Whatnot"
+    },
+    {
+      "name": "Glean",
+      "slug": "Glean"
+    },
+    {
+      "name": "Databricks",
+      "slug": "Databricks"
+    },
+    {
+      "name": "DoorDash",
+      "slug": "DoorDash"
+    },
+    {
+      "name": "Nubank",
+      "slug": "Nubank"
+    },
+    {
+      "name": "Devoted Health",
+      "slug": "DevotedHealth"
+    },
+    {
+      "name": "Rippling",
+      "slug": "Rippling"
+    },
+    {
+      "name": "ByteDance",
+      "slug": "ByteDance"
+    },
+    {
+      "name": "bolttech",
+      "slug": "bolttech"
+    },
+    {
+      "name": "PhonePe",
+      "slug": "PhonePe"
+    },
+    {
+      "name": "Gamma",
+      "slug": "Gamma"
+    },
+    {
+      "name": "Razor Group",
+      "slug": "RazorGroup"
+    },
+    {
+      "name": "CrowdStrike",
+      "slug": "CrowdStrike"
+    },
+    {
+      "name": "Apex",
+      "slug": "Apex"
+    },
+    {
+      "name": "Uber",
+      "slug": "Uber"
+    },
+    {
+      "name": "Augment",
+      "slug": "Augment"
+    },
+    {
+      "name": "Canva",
+      "slug": "Canva"
+    },
+    {
+      "name": "Discord",
+      "slug": "Discord"
+    },
+    {
+      "name": "Qonto",
+      "slug": "Qonto"
+    },
+    {
+      "name": "Xiaomi",
+      "slug": "Xiaomi"
+    },
+    {
+      "name": "Mercury",
+      "slug": "Mercury"
+    },
+    {
+      "name": "Meta",
+      "slug": "Meta"
+    }
+  ],
+  "unmatched": [
+    {
+      "name": "Safe Superintelligence",
+      "candidates": [
+        "SafeSuperintelligence",
+        "safesuperintelligence",
+        "safe-superintelligence",
+        "safe_superintelligence"
+      ]
+    },
+    {
+      "name": "Mistral AI",
+      "candidates": [
+        "MistralAI",
+        "MistralAi",
+        "mistralai",
+        "mistral-ai",
+        "mistral_ai"
+      ]
+    },
+    {
+      "name": "Unconventional AI",
+      "candidates": [
+        "UnconventionalAI",
+        "UnconventionalAi",
+        "unconventionalai",
+        "unconventional-ai",
+        "unconventional_ai"
+      ]
+    },
+    {
+      "name": "Anysphere",
+      "candidates": [
+        "Anysphere",
+        "anysphere"
+      ]
+    },
+    {
+      "name": "Reflection AI",
+      "candidates": [
+        "ReflectionAI",
+        "ReflectionAi",
+        "reflectionai",
+        "reflection-ai",
+        "reflection_ai"
+      ]
+    },
+    {
+      "name": "Skild AI",
+      "candidates": [
+        "SkildAI",
+        "SkildAi",
+        "skildai",
+        "skild-ai",
+        "skild_ai"
+      ]
+    },
+    {
+      "name": "Mercor",
+      "candidates": [
+        "Mercor",
+        "mercor"
+      ]
+    },
+    {
+      "name": "Physical Intelligence",
+      "candidates": [
+        "PhysicalIntelligence",
+        "physicalintelligence",
+        "physical-intelligence",
+        "physical_intelligence"
+      ]
+    },
+    {
+      "name": "Sierra",
+      "candidates": [
+        "Sierra",
+        "sierra"
+      ]
+    },
+    {
+      "name": "Cognition",
+      "candidates": [
+        "Cognition",
+        "cognition"
+      ]
+    },
+    {
+      "name": "Thinking Machines Lab",
+      "candidates": [
+        "ThinkingMachinesLab",
+        "thinkingmachineslab",
+        "thinking-machines-lab",
+        "thinking_machines_lab"
+      ]
+    },
+    {
+      "name": "The Bot Company",
+      "candidates": [
+        "TheBotCompany",
+        "thebotcompany",
+        "the-bot-company",
+        "the_bot_company"
+      ]
+    },
+    {
+      "name": "Eon",
+      "candidates": [
+        "Eon",
+        "eon"
+      ]
+    },
+    {
+      "name": "OpenAI",
+      "candidates": [
+        "OpenAI",
+        "Openai",
+        "openai"
+      ]
+    },
+    {
+      "name": "ElevenLabs",
+      "candidates": [
+        "ElevenLabs",
+        "Elevenlabs",
+        "elevenlabs"
+      ]
+    },
+    {
+      "name": "Harvey",
+      "candidates": [
+        "Harvey",
+        "harvey"
+      ]
+    },
+    {
+      "name": "Surge AI",
+      "candidates": [
+        "SurgeAI",
+        "SurgeAi",
+        "surgeai",
+        "surge-ai",
+        "surge_ai"
+      ]
+    },
+    {
+      "name": "Ramp",
+      "candidates": [
+        "Ramp",
+        "ramp"
+      ]
+    },
+    {
+      "name": "OpenEvidence",
+      "candidates": [
+        "OpenEvidence",
+        "Openevidence",
+        "openevidence"
+      ]
+    },
+    {
+      "name": "Bilt",
+      "candidates": [
+        "Bilt",
+        "bilt"
+      ]
+    },
+    {
+      "name": "Anduril",
+      "candidates": [
+        "Anduril",
+        "anduril"
+      ]
+    },
+    {
+      "name": "Decagon",
+      "candidates": [
+        "Decagon",
+        "decagon"
+      ]
+    },
+    {
+      "name": "Periodic Labs",
+      "candidates": [
+        "PeriodicLabs",
+        "periodiclabs",
+        "periodic-labs",
+        "periodic_labs"
+      ]
+    },
+    {
+      "name": "Poolside",
+      "candidates": [
+        "Poolside",
+        "poolside"
+      ]
+    },
+    {
+      "name": "Decart",
+      "candidates": [
+        "Decart",
+        "decart"
+      ]
+    },
+    {
+      "name": "Base",
+      "candidates": [
+        "Base",
+        "base"
+      ]
+    },
+    {
+      "name": "Saronic",
+      "candidates": [
+        "Saronic",
+        "saronic"
+      ]
+    },
+    {
+      "name": "Revolut",
+      "candidates": [
+        "Revolut",
+        "revolut"
+      ]
+    },
+    {
+      "name": "Fireworks",
+      "candidates": [
+        "Fireworks",
+        "fireworks"
+      ]
+    },
+    {
+      "name": "Sakana AI",
+      "candidates": [
+        "SakanaAI",
+        "SakanaAi",
+        "sakanaai",
+        "sakana-ai",
+        "sakana_ai"
+      ]
+    },
+    {
+      "name": "Liquid AI",
+      "candidates": [
+        "LiquidAI",
+        "LiquidAi",
+        "liquidai",
+        "liquid-ai",
+        "liquid_ai"
+      ]
+    },
+    {
+      "name": "Deel",
+      "candidates": [
+        "Deel",
+        "deel"
+      ]
+    },
+    {
+      "name": "Hippocratic AI",
+      "candidates": [
+        "HippocraticAI",
+        "HippocraticAi",
+        "hippocraticai",
+        "hippocratic-ai",
+        "hippocratic_ai"
+      ]
+    },
+    {
+      "name": "Luma AI",
+      "candidates": [
+        "LumaAI",
+        "LumaAi",
+        "lumaai",
+        "luma-ai",
+        "luma_ai"
+      ]
+    },
+    {
+      "name": "Xaira",
+      "candidates": [
+        "Xaira",
+        "xaira"
+      ]
+    },
+    {
+      "name": "Plata",
+      "candidates": [
+        "Plata",
+        "plata"
+      ]
+    },
+    {
+      "name": "Cambricon",
+      "candidates": [
+        "Cambricon",
+        "cambricon"
+      ]
+    },
+    {
+      "name": "Supabase",
+      "candidates": [
+        "Supabase",
+        "supabase"
+      ]
+    },
+    {
+      "name": "LMArena",
+      "candidates": [
+        "LMArena",
+        "Lmarena",
+        "lmarena"
+      ]
+    },
+    {
+      "name": "Tether",
+      "candidates": [
+        "Tether",
+        "tether"
+      ]
+    },
+    {
+      "name": "Crusoe",
+      "candidates": [
+        "Crusoe",
+        "crusoe"
+      ]
+    },
+    {
+      "name": "Legora",
+      "candidates": [
+        "Legora",
+        "legora"
+      ]
+    },
+    {
+      "name": "FieldAI",
+      "candidates": [
+        "FieldAI",
+        "Fieldai",
+        "fieldai"
+      ]
+    },
+    {
+      "name": "Suno",
+      "candidates": [
+        "Suno",
+        "suno"
+      ]
+    },
+    {
+      "name": "VAST Data",
+      "candidates": [
+        "VASTData",
+        "VastData",
+        "vastdata",
+        "vast-data",
+        "vast_data"
+      ]
+    },
+    {
+      "name": "Pinduoduo",
+      "candidates": [
+        "Pinduoduo",
+        "pinduoduo"
+      ]
+    },
+    {
+      "name": "Pennylane",
+      "candidates": [
+        "Pennylane",
+        "pennylane"
+      ]
+    },
+    {
+      "name": "Runway",
+      "candidates": [
+        "Runway",
+        "runway"
+      ]
+    },
+    {
+      "name": "Abridge",
+      "candidates": [
+        "Abridge",
+        "abridge"
+      ]
+    },
+    {
+      "name": "Hygon",
+      "candidates": [
+        "Hygon",
+        "hygon"
+      ]
+    },
+    {
+      "name": "Moonshot AI",
+      "candidates": [
+        "MoonshotAI",
+        "MoonshotAi",
+        "moonshotai",
+        "moonshot-ai",
+        "moonshot_ai"
+      ]
+    },
+    {
+      "name": "BaseTen",
+      "candidates": [
+        "BaseTen",
+        "Baseten",
+        "baseten"
+      ]
+    },
+    {
+      "name": "LangChain",
+      "candidates": [
+        "LangChain",
+        "Langchain",
+        "langchain"
+      ]
+    },
+    {
+      "name": "Genspark",
+      "candidates": [
+        "Genspark",
+        "genspark"
+      ]
+    },
+    {
+      "name": "Distyl",
+      "candidates": [
+        "Distyl",
+        "distyl"
+      ]
+    },
+    {
+      "name": "Island",
+      "candidates": [
+        "Island",
+        "island"
+      ]
+    },
+    {
+      "name": "Function Health",
+      "candidates": [
+        "FunctionHealth",
+        "functionhealth",
+        "function-health",
+        "function_health"
+      ]
+    },
+    {
+      "name": "Crescendo",
+      "candidates": [
+        "Crescendo",
+        "crescendo"
+      ]
+    },
+    {
+      "name": "Flatpay",
+      "candidates": [
+        "Flatpay",
+        "flatpay"
+      ]
+    },
+    {
+      "name": "Sonar",
+      "candidates": [
+        "Sonar",
+        "sonar"
+      ]
+    },
+    {
+      "name": "Cohere",
+      "candidates": [
+        "Cohere",
+        "cohere"
+      ]
+    },
+    {
+      "name": "Tabby",
+      "candidates": [
+        "Tabby",
+        "tabby"
+      ]
+    },
+    {
+      "name": "Zepto",
+      "candidates": [
+        "Zepto",
+        "zepto"
+      ]
+    },
+    {
+      "name": "Cyera",
+      "candidates": [
+        "Cyera",
+        "cyera"
+      ]
+    },
+    {
+      "name": "Pathos",
+      "candidates": [
+        "Pathos",
+        "pathos"
+      ]
+    },
+    {
+      "name": "Rivos",
+      "candidates": [
+        "Rivos",
+        "rivos"
+      ]
+    },
+    {
+      "name": "Keep",
+      "candidates": [
+        "Keep",
+        "keep"
+      ]
+    },
+    {
+      "name": "Harness",
+      "candidates": [
+        "Harness",
+        "harness"
+      ]
+    },
+    {
+      "name": "Eve",
+      "candidates": [
+        "Eve",
+        "eve"
+      ]
+    },
+    {
+      "name": "IREN",
+      "candidates": [
+        "IREN",
+        "Iren",
+        "iren"
+      ]
+    },
+    {
+      "name": "Flock Safety",
+      "candidates": [
+        "FlockSafety",
+        "flocksafety",
+        "flock-safety",
+        "flock_safety"
+      ]
+    },
+    {
+      "name": "Polymarket",
+      "candidates": [
+        "Polymarket",
+        "polymarket"
+      ]
+    },
+    {
+      "name": "Abnormal AI",
+      "candidates": [
+        "AbnormalAI",
+        "AbnormalAi",
+        "abnormalai",
+        "abnormal-ai",
+        "abnormal_ai"
+      ]
+    },
+    {
+      "name": "Kakao",
+      "candidates": [
+        "Kakao",
+        "kakao"
+      ]
+    },
+    {
+      "name": "Aligned Data Centers",
+      "candidates": [
+        "AlignedDataCenters",
+        "aligneddatacenters",
+        "aligned-data-centers",
+        "aligned_data_centers"
+      ]
+    },
+    {
+      "name": "Napster",
+      "candidates": [
+        "Napster",
+        "napster"
+      ]
+    },
+    {
+      "name": "Zip",
+      "candidates": [
+        "Zip",
+        "zip"
+      ]
+    },
+    {
+      "name": "Replit",
+      "candidates": [
+        "Replit",
+        "replit"
+      ]
+    },
+    {
+      "name": "CATL",
+      "candidates": [
+        "CATL",
+        "Catl",
+        "catl"
+      ]
+    },
+    {
+      "name": "Rapyd",
+      "candidates": [
+        "Rapyd",
+        "rapyd"
+      ]
+    },
+    {
+      "name": "Boring Company",
+      "candidates": [
+        "BoringCompany",
+        "boringcompany",
+        "boring-company",
+        "boring_company"
+      ]
+    },
+    {
+      "name": "Tessl",
+      "candidates": [
+        "Tessl",
+        "tessl"
+      ]
+    },
+    {
+      "name": "/dev/agents",
+      "candidates": [
+        "devagents",
+        "DevAgents",
+        "dev-agents",
+        "dev_agents"
+      ]
+    },
+    {
+      "name": "David AI",
+      "candidates": [
+        "DavidAI",
+        "DavidAi",
+        "davidai",
+        "david-ai",
+        "david_ai"
+      ]
+    },
+    {
+      "name": "BeZero",
+      "candidates": [
+        "BeZero",
+        "Bezero",
+        "bezero"
+      ]
+    },
+    {
+      "name": "Nirvana Insurance",
+      "candidates": [
+        "NirvanaInsurance",
+        "nirvanainsurance",
+        "nirvana-insurance",
+        "nirvana_insurance"
+      ]
+    },
+    {
+      "name": "Dream Security",
+      "candidates": [
+        "DreamSecurity",
+        "dreamsecurity",
+        "dream-security",
+        "dream_security"
+      ]
+    },
+    {
+      "name": "Krutrim",
+      "candidates": [
+        "Krutrim",
+        "krutrim"
+      ]
+    },
+    {
+      "name": "Wonder",
+      "candidates": [
+        "Wonder",
+        "wonder"
+      ]
+    },
+    {
+      "name": "Skims",
+      "candidates": [
+        "Skims",
+        "skims"
+      ]
+    },
+    {
+      "name": "n8n",
+      "candidates": [
+        "n8n",
+        "N8n"
+      ]
+    },
+    {
+      "name": "Snowflake",
+      "candidates": [
+        "Snowflake",
+        "snowflake"
+      ]
+    },
+    {
+      "name": "Trade Republic",
+      "candidates": [
+        "TradeRepublic",
+        "traderepublic",
+        "trade-republic",
+        "trade_republic"
+      ]
+    },
+    {
+      "name": "Fuse Energy",
+      "candidates": [
+        "FuseEnergy",
+        "fuseenergy",
+        "fuse-energy",
+        "fuse_energy"
+      ]
+    },
+    {
+      "name": "Substrate",
+      "candidates": [
+        "Substrate",
+        "substrate"
+      ]
+    },
+    {
+      "name": "Reka",
+      "candidates": [
+        "Reka",
+        "reka"
+      ]
+    },
+    {
+      "name": "Xpanceo",
+      "candidates": [
+        "Xpanceo",
+        "xpanceo"
+      ]
+    },
+    {
+      "name": "Motif",
+      "candidates": [
+        "Motif",
+        "motif"
+      ]
+    },
+    {
+      "name": "Bullish",
+      "candidates": [
+        "Bullish",
+        "bullish"
+      ]
+    },
+    {
+      "name": "Telegram",
+      "candidates": [
+        "Telegram",
+        "telegram"
+      ]
+    },
+    {
+      "name": "Zetwerk",
+      "candidates": [
+        "Zetwerk",
+        "zetwerk"
+      ]
+    },
+    {
+      "name": "DualEntry",
+      "candidates": [
+        "DualEntry",
+        "Dualentry",
+        "dualentry"
+      ]
+    },
+    {
+      "name": "Vanta",
+      "candidates": [
+        "Vanta",
+        "vanta"
+      ]
+    },
+    {
+      "name": "CloudKitchens",
+      "candidates": [
+        "CloudKitchens",
+        "Cloudkitchens",
+        "cloudkitchens"
+      ]
+    },
+    {
+      "name": "Aven",
+      "candidates": [
+        "Aven",
+        "aven"
+      ]
+    },
+    {
+      "name": "Writer",
+      "candidates": [
+        "Writer",
+        "writer"
+      ]
+    },
+    {
+      "name": "Hadrian",
+      "candidates": [
+        "Hadrian",
+        "hadrian"
+      ]
+    },
+    {
+      "name": "Upwind",
+      "candidates": [
+        "Upwind",
+        "upwind"
+      ]
+    },
+    {
+      "name": "Synthesia",
+      "candidates": [
+        "Synthesia",
+        "synthesia"
+      ]
+    },
+    {
+      "name": "Onebrief",
+      "candidates": [
+        "Onebrief",
+        "onebrief"
+      ]
+    },
+    {
+      "name": "BharatPe",
+      "candidates": [
+        "BharatPe",
+        "Bharatpe",
+        "bharatpe"
+      ]
+    },
+    {
+      "name": "Raise",
+      "candidates": [
+        "Raise",
+        "raise"
+      ]
+    },
+    {
+      "name": "Stoke Space",
+      "candidates": [
+        "StokeSpace",
+        "stokespace",
+        "stoke-space",
+        "stoke_space"
+      ]
+    },
+    {
+      "name": "EvenUp",
+      "candidates": [
+        "EvenUp",
+        "Evenup",
+        "evenup"
+      ]
+    },
+    {
+      "name": "D-Matrix",
+      "candidates": [
+        "DMatrix",
+        "dmatrix",
+        "d-matrix",
+        "d_matrix"
+      ]
+    },
+    {
+      "name": "1X",
+      "candidates": [
+        "1X",
+        "1x"
+      ]
+    },
+    {
+      "name": "Varda",
+      "candidates": [
+        "Varda",
+        "varda"
+      ]
+    },
+    {
+      "name": "Chapter",
+      "candidates": [
+        "Chapter",
+        "chapter"
+      ]
+    },
+    {
+      "name": "Reducto",
+      "candidates": [
+        "Reducto",
+        "reducto"
+      ]
+    },
+    {
+      "name": "Statsig",
+      "candidates": [
+        "Statsig",
+        "statsig"
+      ]
+    },
+    {
+      "name": "Tesla",
+      "candidates": [
+        "Tesla",
+        "tesla"
+      ]
+    },
+    {
+      "name": "Uala",
+      "candidates": [
+        "Uala",
+        "uala"
+      ]
+    },
+    {
+      "name": "Modal Labs",
+      "candidates": [
+        "ModalLabs",
+        "modallabs",
+        "modal-labs",
+        "modal_labs"
+      ]
+    },
+    {
+      "name": "Jeeves",
+      "candidates": [
+        "Jeeves",
+        "jeeves"
+      ]
+    }
+  ]
+}

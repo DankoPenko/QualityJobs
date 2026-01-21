@@ -485,11 +485,22 @@
         };
 
         function getCompanyLogo(company) {
-            const domain = companyDomains[company];
+            const domain = companyDomains[company] || dynamicDomains[company];
             if (domain) {
                 return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
             }
             return null;
+        }
+
+        // Domains extracted from jobs.json
+        let dynamicDomains = {};
+
+        function buildDomainMap(jobs) {
+            jobs.forEach(job => {
+                if (job.domain && !dynamicDomains[job.company]) {
+                    dynamicDomains[job.company] = job.domain;
+                }
+            });
         }
 
         function getCompanyCounts(jobs) {
@@ -613,6 +624,7 @@
                     return;
                 }
 
+                buildDomainMap(allJobs);
                 buildFilterMenu(allJobs);
                 renderJobs();
 
