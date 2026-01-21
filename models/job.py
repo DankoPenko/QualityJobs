@@ -27,6 +27,7 @@ class Job:
     # Metadata
     source: str = ""             # Scraper that found this job
     scraped_at: datetime = field(default_factory=datetime.now)
+    domain: Optional[str] = None # Company domain for favicon
 
     # Optional details
     description: Optional[str] = None
@@ -48,6 +49,7 @@ class Job:
             "updated_time": self.updated_time,
             "source": self.source,
             "scraped_at": self.scraped_at.isoformat(),
+            "domain": self.domain,
             "description": self.description,
             "salary": self.salary,
             "job_type": self.job_type,
@@ -75,6 +77,7 @@ class Job:
             updated_time=data.get("updated_time"),
             source=data.get("source", ""),
             scraped_at=scraped_at,
+            domain=data.get("domain"),
             description=data.get("description"),
             salary=data.get("salary"),
             job_type=data.get("job_type"),

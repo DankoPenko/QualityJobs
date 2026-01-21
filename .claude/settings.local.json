@@ -15,7 +15,8 @@
       "Bash(git -C \"c:\\\\Stuff\\\\Aijobscrapper\" diff --stat)",
       "Bash(curl:*)",
       "Bash(git rm:*)",
-      "Bash(xargs git rm:*)"
+      "Bash(xargs git rm:*)",
+      "Bash(gh workflow run:*)"
     ]
   }
 }

@@ -169,6 +169,7 @@ class SmartRecruitersScraper(BaseScraper):
             posted_date=data.get("releasedDate"),
             updated_time=None,
             source=f"SmartRecruiters:{self.company_slug}",
+            domain=self.domain,
             department=department.get("label") if department else None,
             description=description,
         )

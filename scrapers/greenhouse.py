@@ -159,6 +159,7 @@ class GreenhouseScraper(BaseScraper):
             posted_date=None,
             updated_time=data.get("updated_at"),
             source=f"Greenhouse:{self.board_slug}",
+            domain=self.domain,
             department=department,
             description=description,
         )
