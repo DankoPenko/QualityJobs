@@ -120,12 +120,19 @@
             margin-top: 4px;
         }
         .job-company a {
-            color: #666;
-            text-decoration: none;
-        }
-        .job-company a:hover {
             color: #0066cc;
             text-decoration: underline;
+            text-decoration-style: dotted;
+        }
+        .job-company a:hover {
+            color: #004499;
+            text-decoration-style: solid;
+        }
+        .job-logo-link {
+            display: block;
+        }
+        .job-logo-link:hover .job-logo {
+            opacity: 0.8;
         }
         .job-location {
             color: #999;
@@ -603,12 +610,18 @@
 
             jobList.innerHTML = filteredJobs.map(job => {
                 const logoUrl = getCompanyLogo(job.company);
+                const companyUrl = job.domain ? `https://${job.domain}` : null;
+                const logoHtml = logoUrl
+                    ? (companyUrl
+                        ? `<a href="${companyUrl}" target="_blank" rel="noopener" class="job-logo-link"><img src="${logoUrl}" alt="${job.company}" class="job-logo" onerror="this.style.display='none'"></a>`
+                        : `<img src="${logoUrl}" alt="${job.company}" class="job-logo" onerror="this.style.display='none'">`)
+                    : '';
                 return `
                 <li class="job-item${job.description ? ' has-description' : ''}">
-                    ${logoUrl ? `<img src="${logoUrl}" alt="${job.company}" class="job-logo" onerror="this.style.display='none'">` : ''}
+                    ${logoHtml}
                     <div class="job-info">
                         <a href="${job.url}" class="job-title" target="_blank" rel="noopener">${job.title}</a>
-                        <div class="job-company">${job.domain ? `<a href="https://${job.domain}" target="_blank" rel="noopener">${job.company}</a>` : job.company}</div>
+                        <div class="job-company">${companyUrl ? `<a href="${companyUrl}" target="_blank" rel="noopener">${job.company}</a>` : job.company}</div>
                         <div class="job-location">${job.location || ''}</div>
                         <div class="job-scraped">Scraped: ${formatDate(job.scraped_at)}</div>
                     </div>
