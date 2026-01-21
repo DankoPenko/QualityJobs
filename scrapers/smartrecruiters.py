@@ -25,9 +25,17 @@ class SmartRecruitersScraper(BaseScraper):
     # Keywords for ML/DS job filtering
     ML_DS_KEYWORDS = [
         "machine learning", "data scien", "data engineer", "data analyst",
-        "ml ", " ml", "ai ", " ai", "deep learning", "nlp",
-        "computer vision", "analytics", "neural", "llm",
-        "research scientist", "applied scientist"
+        "ml ", " ml,", " ml ", "(ml)", "deep learning", "nlp",
+        "computer vision", "neural", "llm", "genai", "gen ai",
+        "research scientist", "applied scientist", "artificial intelligence",
+        "ai research", "ai engineer", "reinforcement learning"
+    ]
+
+    # Keywords that indicate NOT an ML/DS job
+    EXCLUDE_KEYWORDS = [
+        "site reliability", "sre ", "devops",
+        "frontend", "front-end", "backend", "back-end", "fullstack",
+        "network engineer", "security engineer", "platform engineer"
     ]
 
     def __init__(self, company_name: str, company_slug: str, domain: str = "", **kwargs):
@@ -52,6 +60,11 @@ class SmartRecruitersScraper(BaseScraper):
         dept_name = department.get("label", "").lower() if department else ""
 
         searchable = f"{title} {dept_name}"
+
+        # First check if it matches any exclude keywords (non-ML jobs)
+        if any(kw in searchable for kw in self.EXCLUDE_KEYWORDS):
+            return False
+
         return any(kw in searchable for kw in self.ML_DS_KEYWORDS)
 
     def _is_germany_job(self, job_data: dict) -> bool:
