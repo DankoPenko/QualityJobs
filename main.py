@@ -74,6 +74,23 @@ GREENHOUSE_COMPANIES = [
     {"name": "ShopMy", "slug": "shopmy", "domain": "shopmy.us"},
     {"name": "Coalition", "slug": "coalition", "domain": "coalitioninc.com"},
     {"name": "Temporal", "slug": "temporal", "domain": "temporal.io"},
+    # Healthcare/Biotech from TrueUp
+    {"name": "Doctolib", "slug": "doctolib", "domain": "doctolib.com"},
+    {"name": "Strive Health", "slug": "strivehealth", "domain": "strivehealth.com"},
+    {"name": "Pomelo Care", "slug": "pomelocare", "domain": "pomelocare.com"},
+    {"name": "Headway", "slug": "headway", "domain": "headway.co"},
+    {"name": "Oura", "slug": "oura", "domain": "ouraring.com"},
+    {"name": "Lila Sciences", "slug": "lilasciences", "domain": "lilasciences.com"},
+    {"name": "Truveta", "slug": "truveta", "domain": "truveta.com"},
+    {"name": "Freenome", "slug": "freenome", "domain": "freenome.com"},
+    {"name": "Transcarent", "slug": "transcarent", "domain": "transcarent.com"},
+    {"name": "Tebra", "slug": "tebra", "domain": "tebra.com"},
+    {"name": "Thyme Care", "slug": "thymecare", "domain": "thymecare.com"},
+    {"name": "Generate Biomedicines", "slug": "generatebiomedicines", "domain": "generatebiomedicines.com"},
+    {"name": "Roivant Sciences", "slug": "roivantsciences", "domain": "roivant.com"},
+    {"name": "Resilience", "slug": "resilience", "domain": "resilience.com"},
+    {"name": "NewLimit", "slug": "newlimit", "domain": "newlimit.com"},
+    {"name": "EvolutionaryScale", "slug": "evolutionaryscale", "domain": "evolutionaryscale.ai"},
 ]
 
 # Companies using SmartRecruiters job boards
