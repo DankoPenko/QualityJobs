@@ -21,8 +21,7 @@ EMAIL_ADDRESS = "danko.penko@gmail.com"
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 
-# Resend config (for subscriber notifications)
-RESEND_FROM = "Quality Jobs <jobs@resend.dev>"  # Update with your verified domain
+SUBSCRIBERS_FILE = Path(__file__).parent / "subscribers.json"
 
 
 @dataclass
@@ -106,22 +105,30 @@ def print_new_jobs(jobs: list[NewJob]) -> None:
         print()
 
 
-def send_email(jobs: list[NewJob], password: str) -> bool:
-    """Send email with new jobs."""
+def send_email(jobs: list[NewJob], password: str, to_email: str = None, unsubscribe_url: str = None) -> bool:
+    """Send email with new jobs to a single recipient."""
     if not jobs:
         return False
 
+    recipient = to_email or EMAIL_ADDRESS
     msg = MIMEMultipart("alternative")
     msg["Subject"] = f"Quality Jobs: {len(jobs)} new position(s) found!"
     msg["From"] = EMAIL_ADDRESS
-    msg["To"] = EMAIL_ADDRESS
+    msg["To"] = recipient
 
     # Plain text version
     text = f"{len(jobs)} new job(s) found:\n\n"
     for job in jobs:
         text += f"- {job.title} at {job.company}\n  {job.url}\n\n"
+    text += "\nView all jobs: https://dankopenko.github.io/QualityJobs/\n"
+    if unsubscribe_url:
+        text += f"\nUnsubscribe: {unsubscribe_url}\n"
 
     # HTML version
+    unsubscribe_html = ""
+    if unsubscribe_url:
+        unsubscribe_html = f'<p style="color: #666; font-size: 12px;"><a href="{unsubscribe_url}">Unsubscribe</a></p>'
+
     html = f"""
     <html>
     <body>
@@ -130,6 +137,7 @@ def send_email(jobs: list[NewJob], password: str) -> bool:
     {"".join(f'<li><a href="{job.url}"><b>{job.title}</b></a> at {job.company} ({job.location})</li>' for job in jobs)}
     </ul>
     <p><a href="https://dankopenko.github.io/QualityJobs/">View all jobs</a></p>
+    {unsubscribe_html}
     </body>
     </html>
     """
@@ -142,11 +150,23 @@ def send_email(jobs: list[NewJob], password: str) -> bool:
             server.starttls()
             server.login(EMAIL_ADDRESS, password)
             server.send_message(msg)
-        print("Email sent successfully!")
         return True
     except Exception as e:
-        print(f"Failed to send email: {e}")
+        print(f"Failed to send email to {recipient}: {e}")
         return False
+
+
+def load_subscribers_from_file() -> list[dict]:
+    """Load subscribers from local JSON file."""
+    if not SUBSCRIBERS_FILE.exists():
+        return []
+    try:
+        with open(SUBSCRIBERS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data.get("subscribers", [])
+    except Exception as e:
+        print(f"Failed to load subscribers file: {e}")
+        return []
 
 
 def get_subscribers(worker_url: str, worker_secret: str) -> list[dict]:
@@ -165,83 +185,29 @@ def get_subscribers(worker_url: str, worker_secret: str) -> list[dict]:
         return []
 
 
-def create_subscriber_email_html(jobs: list[NewJob], unsubscribe_url: str) -> str:
-    """Create HTML email content for subscribers."""
-    job_items = ""
-    for job in jobs[:20]:  # Limit to 20 jobs per email
-        job_items += f"""
-        <tr>
-            <td style="padding: 16px; border-bottom: 1px solid #eee;">
-                <a href="{job.url}" style="color: #0066cc; text-decoration: none; font-weight: 500;">
-                    {job.title}
-                </a>
-                <div style="color: #666; font-size: 14px; margin-top: 4px;">
-                    {job.company} - {job.location}
-                </div>
-            </td>
-        </tr>
-        """
-
-    return f"""
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5;">
-    <table width="100%" cellpadding="0" cellspacing="0" style="background: #f5f5f5; padding: 20px;">
-        <tr>
-            <td align="center">
-                <table width="600" cellpadding="0" cellspacing="0" style="background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                    <tr>
-                        <td style="padding: 30px 30px 20px; text-align: center; border-bottom: 1px solid #eee;">
-                            <h1 style="margin: 0; color: #333; font-size: 24px;">Quality Jobs</h1>
-                            <p style="margin: 8px 0 0; color: #666; font-size: 14px;">
-                                {len(jobs)} new ML/DS position{"s" if len(jobs) != 1 else ""} in Germany
-                            </p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table width="100%" cellpadding="0" cellspacing="0">
-                                {job_items}
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 20px 30px; text-align: center; background: #f9f9f9; border-radius: 0 0 8px 8px;">
-                            <a href="https://dankopenko.github.io/QualityJobs/" style="color: #0066cc; text-decoration: none;">
-                                View all jobs
-                            </a>
-                            <span style="color: #ccc; margin: 0 10px;">|</span>
-                            <a href="{unsubscribe_url}" style="color: #999; text-decoration: none; font-size: 13px;">
-                                Unsubscribe
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>
-"""
+def sync_subscribers_to_file(worker_url: str, worker_secret: str) -> None:
+    """Fetch subscribers from Worker and save to local file."""
+    subscribers = get_subscribers(worker_url, worker_secret)
+    if subscribers:
+        with open(SUBSCRIBERS_FILE, "w", encoding="utf-8") as f:
+            json.dump({
+                "subscribers": subscribers,
+                "synced_at": datetime.now().isoformat()
+            }, f, indent=2)
+        print(f"Synced {len(subscribers)} subscribers to {SUBSCRIBERS_FILE}")
 
 
-def send_to_subscribers(jobs: list[NewJob], resend_api_key: str, worker_url: str, worker_secret: str) -> None:
-    """Send email notifications to all subscribers via Resend."""
+def send_to_subscribers(jobs: list[NewJob], password: str, worker_url: str) -> None:
+    """Send email notifications to all subscribers via Gmail."""
     if not jobs:
         return
 
-    subscribers = get_subscribers(worker_url, worker_secret)
+    subscribers = load_subscribers_from_file()
     if not subscribers:
         print("No subscribers to notify")
         return
 
-    print(f"Sending to {len(subscribers)} subscriber(s)...")
-
-    subject = f"{len(jobs)} new ML/DS job{'s' if len(jobs) != 1 else ''} in Germany"
+    print(f"Sending to {len(subscribers)} subscriber(s) via Gmail...")
     sent = 0
     failed = 0
 
@@ -253,33 +219,12 @@ def send_to_subscribers(jobs: list[NewJob], resend_api_key: str, worker_url: str
             continue
 
         unsubscribe_url = f"{worker_url}/unsubscribe?token={token}"
-        html_content = create_subscriber_email_html(jobs, unsubscribe_url)
 
-        try:
-            response = requests.post(
-                "https://api.resend.com/emails",
-                headers={
-                    "Authorization": f"Bearer {resend_api_key}",
-                    "Content-Type": "application/json",
-                },
-                json={
-                    "from": RESEND_FROM,
-                    "to": [email],
-                    "subject": subject,
-                    "html": html_content,
-                },
-                timeout=30,
-            )
-
-            if response.status_code == 200:
-                sent += 1
-                print(f"  Sent to {email}")
-            else:
-                failed += 1
-                print(f"  Failed to send to {email}: {response.text}")
-        except Exception as e:
+        if send_email(jobs, password, to_email=email, unsubscribe_url=unsubscribe_url):
+            sent += 1
+            print(f"  Sent to {email}")
+        else:
             failed += 1
-            print(f"  Error sending to {email}: {e}")
 
     print(f"Subscriber emails: {sent} sent, {failed} failed")
 
@@ -297,27 +242,34 @@ if __name__ == "__main__":
 
     if len(sys.argv) > 1 and sys.argv[1] == "--init":
         initialize_seen_jobs()
+    elif len(sys.argv) > 1 and sys.argv[1] == "--sync":
+        # Sync subscribers from Worker to local file
+        worker_url = os.environ.get("WORKER_URL")
+        worker_secret = os.environ.get("WORKER_SECRET")
+        if worker_url and worker_secret:
+            sync_subscribers_to_file(worker_url, worker_secret)
+        else:
+            print("WORKER_URL and WORKER_SECRET required for sync")
     else:
         new_jobs = detect_new_jobs()
         print_new_jobs(new_jobs)
 
         if new_jobs:
-            # Send email to owner via Gmail
             password = os.environ.get("EMAIL_PASSWORD")
-            if password:
-                send_email(new_jobs, password)
-            else:
-                print("(EMAIL_PASSWORD not set, skipping owner email)")
-
-            # Send to subscribers via Resend
-            resend_api_key = os.environ.get("RESEND_API_KEY")
             worker_url = os.environ.get("WORKER_URL")
-            worker_secret = os.environ.get("WORKER_SECRET")
 
-            if all([resend_api_key, worker_url, worker_secret]):
-                send_to_subscribers(new_jobs, resend_api_key, worker_url, worker_secret)
+            if password:
+                # Send email to owner
+                if send_email(new_jobs, password):
+                    print("Owner email sent successfully!")
+
+                # Send to subscribers via Gmail
+                if worker_url:
+                    send_to_subscribers(new_jobs, password, worker_url)
+                else:
+                    print("(WORKER_URL not set, skipping subscriber emails)")
             else:
-                print("(Resend config not set, skipping subscriber emails)")
+                print("(EMAIL_PASSWORD not set, skipping all emails)")
 
             mark_jobs_as_seen(new_jobs)
             print("(Jobs marked as seen for next run)")
