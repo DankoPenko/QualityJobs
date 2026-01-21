@@ -119,6 +119,14 @@
             font-size: 0.9em;
             margin-top: 4px;
         }
+        .job-company a {
+            color: #666;
+            text-decoration: none;
+        }
+        .job-company a:hover {
+            color: #0066cc;
+            text-decoration: underline;
+        }
         .job-location {
             color: #999;
             font-size: 0.85em;
@@ -600,7 +608,7 @@
                     ${logoUrl ? `<img src="${logoUrl}" alt="${job.company}" class="job-logo" onerror="this.style.display='none'">` : ''}
                     <div class="job-info">
                         <a href="${job.url}" class="job-title" target="_blank" rel="noopener">${job.title}</a>
-                        <div class="job-company">${job.company}</div>
+                        <div class="job-company">${job.domain ? `<a href="https://${job.domain}" target="_blank" rel="noopener">${job.company}</a>` : job.company}</div>
                         <div class="job-location">${job.location || ''}</div>
                         <div class="job-scraped">Scraped: ${formatDate(job.scraped_at)}</div>
                     </div>
