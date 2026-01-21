@@ -91,6 +91,15 @@ GREENHOUSE_COMPANIES = [
     {"name": "Resilience", "slug": "resilience", "domain": "resilience.com"},
     {"name": "NewLimit", "slug": "newlimit", "domain": "newlimit.com"},
     {"name": "EvolutionaryScale", "slug": "evolutionaryscale", "domain": "evolutionaryscale.ai"},
+    # Fintech from TrueUp
+    {"name": "SoFi", "slug": "sofi", "domain": "sofi.com"},
+    {"name": "Brex", "slug": "brex", "domain": "brex.com"},
+    {"name": "C6 Bank", "slug": "c6bank", "domain": "c6bank.com.br"},
+    {"name": "Monzo", "slug": "monzo", "domain": "monzo.com"},
+    {"name": "PhonePe", "slug": "phonepe", "domain": "phonepe.com"},
+    {"name": "Kalshi", "slug": "kalshi", "domain": "kalshi.com"},
+    {"name": "Upgrade", "slug": "upgrade", "domain": "upgrade.com"},
+    {"name": "Array", "slug": "array", "domain": "array.com"},
 ]
 
 # Companies using SmartRecruiters job boards
@@ -103,6 +112,8 @@ SMARTRECRUITERS_COMPANIES = [
     {"name": "Glean", "slug": "Glean", "domain": "glean.com"},
     {"name": "Uber", "slug": "Uber", "domain": "uber.com"},
     {"name": "Xiaomi", "slug": "Xiaomi", "domain": "mi.com"},
+    # Fintech from TrueUp
+    {"name": "Binance", "slug": "Binance", "domain": "binance.com"},
 ]
 
 
