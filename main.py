@@ -100,6 +100,16 @@ GREENHOUSE_COMPANIES = [
     {"name": "Kalshi", "slug": "kalshi", "domain": "kalshi.com"},
     {"name": "Upgrade", "slug": "upgrade", "domain": "upgrade.com"},
     {"name": "Array", "slug": "array", "domain": "array.com"},
+    # German companies
+    {"name": "FlixBus", "slug": "flix", "domain": "flixbus.com"},
+    {"name": "Raisin", "slug": "raisin", "domain": "raisin.com"},
+    {"name": "SumUp", "slug": "sumup", "domain": "sumup.com"},
+    {"name": "Free Now", "slug": "freenow", "domain": "free-now.com"},
+    {"name": "Celonis", "slug": "celonis", "domain": "celonis.com"},
+    {"name": "Contentful", "slug": "contentful", "domain": "contentful.com"},
+    {"name": "GetYourGuide", "slug": "getyourguide", "domain": "getyourguide.com"},
+    {"name": "Trivago", "slug": "trivago", "domain": "trivago.com"},
+    {"name": "Ada Health", "slug": "adahealth", "domain": "ada.com"},
 ]
 
 # Companies using SmartRecruiters job boards
@@ -114,6 +124,12 @@ SMARTRECRUITERS_COMPANIES = [
     {"name": "Xiaomi", "slug": "Xiaomi", "domain": "mi.com"},
     # Fintech from TrueUp
     {"name": "Binance", "slug": "Binance", "domain": "binance.com"},
+    # German companies
+    {"name": "Check24", "slug": "check24", "domain": "check24.de"},
+    {"name": "AboutYou", "slug": "aboutyougmbh", "domain": "aboutyou.com"},
+    {"name": "Sixt", "slug": "sixt", "domain": "sixt.com"},
+    {"name": "AUTO1 Group", "slug": "auto1", "domain": "auto1-group.com"},
+    {"name": "Omio", "slug": "omio", "domain": "omio.com"},
 ]
 
 
