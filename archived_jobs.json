@@ -1,5 +1,24 @@
 [
   {
+    "id": "744000097967475",
+    "title": "Senior Engineering Manager - Data Engineering (Global Discovery)",
+    "company": "Delivery Hero",
+    "url": "https://careers.smartrecruiters.com/DeliveryHero/744000097967475",
+    "location": "Berlin, de",
+    "city": "Berlin",
+    "country": "de",
+    "posted_date": "2025-12-10T05:35:03.115Z",
+    "updated_time": null,
+    "source": "SmartRecruiters:DeliveryHero",
+    "scraped_at": "2026-01-12T09:09:40.159177",
+    "domain": "deliveryhero.com",
+    "description": "We are on the lookout for a&#xa0;Senior Engineering Manager, Data Engineering to lead the Data Engineering Domain within Global Discovery. This is a high-impact leadership role where you will manage three distinct but interconnected squads responsible for the data platform and real-time ingestion.\nYou will be the custodian of the critical data foundation that powers our Search & Recommendation engines—the \"brain\" of our user experience—and enables business insights across the entire organization. If you are passionate about orchestrating complex pipelines, building high-throughput real-time systems, and establishing a culture of data trust at a global scale, we want to hear from you.\nAs a Senior Engineering Manager, you will lead a domain responsible for the unified data platform that drives our Tier-1 discovery services.\n\nLead & Scale: Manage and mentor a diverse group of engineers and managers across three squads. Develop a strong delegation framework and foster a culture of technical excellence and ownership.\n\nBuild a Unified Data Platform: Orchestrate complex data pipelines across both Batch (Airflow, dbt, BigQuery) and Streaming ecosystems. Ensure seamless integration between raw data ingestion and downstream consumption by Data Science models and Analytics use-cases.\n\nEnsure Real-Time Reliability: Lead the Backend team responsible for high-throughput real-time ingestion services that feed Search and Recommendation use cases. You will ensure low-latency processing and high availability for these critical systems.\n\nChampion Data Quality & Governance: Establish a culture of data trust. Improve automated data quality monitoring and define clear SLAs for data freshness and accuracy for both analytical and operational use cases.\n\nEmpower Data Science & Analytics: Act as a strategic partner to the Data Science and Analytics teams. Provide them with high-reliability datasets, clean architecture, and efficient self-service tooling (Cosmos, dbt) to accelerate model trai...",
+    "salary": null,
+    "job_type": null,
+    "department": null,
+    "archived_at": "2026-01-23T20:56:21.041315"
+  },
+  {
     "id": "3134011",
     "title": "Sr. Account Manager (Energy & HCLS), AWS Germany",
     "company": "Amazon",
