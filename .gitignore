@@ -5,3 +5,12 @@ __pycache__/
 venv/
 *.egg-info/
 tmpclaude-*
+
+# Auto-apply personal data
+profile.json
+*.pdf
+applications.json
+
+# Gmail API credentials
+credentials.json
+token.json
