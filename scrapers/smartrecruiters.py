@@ -175,7 +175,7 @@ class SmartRecruitersScraper(BaseScraper):
             id=data.get("id", ""),
             title=data.get("name", ""),
             company=self.company_name,
-            url=f"https://careers.smartrecruiters.com/{self.company_slug}/{data.get('id', '')}",
+            url=f"https://jobs.smartrecruiters.com/{self.company_slug}/{data.get('id', '')}",
             location=f"{location.get('city', '')}, {location.get('country', '')}",
             city=location.get("city"),
             country=location.get("country", "Germany"),
