@@ -1,1 +1,1 @@
-dankopenko.github.io/QualityJobs/
+https://dankopenko.github.io/QualityJobs/
