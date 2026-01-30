@@ -1,5 +1,24 @@
 [
   {
+    "id": "7366032",
+    "title": "Senior Data Analyst (f/m/d)",
+    "company": "Contentful",
+    "url": "https://job-boards.greenhouse.io/contentful/jobs/7366032",
+    "location": "Berlin, Berlin, Germany",
+    "city": "Berlin",
+    "country": "Germany",
+    "posted_date": null,
+    "updated_time": "2026-01-24T19:20:42-05:00",
+    "source": "Greenhouse:contentful",
+    "scraped_at": "2026-01-23T20:55:30.630337",
+    "domain": "contentful.com",
+    "description": "About the Opportunity\n\nWe are seeking an experienced Senior Data Analyst (f/m/d) to help us quantify success across our product, identify and prioritise opportunities for product development, and find patterns in behaviour that can be used to drive conversations with our customers about how they can get the most out of our Product.&nbsp;\n\nYou will own the analytical framework that links product adoption to customer impact and business success. You will collaborate broadly across Product Development and Customer Experience teams to continuously strengthen and scale this framework. Your primary focus will be on designing and implementing repeatable, scalable analytical solutions that inform high-stakes strategic decisions across the organization.&nbsp;\n\nThe ideal candidate possesses deep fluency in data manipulation and statistical methods, combined with a strong commercial mindset. You must be adept at moving beyond descriptive analysis to distill actionable recommendations, translating complex data stories into clear, impactful insights for both technical and non-technical stakeholders.\n\nWhile ad-hoc deep-dive analysis will be required, the early emphasis is on establishing robust, automated measurement systems that guide decisions throughout our business.\n\nWhat to expect?&nbsp;\n\nFramework Ownership: Design, implement, and maintain the end-to-end analytical frameworks linking user behavior, customer value, and commercial outcomes (e.g., retention, expansion).\n\nAnalytical Frameworks: Design and maintain analytical frameworks (e.g., funnel analysis, cohort analysis, statistical modeling) to provide reliable and reproducible measurement of product performance.\n\nStrategic Analysis &amp; Insight: Perform deep-dive quantitative analysis utilizing statistical methods to measure the drivers of product success, operational efficiency, and customer experience.\n\nData Storytelling: Clearly tell the story of your insights for technical and business stakeholders, distilling compl...",
+    "salary": null,
+    "job_type": null,
+    "department": "Product",
+    "archived_at": "2026-01-30T16:39:23.827763"
+  },
+  {
     "id": "1281287201",
     "title": "(Senior) DevOps Engineer (f/m/d) AI Core Operations",
     "company": "SAP",
