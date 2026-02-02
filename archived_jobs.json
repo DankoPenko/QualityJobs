@@ -1,5 +1,24 @@
 [
   {
+    "id": "744000106495655",
+    "title": "Senior Computer Vision Engineer - Berlin - (f/m/x)",
+    "company": "AUTO1 Group",
+    "url": "https://jobs.smartrecruiters.com/auto1/744000106495655",
+    "location": "Berlin, de",
+    "city": "Berlin",
+    "country": "de",
+    "posted_date": "2026-01-30T12:32:42.425Z",
+    "updated_time": null,
+    "source": "SmartRecruiters:auto1",
+    "scraped_at": "2026-01-30T16:39:15.054106",
+    "domain": "auto1-group.com",
+    "description": "What You'll Do\n\nMaintain, optimize, and ensure the reliability of our complex, multi-stage computer vision pipeline, which includes models for semantic segmentation, object detection, image classification, and optical flow estimation.\n\nSet the technical vision and roadmap for specific parts of the CV pipeline, making key architectural and algorithmic decisions to drive performance and accuracy.\n\nLead the adaptation of existing models and the development of new components for upcoming projects, translating business needs into technical solutions.\n\nOversee the entire data lifecycle for your models, from defining clear annotation guidelines to managing data quality and iterating on the feedback loop with our in-house annotation team.\n\nWrite clean, maintainable, and robust production-level Python code, adhering to strong software engineering best practices.\n\nManage model training, experimentation, and evaluation on our on-premise Linux server infrastructure.",
+    "salary": null,
+    "job_type": null,
+    "department": "Technology",
+    "archived_at": "2026-02-02T09:17:23.853426"
+  },
+  {
     "id": "7366032",
     "title": "Senior Data Analyst (f/m/d)",
     "company": "Contentful",
