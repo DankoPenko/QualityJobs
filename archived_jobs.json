@@ -1,5 +1,24 @@
 [
   {
+    "id": "744000109255146",
+    "title": "Working Student, Data Engineering - (Vendor)",
+    "company": "Delivery Hero",
+    "url": "https://jobs.smartrecruiters.com/DeliveryHero/744000109255146",
+    "location": "Berlin, de",
+    "city": "Berlin",
+    "country": "de",
+    "posted_date": "2026-02-13T15:38:35.477Z",
+    "updated_time": null,
+    "source": "SmartRecruiters:DeliveryHero",
+    "scraped_at": "2026-02-15T13:45:40.139759",
+    "domain": "deliveryhero.com",
+    "description": "We are on the look out for a Working Student, Data Engineering for our Vendor Data Team, where your work will directly support how vendors are discovered, managed, and analyzed at scale. You'll be working mostly on Vendor Sales & Operations topics, contributing to data-driven initiatives such as vendor lead generation, vendor management, and competitor analysis.\nAs part of our Vendor Team, you’ll be the driving force behind the success of thousands of restaurants, shops, and local businesses. Your contributions will empower vendors with advanced tools to manage their operations, boosting their visibility and reach. Every feature you help build will create growth opportunities for businesses of all sizes, strengthening Delivery Hero’s ecosystem and impact.\nThis is a hands-on role designed for students who want real production exposure.\nYou'll work with modern data tooling and collaborate closely with data engineers, analytics engineers, and business stakeholders. If you're proactive, communicative, and eager to learn how real-world data platforms are built and operated, this role will give you an excellent foundation.\n\n&#xa0;\nSupport the maintenance and improvement of data ingestion and transformation pipelines powering Vendor Sales & Operations use cases\nWork with SQL and dbt to build, test, and optimize data models in BigQuery\nHelp monitor and ensure data quality and reliability using tools like Monte Carlo\nAssist with Airflow-based orchestration, debugging pipeline failures and improving robustness\nContribute to ML matching systems by supporting data preparation, validation, and monitoring\nCollaborate closely with data engineers, analysts, and commercial stakeholders to understand data needs and translate them into reliable datasets\nDocument data models, pipelines, and assumptions to improve transparency and long-term maintainability.\n&#xa0;",
+    "salary": null,
+    "job_type": null,
+    "department": null,
+    "archived_at": "2026-02-16T17:04:08.450981"
+  },
+  {
     "id": "7428569",
     "title": "Senior Data Scientist, MarTech Alliance (f/m/x) ",
     "company": "HelloFresh",
