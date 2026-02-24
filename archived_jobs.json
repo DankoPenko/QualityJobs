@@ -1,5 +1,24 @@
 [
   {
+    "id": "1216615101",
+    "title": "Working Student (f/m/d) - Developer",
+    "company": "SAP",
+    "url": "https://jobs.sap.com/job/Dresden-Working-Student-%28fmd%29-Developer-01067/1216615101/",
+    "location": "Dresden, DE, 01067",
+    "city": "Dresden",
+    "country": "Germany",
+    "posted_date": null,
+    "updated_time": null,
+    "source": "SAPScraper",
+    "scraped_at": "2026-01-30T09:14:10.514368",
+    "domain": null,
+    "description": "an>\n\nWhat you'll do\r\n\nCan you imagine an IT infrastructure world without manual configuration and management tasks? In this role it is your task to create this. The construction and lifecycle management of large IT landscapes at the push of a button up to the use of Al support.\nAs Developer (f/m/d), you will be part of the Cloud Provider Interface team developing automations to enable deployments of different SAP cloud offerings on Hyperscaler and SAP owned datacenters and to build the automation and integration into the existing operations tool set and processes. Leverage AI functionalities to ease and support end-user automation usage experience.\nYou will drive the process to transform and mature the prototyped code to a production ready solution that can become managed by the infrastructure operation teams. This includes continuous refinements of the prototyped solution and conducting knowledge transfer sessions to the relevant operation teams.\r\n\nWhat you bring\r\n\nStudent (f/m/d) at a university or a university of applied sciences\r\n\nStudies in computer sciences or comparable subject (min. 4 Semester)\r\n\nAbility to work in an international team\r\n\nSoftware development skills in programming/scripting languages e.g., Python, JAVA, Perl …\r\n\nFamiliar with scrum development method and CI/CD deployment pipelines\r\n\nGeneral web services development skills HTTP/HTTPS, RESTful APIs, Open API, Swagger\r\n\nKnowledge and experience with microservices, container, Kubernetes\r\n\nFamiliar with Linux operating system\r\n\nStrong analytical and logical skills\r\n\nAbility to familiarize oneself with existing Codebase\r\n\nWillingness to learn and own initiative; Teamplayer but also autonomous work\r\n\nCustomer orientation with a strong focus on quality\r\n\nGood English language skills fluent in spoken and written\r\n\nIdeally but not necessarily you do have experience with:\r\n\nusage of Public Cloud Infrastructures (Google Cloud Platform, Amazon Web Services, Azure etc.)\r\n\ncentral infrastructure services (...",
+    "salary": null,
+    "job_type": null,
+    "department": null,
+    "archived_at": "2026-02-24T09:20:12.127934"
+  },
+  {
     "id": "2723429",
     "title": "Senior Applied Scientist - Partner Tech (all genders)",
     "company": "Zalando",
