@@ -1,5 +1,24 @@
 [
   {
+    "id": "7543954",
+    "title": "Senior Reporting Data Analyst (Fluent French)",
+    "company": "N26",
+    "url": "https://n26.com/en-eu/careers/positions/7543954?gh_jid=7543954",
+    "location": "Berlin",
+    "city": "Berlin",
+    "country": "Germany",
+    "posted_date": null,
+    "updated_time": "2026-01-26T06:29:17-05:00",
+    "source": "Greenhouse:n26",
+    "scraped_at": "2026-01-23T16:01:57.985553",
+    "domain": "n26.com",
+    "description": "About the opportunity\n\nThe Senior Reporting Data Analyst plays a key role in supporting the French Regulatory Reporting team by developing, maintaining, and optimizing the data models, pipelines, and scripts used for French regulatory submissions. The role ensures high-quality data, reliable transformations, and seamless alignment between French regulatory requirements and our data/tech teams.\n\nIn this role, you will:\n\nWorking with the French Regulatory Reporting team who are our experts in regulatory reports, in order to match regulatory requirements to the data which is living in our DWH.\n\nBuild and automate data models.\n\nData profiling, finding the right data, requesting missing data, etc.\n\nConducting data quality investigation.\n\nDefine, build and maintain processes that deliver crucial data to internal and external stakeholders.\n\nAutomate everything what is possible.\n\nLearn about regulator reports and accounting principles.\n\nMaintain your work well documented, reproducible and reliable.\n\nWhat you need to be successful:\n\nBackground:\n\nMinimum 5 years of experience working with data in the financial industry or similar.\n\nFluent in English &amp; French.\n\nAdvanced knowledge of SQL is a must (Postgres or Redshift preferred).\n\nYou love working with data, and you become very creative when analyzing data.\n\nYou are independent problem solver who owns the process from the beginning till the end, however you also know how to recognize when to ask for a help.\n\nYou are curious, responsible, self-motivated, detail oriented empathic leader and a strong communicator.\n&nbsp;\n\nAdvanced SQL Skills:\n\nExpert-level proficiency in SQL for querying, data manipulation, and performance optimization.\n\nAbility to write complex SQL queries, stored procedures, CTEs, and window functions.\n\nStrong understanding of database normalization, indexing, and query performance tuning.\n&nbsp;\n\ndbt (Data Build Tool) Knowledge (optional but beneficial):\n\nProficiency with dbt for transforming, testing, and...",
+    "salary": null,
+    "job_type": null,
+    "department": "European Markets",
+    "archived_at": "2026-02-25T09:20:27.678837"
+  },
+  {
     "id": "1216615101",
     "title": "Working Student (f/m/d) - Developer",
     "company": "SAP",
