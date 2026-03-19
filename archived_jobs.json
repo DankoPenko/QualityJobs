@@ -1,5 +1,24 @@
 [
   {
+    "id": "3176950",
+    "title": "TOM Technician (Level 3), EU TOM TIE",
+    "company": "Amazon",
+    "url": "https://www.amazon.jobs/en/jobs/3176950",
+    "location": "DE, NW, Dortmund",
+    "city": "Dortmund",
+    "country": "Germany",
+    "posted_date": "February  9, 2026",
+    "updated_time": "about 1 month",
+    "source": "AmazonScraper",
+    "scraped_at": "2026-02-09T21:55:11.827461",
+    "domain": null,
+    "description": "Amazon’s EU Transportation Operations Management (TOM) Tech Integration and Execution team is looking for Technicians who want to create a best-in-class network and maintain sustainable yard systems within Amazon Transportation Services.<br/>As a TIE(Technology Integration and Execution) Technician, you will use your knowledge and specialized skills to implement technical solutions and provide high quality support for computer and electronic hardware and, operating systems, and software used in TOM managed yards. You are able to determine when it is appropriate to deviate from a standard practice to accomplish the desired result. You can troubleshoot and solve straightforward problems that do not have defined SOPs.<br/><br/><br/>Key job responsibilities<br/>•\tManage and resolve technical tickets within SLA timelines<br/>•\tComprehensively understand the Gatehouse PC configurations (hardware and software) and how 8-9 GH automation devices (per lane) are connected to the PC (their individual drivers, mac and IP address etc).<br/>•\tGet a comprehensive understanding of all TIE SOPs that guide towards potential issues causing the problem. Technician has to use their developed knowledge to isolate the root cause by iterative testing of various variables in combination.<br/>•\tOwn and manage the inventory of all GH automation equipment, keeping log of items checked out and raise ticket for fresh orders.<br/>•\t<br/>•\tCoordinate with TIE Procurement, OTS, RME, and RYA/Gate teams<br/>•\tConduct daily health checks across all RRG sites and perform early fault detection<br/>•\tMonitor equipment performance metrics (license plate detection, vehicle detection, audio quality)<br/>•\tPerform quarterly preventive maintenance on RRG infrastructure<br/>•\tConduct deep-dive investigations for critical system performance issues<br/>•\tDocument findings, root cause analysis, corrective actions, and prevention recommendations<br/>•\tMaintain inventory accuracy through weekly monitoring and audits<br/>•\tServe as primary liaison with vendors and conduct post-work inspections<br/>•\tCollaborate with RYA and Gate teams on operational issues and dashboard accuracy<br/>•\tRaise tickets with clear problem descriptions, impact assessments, and supporting documentation<br/><br/><br/>About the team<br/>Amazon couldn’t deliver at pace without the Amazon Transportation Service (ATS) team. As part of ATS, you’ll be welcomed into a diverse team that plays a central role in our success. Using air, sea and road transport, as well as sortation centres equipped with the latest technology, you’ll help Amazon’s transport run at maximum efficiency. Our team captures data and uses it to drive decisions. They are key to making Amazon more innovative and efficient.<br/>We put safety first as our people are our priority. And we use the expertise of our people to get packages to their destination.",
+    "salary": null,
+    "job_type": "full-time",
+    "department": null,
+    "archived_at": "2026-03-19T19:13:38.718261"
+  },
+  {
     "id": "7385709",
     "title": "Data Engineer (Java/Scala)",
     "company": "GetYourGuide",
