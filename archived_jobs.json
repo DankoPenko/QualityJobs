@@ -1,5 +1,24 @@
 [
   {
+    "id": "7582805",
+    "title": "Senior AI Engineer - APM Integrations",
+    "company": "Datadog",
+    "url": "https://careers.datadoghq.com/detail/7582805/?gh_jid=7582805",
+    "location": "Germany, Remote; Italy, Remote; Spain, Remote",
+    "city": "Germany",
+    "country": "Germany",
+    "posted_date": null,
+    "updated_time": "2026-04-01T14:20:47-04:00",
+    "source": "Greenhouse:datadog",
+    "scraped_at": "2026-02-03T09:13:48.055139",
+    "domain": "datadoghq.com",
+    "description": "IDM is the team that works on Datadog APM integrations: the parts that connect Datadog to the tools and services customers use. The team’s job is to make it easier for engineers to build and maintain integrations over time, and to keep quality and reliability high.&nbsp;You will build AI-assisted tools that help with day-to-day engineering work, like drafting code changes, suggesting fixes, and checking results with tests and other automated checks. The goal is building tools that engineers can trust in real production work. You’ll also work closely with other teams, understand how they work, and build solutions that fit their process.&nbsp;You will define what “good” means for these tools, measure results, and improve them over time. You’ll set up evaluation and testing so the AI output stays correct and doesn’t silently get worse. This is a senior role with high ownership, from early prototypes to production and ongoing support.\n\nAt Datadog, we place value in our office culture - the relationships and collaboration it builds and the creativity it brings to the table. We operate as a hybrid workplace to ensure our Datadogs can create a work-life harmony that best fits them.\n\n&nbsp;\n\nWhat You’ll Do:\n\nBuild agent workflows that take an integration need from plan to implementation and validation with humans approving at the right checkpoints\n\nCreate systems that synthesize context from codebases, docs, specs, telemetry, and historical incidents to make changes that match Datadog conventions and customer expectations\n\nGenerate and evolve integration code and tests, including end-to-end scenarios that reflect real customer workloads and product features\n\nDesign evaluation harnesses that prevent silent regressions: golden sets, scenario baselines, semantic checks, performance thresholds, and release gating\n\nBuild portfolio-level automation: proactive updates for upstream breaking changes, tracer feature rollouts across the catalog, migrations to new schemas/semantics, an...",
+    "salary": null,
+    "job_type": null,
+    "department": "Dev Eng",
+    "archived_at": "2026-04-16T09:33:52.018017"
+  },
+  {
     "id": "1381176233",
     "title": "Expert DevOps Engineer for Sovereign Cloud Onsite Project (m/f/d)",
     "company": "SAP",
