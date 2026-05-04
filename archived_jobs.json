@@ -1,5 +1,24 @@
 [
   {
+    "id": "8429567002",
+    "title": "Senior Data Scientist, Ads & Monetisation",
+    "company": "Bolt",
+    "url": "https://bolt.eu/en/careers/positions/8429567002?gh_jid=8429567002",
+    "location": "Berlin, Germany",
+    "city": "Berlin",
+    "country": "Germany",
+    "posted_date": null,
+    "updated_time": "2026-03-05T06:51:13-05:00",
+    "source": "Greenhouse:boltv2",
+    "scraped_at": "2026-02-19T21:18:19.655380",
+    "domain": "bolt.eu",
+    "description": "&nbsp; \nWe're looking for an experienced Data Scientist to join our Ads &amp; Monetization team and help build intelligent ranking, pricing, and bidding systems for our advertising platform. If you're excited about applying machine learning to marketplace monetization challenges across Bolt's 200M+ users, you'll find plenty of impactful work here.\n\n&nbsp; \n\n&nbsp; About us\n&nbsp; \nWith over 200 million users in 50+ countries, Bolt is one of the fastest-growing tech companies in Europe and Africa. And it's all thanks to our people.\n\nWe believe in creating an inclusive environment where everyone is welcome, regardless of race, colour, religion, gender identity, sexual orientation, national origin, age, or ability.\n\nOur ultimate goal is to make cities for people, not cars. And we need your help on this mission!\n&nbsp; \n\n&nbsp; About the role\n&nbsp; \nWe are building an advertising and monetization platform, enabling merchants and brands to reach customers through sponsored listings, banners, and targeted promotions across Bolt Food. You'll drive the data science roadmap for Ads — from building automated pricing and bidding engines that maximize value for advertisers and users to integrating sponsored content into our existing ML ranking systems. This is a foundational role: you'll be the first dedicated Data Science hire for Ads &amp; Monetization, working closely with Product, Engineering and Data Science teams.\n&nbsp; \n\n&nbsp; Main tasks and responsibilities:\n&nbsp; \n\nDevelop bidding and auction algos that enable fair price discovery and efficient budget allocation.\n\nBuild conversion prediction models (pCTR, pCVR) to power automated CPA/CPO pricing for self-serve merchant advertising.\n\nDesign and implement ranking models that blend sponsored listings with organic results, optimizing for user experience and advertiser ROI.\n\nPartner with other data science teams to extend existing ranking infrastructure with ads-specific features and signals.\n\nDesign and run experiments...",
+    "salary": null,
+    "job_type": null,
+    "department": "Engineering",
+    "archived_at": "2026-05-04T09:48:02.895283"
+  },
+  {
     "id": "744000112366418",
     "title": "Data Science Manager Finance (m/f/d)  ",
     "company": "Sixt",
