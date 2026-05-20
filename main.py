@@ -12,6 +12,7 @@ from pathlib import Path
 from scrapers import (
     GreenhouseScraper,
     SmartRecruitersScraper,
+    WorkdayScraper,
     AmazonScraper,
     ZalandoScraper,
     SAPScraper,
@@ -130,6 +131,25 @@ SMARTRECRUITERS_COMPANIES = [
     {"name": "Sixt", "slug": "sixt", "domain": "sixt.com"},
     {"name": "AUTO1 Group", "slug": "auto1", "domain": "auto1-group.com"},
     {"name": "Omio", "slug": "omio", "domain": "omio.com"},
+    # LinkedIn Top Companies 2026 Germany
+    {"name": "ServiceNow", "slug": "ServiceNow", "domain": "servicenow.com"},
+    {"name": "Nagarro", "slug": "Nagarro1", "domain": "nagarro.com"},
+]
+
+# Companies using Workday career sites (*.myworkdayjobs.com)
+WORKDAY_COMPANIES = [
+    # LinkedIn Top Companies 2026 Germany
+    {"name": "Stryker", "tenant": "stryker", "wd": "wd1", "site": "StrykerCareers", "domain": "stryker.com"},
+    {"name": "Medtronic", "tenant": "medtronic", "wd": "wd1", "site": "MedtronicCareers", "domain": "medtronic.com"},
+    {"name": "Eli Lilly", "tenant": "lilly", "wd": "wd5", "site": "LLY", "domain": "lilly.com"},
+    {"name": "Roche", "tenant": "roche", "wd": "wd3", "site": "roche-ext", "domain": "roche.com"},
+    {"name": "Adobe", "tenant": "adobe", "wd": "wd5", "site": "external_experienced", "domain": "adobe.com"},
+    {"name": "Abbott", "tenant": "abbott", "wd": "wd5", "site": "abbottcareers", "domain": "abbott.com"},
+    {"name": "Sanofi", "tenant": "sanofi", "wd": "wd3", "site": "SanofiCareers", "domain": "sanofi.com"},
+    # ML/AI-heavy tenants
+    {"name": "NVIDIA", "tenant": "nvidia", "wd": "wd5", "site": "NVIDIAExternalCareerSite", "domain": "nvidia.com"},
+    {"name": "Salesforce", "tenant": "salesforce", "wd": "wd12", "site": "External_Career_Site", "domain": "salesforce.com"},
+    {"name": "Mastercard", "tenant": "mastercard", "wd": "wd1", "site": "CorporateCareers", "domain": "mastercard.com"},
 ]
 
 
@@ -210,6 +230,17 @@ def main():
         scrapers.append(SmartRecruitersScraper(
             company_name=company["name"],
             company_slug=company["slug"],
+            domain=company["domain"],
+            country_code="DEU",
+        ))
+
+    # Workday-based companies
+    for company in WORKDAY_COMPANIES:
+        scrapers.append(WorkdayScraper(
+            company_name=company["name"],
+            tenant=company["tenant"],
+            wd=company["wd"],
+            site=company["site"],
             domain=company["domain"],
             country_code="DEU",
         ))
