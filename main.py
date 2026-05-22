@@ -13,6 +13,7 @@ from scrapers import (
     GreenhouseScraper,
     SmartRecruitersScraper,
     WorkdayScraper,
+    AshbyScraper,
     AmazonScraper,
     ZalandoScraper,
     SAPScraper,
@@ -111,6 +112,10 @@ GREENHOUSE_COMPANIES = [
     {"name": "GetYourGuide", "slug": "getyourguide", "domain": "getyourguide.com"},
     {"name": "Trivago", "slug": "trivago", "domain": "trivago.com"},
     {"name": "Ada Health", "slug": "adahealth", "domain": "ada.com"},
+    # German AI scene
+    {"name": "Trade Republic", "slug": "traderepublicbank", "domain": "traderepublic.com"},
+    {"name": "Black Forest Labs", "slug": "blackforestlabs", "domain": "bfl.ai"},
+    {"name": "Parloa", "slug": "parloa", "domain": "parloa.com"},
 ]
 
 # Companies using SmartRecruiters job boards
@@ -134,6 +139,13 @@ SMARTRECRUITERS_COMPANIES = [
     # LinkedIn Top Companies 2026 Germany
     {"name": "ServiceNow", "slug": "ServiceNow", "domain": "servicenow.com"},
     {"name": "Nagarro", "slug": "Nagarro1", "domain": "nagarro.com"},
+]
+
+# Companies using Ashby job boards (jobs.ashbyhq.com)
+ASHBY_COMPANIES = [
+    # German AI scene
+    {"name": "DeepL", "slug": "DeepL", "domain": "deepl.com"},
+    {"name": "Aleph Alpha", "slug": "AlephAlpha", "domain": "aleph-alpha.com"},
 ]
 
 # Companies using Workday career sites (*.myworkdayjobs.com)
@@ -243,6 +255,15 @@ def main():
             tenant=company["tenant"],
             wd=company["wd"],
             site=company["site"],
+            domain=company["domain"],
+            country_code="DEU",
+        ))
+
+    # Ashby-based companies
+    for company in ASHBY_COMPANIES:
+        scrapers.append(AshbyScraper(
+            company_name=company["name"],
+            board_slug=company["slug"],
             domain=company["domain"],
             country_code="DEU",
         ))

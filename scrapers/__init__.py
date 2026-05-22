@@ -2,6 +2,7 @@ from .base import BaseScraper
 from .greenhouse import GreenhouseScraper
 from .smartrecruiters import SmartRecruitersScraper
 from .workday import WorkdayScraper
+from .ashby import AshbyScraper
 from .amazon import AmazonScraper
 from .zalando import ZalandoScraper
 from .sap import SAPScraper
@@ -12,6 +13,7 @@ __all__ = [
     "GreenhouseScraper",
     "SmartRecruitersScraper",
     "WorkdayScraper",
+    "AshbyScraper",
     "AmazonScraper",
     "ZalandoScraper",
     "SAPScraper",
