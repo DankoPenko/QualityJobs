@@ -150,6 +150,8 @@ WORKDAY_COMPANIES = [
     {"name": "NVIDIA", "tenant": "nvidia", "wd": "wd5", "site": "NVIDIAExternalCareerSite", "domain": "nvidia.com"},
     {"name": "Salesforce", "tenant": "salesforce", "wd": "wd12", "site": "External_Career_Site", "domain": "salesforce.com"},
     {"name": "Mastercard", "tenant": "mastercard", "wd": "wd1", "site": "CorporateCareers", "domain": "mastercard.com"},
+    # German companies
+    {"name": "enercity", "tenant": "enercity", "wd": "wd3", "site": "enercity_extern", "domain": "enercity.de"},
 ]
 
 
