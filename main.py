@@ -20,8 +20,14 @@ from scrapers import (
     SAPScraper,
     SnapchatScraper,
     BMWScraper,
-    AllianzScraper,
+    PhenomScraper,
 )
+
+# Companies running Phenom People career sites
+PHENOM_COMPANIES = [
+    {"name": "Allianz", "host": "careers.allianz.com", "domain": "allianz.com"},
+    {"name": "Bayer", "host": "jobs.bayer.com", "domain": "bayer.com"},
+]
 
 ARCHIVE_FILE = "archived_jobs.json"
 
@@ -305,8 +311,16 @@ def main():
         SAPScraper(country_code="DEU"),
         SnapchatScraper(country_code="DEU"),
         BMWScraper(country_code="DEU"),
-        AllianzScraper(country_code="DEU"),
     ])
+
+    # Phenom People-based companies
+    for company in PHENOM_COMPANIES:
+        scrapers.append(PhenomScraper(
+            company_name=company["name"],
+            host=company["host"],
+            domain=company["domain"],
+            country_code="DEU",
+        ))
 
     all_jobs = []
 
