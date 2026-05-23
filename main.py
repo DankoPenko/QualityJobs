@@ -20,6 +20,7 @@ from scrapers import (
     SAPScraper,
     SnapchatScraper,
     BMWScraper,
+    AllianzScraper,
 )
 
 ARCHIVE_FILE = "archived_jobs.json"
@@ -304,6 +305,7 @@ def main():
         SAPScraper(country_code="DEU"),
         SnapchatScraper(country_code="DEU"),
         BMWScraper(country_code="DEU"),
+        AllianzScraper(country_code="DEU"),
     ])
 
     all_jobs = []
