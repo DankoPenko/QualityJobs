@@ -12,11 +12,15 @@ backlog.
 | ✅ done | **BMW Group** | jobs.bmwgroup.com | Jobs2Web (SF front-end) HTML | 28 German ML/AI roles |
 | ✅ done | **Allianz** | careers.allianz.com | Phenom (sitemap + JSON-LD mode) | 4 German ML/AI roles |
 | ✅ done | **Bayer** | jobs.bayer.com | Phenom (Google-for-Jobs RSS mode) | 4 German ML/AI roles |
+| ✅ done | **Merck KGaA** | careers.merckgroup.com | Phenom (sitemap + JSON-LD) | 1 German ML/AI role |
+| ✅ done | **Procter & Gamble** | www.pgcareers.com | Phenom (sitemap + JSON-LD) | 1 German ML/AI role |
+| ✅ done | **Thermo Fisher Scientific** | jobs.thermofisher.com | Phenom (sitemap + JSON-LD) | 0 currently, wired |
+| ✅ done | **PwC Germany** | jobs.pwc.de | Phenom (urlset + JSON-LD) | 0 currently, wired |
+| skip | **Microsoft** | jobs.careers.microsoft.com | Eightfold AI (not Phenom) | Different platform; would need new scraper |
 | todo | **Mercedes-Benz Group** | group.mercedes-benz.com/careers | own / SF | Stuttgart, ML / autonomous driving |
 | todo | **Munich Re** | munichre.com/en/career | likely Workday (private tenant) | Reinsurance ML |
 | todo | **Lufthansa Group** | lufthansagroup.careers | SAP SF / own | Operations ML |
 | todo | **adidas** | careers.adidas-group.com | Workday (probe failed earlier - re-investigate) | Retail ML, Herzogenaurach |
-| todo | **Merck KGaA** | jobs.merckgroup.com | Phenom likely | Pharma ML |
 | todo | **Deutsche Telekom** | careers.telekom.com | Avature likely | T-Labs / AI |
 | todo | **Schaeffler** | jobs.schaeffler.com | own / Phenom | Automotive components ML |
 | todo | **Otto Group** | jobs.otto.de / ottogroup.com | own / SF | E-comm ML, Hamburg |
