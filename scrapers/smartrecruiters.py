@@ -68,12 +68,12 @@ class SmartRecruitersScraper(BaseScraper):
         return any(kw in searchable for kw in self.ML_DS_KEYWORDS)
 
     def _is_germany_job(self, job_data: dict) -> bool:
-        """Check if job is in Germany."""
+        """Check if job is in Germany. Some tenants return ISO codes ('de'), others full names."""
         location = job_data.get("location", {})
-        country = location.get("country", "")
+        country = location.get("country", "").strip().lower()
         city = location.get("city", "")
 
-        return "Germany" in country or city in self.GERMANY_CITIES
+        return country in ("germany", "deutschland", "de") or city in self.GERMANY_CITIES
 
     def fetch_jobs(self, query: str = "data science", max_results: Optional[int] = None) -> list[Job]:
         """
