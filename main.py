@@ -116,6 +116,9 @@ GREENHOUSE_COMPANIES = [
     {"name": "Trade Republic", "slug": "traderepublicbank", "domain": "traderepublic.com"},
     {"name": "Black Forest Labs", "slug": "blackforestlabs", "domain": "bfl.ai"},
     {"name": "Parloa", "slug": "parloa", "domain": "parloa.com"},
+    # Globeone Future Readiness Index 2026
+    {"name": "IONOS", "slug": "ionos", "domain": "ionos.com"},
+    {"name": "Scout24", "slug": "scout24", "domain": "scout24.com"},
 ]
 
 # Companies using SmartRecruiters job boards
@@ -139,6 +142,8 @@ SMARTRECRUITERS_COMPANIES = [
     # LinkedIn Top Companies 2026 Germany
     {"name": "ServiceNow", "slug": "ServiceNow", "domain": "servicenow.com"},
     {"name": "Nagarro", "slug": "Nagarro1", "domain": "nagarro.com"},
+    # Globeone Future Readiness Index 2026
+    {"name": "Continental", "slug": "Continental", "domain": "continental.com"},
 ]
 
 # Companies using Ashby job boards (jobs.ashbyhq.com)
@@ -164,6 +169,8 @@ WORKDAY_COMPANIES = [
     {"name": "Mastercard", "tenant": "mastercard", "wd": "wd1", "site": "CorporateCareers", "domain": "mastercard.com"},
     # German companies
     {"name": "enercity", "tenant": "enercity", "wd": "wd3", "site": "enercity_extern", "domain": "enercity.de"},
+    # Globeone Future Readiness Index 2026
+    {"name": "Deutsche Bank", "tenant": "db", "wd": "wd3", "site": "DBWebsite", "domain": "db.com"},
 ]
 
 
