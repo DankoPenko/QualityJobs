@@ -14,6 +14,7 @@ from scrapers import (
     SmartRecruitersScraper,
     WorkdayScraper,
     AshbyScraper,
+    PersonioScraper,
     AmazonScraper,
     ZalandoScraper,
     SAPScraper,
@@ -153,6 +154,17 @@ ASHBY_COMPANIES = [
     {"name": "Aleph Alpha", "slug": "AlephAlpha", "domain": "aleph-alpha.com"},
 ]
 
+# Companies using Personio job boards (*.jobs.personio.de)
+PERSONIO_COMPANIES = [
+    {"name": "Wandelbots", "slug": "wandelbots", "domain": "wandelbots.com"},
+    {"name": "Vivid", "slug": "vivid", "domain": "vivid.money"},
+    {"name": "Clark", "slug": "clark", "domain": "goclark.com"},
+    {"name": "Envelio", "slug": "envelio", "domain": "envelio.com"},
+    {"name": "Candis", "slug": "candis", "domain": "candis.io"},
+    {"name": "Personio", "slug": "personio", "domain": "personio.com"},
+    {"name": "Everphone", "slug": "everphone", "domain": "everphone.com"},
+]
+
 # Companies using Workday career sites (*.myworkdayjobs.com)
 WORKDAY_COMPANIES = [
     # LinkedIn Top Companies 2026 Germany
@@ -269,6 +281,15 @@ def main():
     # Ashby-based companies
     for company in ASHBY_COMPANIES:
         scrapers.append(AshbyScraper(
+            company_name=company["name"],
+            board_slug=company["slug"],
+            domain=company["domain"],
+            country_code="DEU",
+        ))
+
+    # Personio-based companies
+    for company in PERSONIO_COMPANIES:
+        scrapers.append(PersonioScraper(
             company_name=company["name"],
             board_slug=company["slug"],
             domain=company["domain"],
