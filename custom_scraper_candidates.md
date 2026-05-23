@@ -10,8 +10,8 @@ backlog.
 | Status | Company | Careers URL | ATS | Notes |
 |---|---|---|---|---|
 | ✅ done | **BMW Group** | jobs.bmwgroup.com | Jobs2Web (SF front-end) HTML | 28 German ML/AI roles |
-| ⏳ next | **Allianz** | careers.allianz.com | Phenom People | Insurance ML (claims, fraud, risk) |
-| todo | **Bayer** | jobs.bayer.com | Phenom likely | Pharma / digital ag ML |
+| ✅ done | **Allianz** | careers.allianz.com | Phenom (sitemap + JSON-LD mode) | 4 German ML/AI roles |
+| ✅ done | **Bayer** | jobs.bayer.com | Phenom (Google-for-Jobs RSS mode) | 4 German ML/AI roles |
 | todo | **Mercedes-Benz Group** | group.mercedes-benz.com/careers | own / SF | Stuttgart, ML / autonomous driving |
 | todo | **Munich Re** | munichre.com/en/career | likely Workday (private tenant) | Reinsurance ML |
 | todo | **Lufthansa Group** | lufthansagroup.careers | SAP SF / own | Operations ML |
@@ -46,9 +46,12 @@ Order by expected ML/AI hiring volume + Germany concentration + scraper effort:
 
 ## Notes on platform difficulty
 
-- **Phenom People** - tenants vary but the careers app usually exposes an XHR
-  endpoint at `/api/careers-app-i18n/jobs/search` or similar. Generic scraper
-  may be feasible.
+- **Phenom People** - generic scraper now in place (`PhenomScraper`). Phenom
+  tenants serve `/sitemap.xml` in one of two flavours: a Google-for-Jobs RSS
+  feed with every posting inline (Bayer), or a sitemap-index whose sub-sitemaps
+  list job URLs whose detail pages embed JSON-LD `JobPosting` blocks (Allianz).
+  Both modes are auto-detected. New Phenom tenants only need one config line in
+  `PHENOM_COMPANIES`.
 - **Jobs2Web / SF HTML** (BMW pattern) - one-off HTML parsers per tenant, like
   BMW. Workable, just bespoke.
 - **Avature** - server-rendered HTML; per-tenant parser needed.
