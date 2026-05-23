@@ -27,6 +27,10 @@ from scrapers import (
 PHENOM_COMPANIES = [
     {"name": "Allianz", "host": "careers.allianz.com", "domain": "allianz.com"},
     {"name": "Bayer", "host": "jobs.bayer.com", "domain": "bayer.com"},
+    {"name": "Merck KGaA", "host": "careers.merckgroup.com", "domain": "merckgroup.com"},
+    {"name": "Procter & Gamble", "host": "www.pgcareers.com", "domain": "pg.com"},
+    {"name": "Thermo Fisher Scientific", "host": "jobs.thermofisher.com", "domain": "thermofisher.com"},
+    {"name": "PwC Germany", "host": "jobs.pwc.de", "domain": "pwc.de"},
 ]
 
 ARCHIVE_FILE = "archived_jobs.json"
