@@ -31,6 +31,7 @@ PHENOM_COMPANIES = [
     {"name": "Procter & Gamble", "host": "www.pgcareers.com", "domain": "pg.com"},
     {"name": "Thermo Fisher Scientific", "host": "jobs.thermofisher.com", "domain": "thermofisher.com"},
     {"name": "PwC Germany", "host": "jobs.pwc.de", "domain": "pwc.de"},
+    {"name": "DHL Group", "host": "careers.dhl.com", "domain": "dhl.com"},
 ]
 
 ARCHIVE_FILE = "archived_jobs.json"
