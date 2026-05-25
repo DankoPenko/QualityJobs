@@ -285,6 +285,8 @@ class PhenomScraper(BaseScraper):
         if not date_str:
             return datetime(1900, 1, 1)
         try:
-            return datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+            parsed = datetime.fromisoformat(date_str.replace("Z", "+00:00"))
         except ValueError:
             return datetime(1900, 1, 1)
+        # Strip tzinfo so all returned datetimes are naive (mix would crash sort).
+        return parsed.replace(tzinfo=None) if parsed.tzinfo is not None else parsed
