@@ -8,9 +8,9 @@ from .amazon import AmazonScraper
 from .zalando import ZalandoScraper
 from .sap import SAPScraper
 from .snapchat import SnapchatScraper
-from .bmw import BMWScraper
 from .phenom import PhenomScraper
 from .revolut import RevolutScraper
+from .jobs2web import Jobs2WebScraper
 
 __all__ = [
     "BaseScraper",
@@ -23,7 +23,7 @@ __all__ = [
     "ZalandoScraper",
     "SAPScraper",
     "SnapchatScraper",
-    "BMWScraper",
     "PhenomScraper",
     "RevolutScraper",
+    "Jobs2WebScraper",
 ]
