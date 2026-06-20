@@ -19,9 +19,9 @@ from scrapers import (
     ZalandoScraper,
     SAPScraper,
     SnapchatScraper,
-    BMWScraper,
     PhenomScraper,
     RevolutScraper,
+    Jobs2WebScraper,
 )
 
 # Companies running Phenom People career sites
@@ -199,6 +199,13 @@ WORKDAY_COMPANIES = [
     {"name": "Deutsche Bank", "tenant": "db", "wd": "wd3", "site": "DBWebsite", "domain": "db.com"},
 ]
 
+# Companies running Jobs2Web / SuccessFactors HTML career sites (BMW pattern).
+# Each exposes the same /search?q=&startrow= results page with <tr class="data-row">.
+JOBS2WEB_COMPANIES = [
+    {"name": "BMW Group", "host": "jobs.bmwgroup.com", "domain": "bmwgroup.com"},
+    {"name": "adidas", "host": "jobs.adidas-group.com", "domain": "adidas.com"},
+]
+
 
 def load_existing_jobs(filepath: str) -> dict[str, dict]:
     """Load existing jobs and return a dict keyed by job ID."""
@@ -310,13 +317,22 @@ def main():
             country_code="DEU",
         ))
 
+    # Jobs2Web / SuccessFactors HTML companies (BMW pattern)
+    for company in JOBS2WEB_COMPANIES:
+        scrapers.append(Jobs2WebScraper(
+            company_name=company["name"],
+            host=company["host"],
+            domain=company["domain"],
+            source=company["name"],
+            country_code="DEU",
+        ))
+
     # Custom scrapers
     scrapers.extend([
         AmazonScraper(country_code="DEU"),
         ZalandoScraper(country_code="DEU"),
         SAPScraper(country_code="DEU"),
         SnapchatScraper(country_code="DEU"),
-        BMWScraper(country_code="DEU"),
         RevolutScraper(country_code="DEU"),
     ])
 
