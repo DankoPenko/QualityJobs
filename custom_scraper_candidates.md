@@ -9,7 +9,8 @@ backlog.
 
 | Status | Company | Careers URL | ATS | Notes |
 |---|---|---|---|---|
-| ✅ done | **BMW Group** | jobs.bmwgroup.com | Jobs2Web (SF front-end) HTML | 28 German ML/AI roles |
+| ✅ done | **BMW Group** | jobs.bmwgroup.com | Jobs2Web (SF) — migrated to client-rendered; now via `Jobs2WebScraper` RSS fallback | live (RSS feed) |
+| ✅ done | **adidas** | jobs.adidas-group.com | Jobs2Web (SF) `data-row` HTML via `Jobs2WebScraper` | wired; 0 German ML/DS currently (sportswear retailer) |
 | ✅ done | **Allianz** | careers.allianz.com | Phenom (sitemap + JSON-LD mode) | 4 German ML/AI roles |
 | ✅ done | **Bayer** | jobs.bayer.com | Phenom (Google-for-Jobs RSS mode) | 4 German ML/AI roles |
 | ✅ done | **Merck KGaA** | careers.merckgroup.com | Phenom (sitemap + JSON-LD) | 1 German ML/AI role |
@@ -20,7 +21,6 @@ backlog.
 | todo | **Mercedes-Benz Group** | group.mercedes-benz.com/careers | own / SF | Stuttgart, ML / autonomous driving |
 | todo | **Munich Re** | munichre.com/en/career | likely Workday (private tenant) | Reinsurance ML |
 | todo | **Lufthansa Group** | lufthansagroup.careers | SAP SF / own | Operations ML |
-| todo | **adidas** | careers.adidas-group.com | Workday (probe failed earlier - re-investigate) | Retail ML, Herzogenaurach |
 | todo | **Deutsche Telekom** | careers.telekom.com | Avature likely | T-Labs / AI |
 | todo | **Schaeffler** | jobs.schaeffler.com | own / Phenom | Automotive components ML |
 | todo | **Otto Group** | jobs.otto.de / ottogroup.com | own / SF | E-comm ML, Hamburg |
@@ -56,8 +56,13 @@ Order by expected ML/AI hiring volume + Germany concentration + scraper effort:
   list job URLs whose detail pages embed JSON-LD `JobPosting` blocks (Allianz).
   Both modes are auto-detected. New Phenom tenants only need one config line in
   `PHENOM_COMPANIES`.
-- **Jobs2Web / SF HTML** (BMW pattern) - one-off HTML parsers per tenant, like
-  BMW. Workable, just bespoke.
+- **Jobs2Web / SF** (BMW/adidas pattern) - now a generic `Jobs2WebScraper`
+  (one-line config: host + name). Dual-mode: parses server-rendered
+  `<tr class="data-row">` HTML at `/search?q=&startrow=` (adidas), and auto-falls
+  back to the RSS feed at `/services/rss/job/?keywords=(term)` when a tenant has
+  migrated to the client-rendered "searchResultsUnify" template (BMW). The RSS
+  feed includes full job descriptions inline but is capped at the latest ~20
+  items per keyword with no pagination, so HTML mode is preferred where available.
 - **Avature** - server-rendered HTML; per-tenant parser needed.
 - **Workday private tenants** (e.g. Hensoldt) - CXS endpoint exists but rejects
   bodies without CSRF; would need a session-bootstrap step.
