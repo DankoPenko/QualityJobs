@@ -21,6 +21,7 @@ from scrapers import (
     SnapchatScraper,
     BMWScraper,
     PhenomScraper,
+    RevolutScraper,
 )
 
 # Companies running Phenom People career sites
@@ -316,6 +317,7 @@ def main():
         SAPScraper(country_code="DEU"),
         SnapchatScraper(country_code="DEU"),
         BMWScraper(country_code="DEU"),
+        RevolutScraper(country_code="DEU"),
     ])
 
     # Phenom People-based companies
