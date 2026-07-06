@@ -17,6 +17,9 @@ backlog.
 | ✅ done | **Procter & Gamble** | www.pgcareers.com | Phenom (sitemap + JSON-LD) | 1 German ML/AI role |
 | ✅ done | **Thermo Fisher Scientific** | jobs.thermofisher.com | Phenom (sitemap + JSON-LD) | 0 currently, wired |
 | ✅ done | **PwC Germany** | jobs.pwc.de | Phenom (urlset + JSON-LD) | 0 currently, wired |
+| ✅ done | **Deloitte** | job.deloitte.com | Phenom (urlset + JSON-LD, `job_url_match="/job-"`) | consultancy, many German AI/Data roles |
+| ✅ done | **NORD/LB** | karriere.nordlb.de | SAP SuccessFactors CSB (`SuccessFactorsScraper`, urlset + schema.org **microdata**) | 2 German KI/AI roles |
+| ✅ done | **Finanz Informatik** | www.f-i.de/karriere/offene-stellen | Bespoke Netgen/Ibexa site, JSON-LD detail (`FinanzInformatikScraper` = Phenom subclass, URLs from listing page) | wired; 0 ML/DS currently (small board) |
 | skip | **Microsoft** | jobs.careers.microsoft.com | Eightfold AI (not Phenom) | Different platform; would need new scraper |
 | todo | **Mercedes-Benz Group** | group.mercedes-benz.com/careers | own / SF | Stuttgart, ML / autonomous driving |
 | todo | **Munich Re** | munichre.com/en/career | likely Workday (private tenant) | Reinsurance ML |
