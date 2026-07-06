@@ -1,5 +1,24 @@
 [
   {
+    "id": "f00b3d8e-2c9a-4af6-86ee-644dbf8b6bc6",
+    "title": "Software Engineer (Python) - AI Platform",
+    "company": "Revolut",
+    "url": "https://www.revolut.com/careers/position/software-engineer-python-ai-platform-f00b3d8e-2c9a-4af6-86ee-644dbf8b6bc6/",
+    "location": "Barcelona, Czech Republic - Remote, Dubai, Krakow, Lisbon, London, Madrid, Poland - Remote, Porto - Remote, Portugal - Remote, Serbia - Remote, Spain - Remote, Sweden - Remote, UAE - Remote, UK - Remote",
+    "city": "Barcelona",
+    "country": "Spain",
+    "posted_date": null,
+    "updated_time": null,
+    "source": "Revolut",
+    "scraped_at": "2026-06-20T13:27:46.536770",
+    "domain": "revolut.com",
+    "description": "About Revolut\n\nPeople deserve more from their money. More visibility, more control, and more freedom. Since 2015, Revolut has been on a mission to deliver just that. Our powerhouse of products — including spending, saving, investing, exchanging, travelling, and more — help our 75+ million customers get more from their money every day.\nAs we continue our lightning-fast growth,‌ 2 things are essential to our success: our people and our culture. In recognition of our outstanding employee experience, we've been certified as a Great Place to Work™. So far, we have 13,000+ people working around the world, from our offices and remotely, to help us achieve our mission. And we're looking for more brilliant people. People who love building great products, redefining success, and turning the complexity of a chaotic world into the simplicity of a beautiful solution.\nAbout the role\n\nOur Technology team builds the systems and experiences that keep Revolut moving. From the infrastructure behind our innovative app to the features used by millions of people around the world, they bring sharp thinking, speed, and a focus on meaningful impact to everything they do.\nRevolut's AI department drives innovation, powering products through a central platform and building specialised AI-driven systems deployed worldwide. Our mission is to build a world-class automated foundation that empowers our scientists and engineers to solve tomorrow's challenges today.\nWe're looking for a Python Software Engineer to build the core infrastructure that powers our AI ecosystem — from large-scale data pipelines to Generative AI applications. You'll create modern, production-grade systems from the ground up, solving complex engineering challenges at a global scale.\nUp to shape what's next in finance? Let's get in touch.\nWhat you'll be doing\n\nDesigning, building, and maintaining scalable services that support the AI lifecycle\nDeveloping infrastructure and APIs that integrate third-party services and grow with...",
+    "salary": null,
+    "job_type": null,
+    "department": "Engineering",
+    "archived_at": "2026-07-06T19:17:57.255880"
+  },
+  {
     "id": "99961",
     "title": "Werkstudent im Bereich Data Engineering, Data Analytics und GenAI (m/w/d)",
     "company": "Allianz",
