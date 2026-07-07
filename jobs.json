@@ -1,5 +1,23 @@
 [
   {
+    "id": "8522383002",
+    "title": "Senior Analytics Engineer - Run & Grow",
+    "company": "SumUp",
+    "url": "https://sumup.com/careers/positions/8522383002?gh_jid=8522383002",
+    "location": "Berlin, Germany",
+    "city": "Berlin",
+    "country": "Germany",
+    "posted_date": null,
+    "updated_time": "2026-07-07T06:56:28-04:00",
+    "source": "Greenhouse:sumup",
+    "scraped_at": "2026-07-07T11:44:06.550771",
+    "domain": "sumup.com",
+    "description": "The Run &amp; Grow Tribe of Tribes powers the systems, insights, and experiences that keep millions of merchants engaged, successful, and growing with SumUp across every market we operate in. We're at a genuine inflection point in how we use data, moving from fragmented pipelines to a world-class data foundation built on stable business domains, trusted metrics, and AI-ready data products. This is a greenfield opportunity to shape how data is owned, defined, and built at scale, and as our Analytics Engineer, you'll be the connective tissue that makes that vision real.\n\nWhat you'll do\n\nPartner with squads across the tribe on event design and data contracts, maintaining staging pipelines, applying modelling conventions, and keeping domain outputs consistent, tested, and discoverable\n\nModel key business domains, including merchant activity, product adoption, lifecycle events, and risk scoring, building well-documented, quality-assured data products that serve as the trusted source of truth across the organisation\n\nBuild and maintain the insights layer on top of governed domains, producing reusable KPI models, funnels, cohorts, and segmentations that Product, Commercial, and AI teams can self-serve with confidence\n\nImplement technical improvements including incremental processing strategies, performance optimisations, and scalable data architecture to support growing data volumes\n\nContribute to SumUp's broader data domain strategy, helping establish durable ownership, consistent definitions, and a shared catalogue of data products that unlock self-serve analytics and AI at scale\n\nYou'll be great for this role if…\n\nStrong, proven experience in analytics engineering or data engineering, with a track record of building and maintaining production data systems\n\nExpert-level SQL skills for complex transformations and query optimisation, with hands-on experience building layered data models in a modern data warehouse or lakehouse (e.g. Snowflake, Iceberg) and solid command of ...",
+    "salary": null,
+    "job_type": null,
+    "department": "Data Engineer/Scientist"
+  },
+  {
     "id": "1405223933",
     "title": "Werkstudierende KI und Agentic AI Digital Operations (m/w/d)",
     "company": "NORD/LB",
@@ -1754,7 +1772,7 @@
     "city": "Berlin",
     "country": "Germany",
     "posted_date": "June 16, 2026",
-    "updated_time": "about 21 hours",
+    "updated_time": "about 22 hours",
     "source": "AmazonScraper",
     "scraped_at": "2026-06-17T10:18:47.650792",
     "domain": null,
@@ -2680,24 +2698,6 @@
     "salary": null,
     "job_type": null,
     "department": "Engineering"
-  },
-  {
-    "id": "10402625",
-    "title": "Senior Business Intelligence Engineer, EU Stores CX Analytics & Automation",
-    "company": "Amazon",
-    "url": "https://www.amazon.jobs/en/jobs/10402625",
-    "location": "DE, BE, Berlin",
-    "city": "Berlin",
-    "country": "Germany",
-    "posted_date": "April 24, 2026",
-    "updated_time": "21 days",
-    "source": "AmazonScraper",
-    "scraped_at": "2026-04-27T09:48:11.082978",
-    "domain": null,
-    "description": "This position can be based in either Madrid or Berlin. <br/><br/>Are you passionate about using data to create shopping experiences that feel genuinely personal? We're looking for a Senior Business Intelligence Engineer to lead the way we build and scale personalised recommendations for millions of customers across ten European marketplaces.<br/><br/>In this role, you'll sit at an exciting intersection of business intelligence, data engineering, and data science. You'll build on top of Amazon's world-class personalisation infrastructure — consuming real-time customer intent signals, blending them with large-scale EU retail data and engagement metrics, and applying custom processors and matching models to surface the right product at the right moment. Think complement strategies that inspire follow-on purchases, discovery strategies that introduce customers to new categories, and inspiration experiences that tap into individual browsing and purchase patterns — all layered on top of centralised recommendation systems and enriched with EU-specific intelligence that you build and own.<br/><br/>This is more than a traditional data role. On the data science side, you'll develop custom models using Python and Spark to understand customer–product affinity at scale, applying techniques like embeddings modelling and customer persona matching to power EU-specific personalisation strategies built on top of Amazon's global recommendation infrastructure. On the engineering side, you'll build and deploy the internal tooling that puts these capabilities directly in the hands of marketing teams — writing production-grade Python services, building serverless infrastructure with AWS Lambda and CDK, and developing APIs with FastAPI. Analytics sits alongside both: you'll own the baseline reporting and measurement suite for our personalised marketing campaigns, powered by models built across the broader team, and use those insights to deep-dive into customer engagement, quantify the impact of strategies across homepage experiments, storefronts, and seasonal events, and continuously drive improvements that matter.<br/><br/>You'll be joining one of the most forward-thinking intelligence teams in EU retail — and thriving here means bringing more than technical skills. The right person takes genuine ownership of their domain: they don't wait to be told what to build next, they spot the gap and go after it. They have a strong appetite for picking up new technologies and getting them into production quickly, whether that's a new AWS service, an emerging data science technique, or an internal platform they've never touched before. And they're genuinely excited about the pace of change in this space — not just keeping up with it, but staying ahead of it and bringing new ideas to the team. If that sounds like you, and you want to make a visible impact on how European customers discover products they love, we'd love to hear from you.<br/><br/>Key job responsibilities<br/>- Leading the design and delivery of personalised recommendation strategies for EU customers, combining large-scale Amazon retail data, real-time customer signals, and custom models to surface the right products at the right moment<br/>- Developing custom data models using Python and Spark, applying techniques such as embeddings modelling and customer persona matching to power EU-specific personalisation strategies built on top of Amazon's global recommendation infrastructure<br/>- Designing, developing, and maintaining internal tooling and services that enable marketing teams to independently configure and launch personalised campaigns — Python based serverless applications (AWS Lambda) with React front ends.<br/>- Owning the baseline reporting and measurement suite for personalised marketing campaigns, building standardised metrics and dashboards (in collaboration with the broader team) to track performance across all channels and surfaces<br/>- Conducting deep-dive analytics to understand drivers of customer engagement and personalisation performance, translating findings into concrete strategic and technical recommendations<br/>- Writing advanced SQL and leveraging big data query engines to extract, transform, and analyse large-scale datasets across Amazon's data ecosystem, forming the analytical foundation for personalisation strategies and campaign reporting<br/>- Partnering and collaborating closely with colleagues across the EU Customer Insights and Analytics team, contributing expertise across the full analytical and engineering stack<br/><br/>About the team<br/>We are the EU Stores Customer Experience Analytics & Automation team — simultaneously a product team, a data science team, and a customer analytics team. Our mission is to transform Amazon's vast selection into curated, personalised, shoppable experiences that help customers find products they'll love.<br/><br/>The BIE function sits at the technical core of that mission. We build the data primitives, automation systems, and self-service platforms that make personalised discovery at scale possible. Where global teams provide foundational building blocks, we build orchestration layers on top — composing capabilities into workflows tailored to EU requirements. Where gaps exist, we close them. Where central solutions mature, we converge and evolve.<br/><br/>Our work spans three areas: data models and pipelines powering personalised recommendations across EU10; production applications used by hundreds of marketing stakeholders daily, built with Python, React, Lambda, FastAPI, and CDK; and CX analytics across search, detail page, and marketing that tells leadership whether it's working. We write production code, design systems others depend on, and analyse data that shapes strategic decisions. If you want to do serious work at the intersection of data, product, and customer experience — this is the place.",
-    "salary": null,
-    "job_type": "full-time",
-    "department": null
   },
   {
     "id": "7594703",
