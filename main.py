@@ -20,6 +20,8 @@ from scrapers import (
     SAPScraper,
     SnapchatScraper,
     PhenomScraper,
+    SuccessFactorsScraper,
+    FinanzInformatikScraper,
     RevolutScraper,
     Jobs2WebScraper,
 )
@@ -33,6 +35,15 @@ PHENOM_COMPANIES = [
     {"name": "Thermo Fisher Scientific", "host": "jobs.thermofisher.com", "domain": "thermofisher.com"},
     {"name": "PwC Germany", "host": "jobs.pwc.de", "domain": "pwc.de"},
     {"name": "DHL Group", "host": "careers.dhl.com", "domain": "dhl.com"},
+    # Deloitte's German careers site serves the same JSON-LD JobPosting detail
+    # pages, but its sitemap job URLs use a "/job-" prefix (not "/job/").
+    {"name": "Deloitte", "host": "job.deloitte.com", "domain": "deloitte.com", "job_url_match": "/job-"},
+]
+
+# SAP SuccessFactors Career Site Builder tenants (schema.org microdata detail
+# pages served from a /sitemap.xml urlset).
+SUCCESSFACTORS_COMPANIES = [
+    {"name": "NORD/LB", "host": "karriere.nordlb.de", "domain": "nordlb.de"},
 ]
 
 ARCHIVE_FILE = "archived_jobs.json"
@@ -334,11 +345,22 @@ def main():
         SAPScraper(country_code="DEU"),
         SnapchatScraper(country_code="DEU"),
         RevolutScraper(country_code="DEU"),
+        FinanzInformatikScraper(country_code="DEU"),
     ])
 
     # Phenom People-based companies
     for company in PHENOM_COMPANIES:
         scrapers.append(PhenomScraper(
+            company_name=company["name"],
+            host=company["host"],
+            domain=company["domain"],
+            job_url_match=company.get("job_url_match", "/job/"),
+            country_code="DEU",
+        ))
+
+    # SAP SuccessFactors Career Site Builder tenants
+    for company in SUCCESSFACTORS_COMPANIES:
+        scrapers.append(SuccessFactorsScraper(
             company_name=company["name"],
             host=company["host"],
             domain=company["domain"],
