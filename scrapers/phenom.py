@@ -248,7 +248,9 @@ class PhenomScraper(BaseScraper):
                 continue
             address = loc.get("address") or {}
             country = (address.get("addressCountry") or "").strip().lower()
-            if country in PhenomScraper.GERMANY_NAMES or country == "de":
+            # addressCountry may be a name ("Germany"/"Deutschland") or an ISO
+            # code - alpha-2 "DE" (Deloitte, NORD/LB) or alpha-3 "DEU" (PwC).
+            if country in PhenomScraper.GERMANY_NAMES or country in ("de", "deu"):
                 return loc
         return None
 
