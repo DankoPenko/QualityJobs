@@ -54,16 +54,20 @@ class PhenomScraper(BaseScraper):
 
     GERMANY_NAMES = ("germany", "deutschland")
 
-    def __init__(self, company_name: str, host: str, domain: str = "", **kwargs):
+    def __init__(self, company_name: str, host: str, domain: str = "",
+                 job_url_match: str = "/job/", **kwargs):
         """
         Args:
             company_name: Display name (e.g. "Allianz", "Bayer")
             host: Hostname of the Phenom careers site (e.g. "careers.allianz.com")
             domain: Company domain for logo (e.g. "allianz.com")
+            job_url_match: Substring that marks a job-detail URL in the sitemap
+                (default "/job/"; some tenants use "/job-", e.g. Deloitte).
         """
         self.company_name = company_name
         self.host = host
         self.domain = domain
+        self.job_url_match = job_url_match
         self.base_url = f"https://{host}"
         super().__init__(**kwargs)
 
@@ -177,15 +181,15 @@ class PhenomScraper(BaseScraper):
                 sub_body = self._make_request(sm).text
             except Exception:
                 continue
-            for url in re.findall(r"<loc>([^<]+/job/[^<]+)</loc>", sub_body):
-                if url not in seen:
+            for url in re.findall(r"<loc>([^<]+)</loc>", sub_body):
+                if self.job_url_match in url and url not in seen:
                     seen.add(url)
                     job_urls.append(url)
         return self._scrape_job_url_list(job_urls)
 
     def _scrape_urlset(self, body: str) -> list[Job]:
-        """Single-sitemap <urlset> with /job/ URLs inline."""
-        job_urls = [u for u in re.findall(r"<loc>([^<]+)</loc>", body) if "/job/" in u]
+        """Single-sitemap <urlset> with job-detail URLs inline."""
+        job_urls = [u for u in re.findall(r"<loc>([^<]+)</loc>", body) if self.job_url_match in u]
         return self._scrape_job_url_list(job_urls)
 
     def _scrape_job_url_list(self, job_urls: list[str]) -> list[Job]:
@@ -244,7 +248,7 @@ class PhenomScraper(BaseScraper):
                 continue
             address = loc.get("address") or {}
             country = (address.get("addressCountry") or "").strip().lower()
-            if country in PhenomScraper.GERMANY_NAMES:
+            if country in PhenomScraper.GERMANY_NAMES or country == "de":
                 return loc
         return None
 
