@@ -1,5 +1,24 @@
 [
   {
+    "id": "744000133297178",
+    "title": "Werkstudent (m/w/d) Data Science – Hotel",
+    "company": "Check24",
+    "url": "https://jobs.smartrecruiters.com/check24/744000133297178",
+    "location": "Münster, de",
+    "city": "Münster",
+    "country": "de",
+    "posted_date": "2026-06-22T09:01:29.618Z",
+    "updated_time": null,
+    "source": "SmartRecruiters:check24",
+    "scraped_at": "2026-06-22T10:55:13.973420",
+    "domain": "check24.de",
+    "description": "Mitarbeit bei der Entwicklung und Optimierung von KI- und Machine-Learning-Lösungen\nUnterstützung beim Aufbau und der Pflege von Datenpipelines sowie bei Datenaufbereitung und Feature Engineering\nMitwirkung beim Training, Monitoring und der Analyse von Machine-Learning-Modellen\nUnterstützung beim Tracking von Experimenten und der Dokumentation von Modellen und Ergebnissen (z. B. mit MLflow)\nMitarbeit bei der Integration moderner Large Language Models, Prompting-Ansätzen und Agentic Systems in unsere Produkte\nZusammenarbeit mit verschiedenen Fachbereichen zur Identifikation und Umsetzung datengetriebener Potenziale",
+    "salary": null,
+    "job_type": null,
+    "department": "Data Science",
+    "archived_at": "2026-07-09T11:16:32.946504"
+  },
+  {
     "id": "744000130711510",
     "title": "Duales Studium Data Science – in Kooperation mit der DHBW Stuttgart",
     "company": "Sixt",
