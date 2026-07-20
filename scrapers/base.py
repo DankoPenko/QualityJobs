@@ -1,6 +1,7 @@
 """Base scraper class that all company scrapers inherit from."""
 
 import re
+import time
 from abc import ABC, abstractmethod
 from typing import Optional
 import requests
@@ -25,16 +26,23 @@ class BaseScraper(ABC):
     company_name: str = "Unknown"
     country_code: str = "DEU"
     base_url: str = ""
+    request_delay: float = 0.0
 
-    def __init__(self, country_code: Optional[str] = None):
+    def __init__(self, country_code: Optional[str] = None,
+                 request_delay: Optional[float] = None):
         """
         Initialize the scraper.
 
         Args:
             country_code: Override the default country code
+            request_delay: Seconds to wait between requests. Defaults to 0
+                (unthrottled). Set it for sites behind a bot-protection CDN -
+                crawling a large sitemap flat out can get the runner IP blocked.
         """
         if country_code:
             self.country_code = country_code
+        if request_delay is not None:
+            self.request_delay = request_delay
 
         self.session = requests.Session()
         self.session.headers.update(self.get_headers())
@@ -79,6 +87,8 @@ class BaseScraper(ABC):
         Raises:
             requests.RequestException: If the request fails
         """
+        if self.request_delay:
+            time.sleep(self.request_delay)
         response = self.session.get(url, params=params)
         response.raise_for_status()
         return response
