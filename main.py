@@ -47,6 +47,9 @@ PHENOM_COMPANIES = [
      "domain": "mercedes-benz.com", "job_url_match": "/en/", "request_delay": 3.0},
     # Also not Phenom - own careers site, but sitemap + JSON-LD all the same.
     {"name": "EnBW", "host": "careers.enbw.com", "domain": "enbw.com", "request_delay": 0.2},
+    # eon.com sits behind a Cloudflare managed challenge, but the job board on
+    # jobs.eon.com does not - SuccessFactors, sitemap + JSON-LD, no challenge.
+    {"name": "E.ON", "host": "jobs.eon.com", "domain": "eon.com", "request_delay": 0.2},
 ]
 
 # SAP SuccessFactors Career Site Builder tenants (schema.org microdata detail

@@ -230,9 +230,18 @@ class PhenomScraper(BaseScraper):
 
     @staticmethod
     def _slug_text(url: str) -> str:
-        """Convert the job URL's title slug ('IT-Architect-Principal') back to readable text."""
-        slug = url.rstrip("/").rsplit("/", 1)[-1]
-        return slug.replace("-", " ")
+        """Convert the job URL's title slug ('IT-Architect-Principal') to readable text.
+
+        Tenants bury the slug at different depths, so walk back from the end and
+        take the last segment that is not purely numeric. This covers Phenom
+        (.../job/{id}/{slug}), Mercedes (.../{slug}-{id}), E.ON
+        (.../job/{slug}/{id}) and Munich Re (.../job/{city}/{slug}/{org}/{id}).
+        """
+        parts = [p for p in url.split("?")[0].rstrip("/").split("/") if p]
+        for part in reversed(parts):
+            if not part.isdigit():
+                return part.replace("-", " ")
+        return parts[-1].replace("-", " ") if parts else ""
 
     def _fetch_job_posting(self, url: str) -> Optional[dict]:
         """Fetch a job detail page and return its JSON-LD JobPosting block."""

@@ -29,7 +29,7 @@ backlog.
 | blocked | **Otto Group** | ottogroup.com | own | `jobs.otto.de` does not resolve; ottogroup.com/careers is a holding page linking to sub-brand boards (bonprix, Baur, EOS, Witt). No single Otto board found - would need per-brand scrapers |
 | ✅ done | **Hensoldt** | jobs.hensoldt.net | Jobs2Web (SF) via `Jobs2WebScraper` RSS fallback | 4 German AI/Data roles. The old `hensoldt.wd3.myworkdayjobs.com` Workday tenant is dead (500 at root; the 422s were not a CSRF problem) - they moved to a Jobs2Web board |
 | blocked | **Rheinmetall** | rheinmetall.recruitmentplatform.com | **Lumesse / TalentLink** | Board host returns 403 to plain requests; careers site is a Nuxt SPA. New platform, no scraper yet |
-| blocked | **E.ON** | career.eon.com / eon.com | unknown | **Cloudflare interstitial** ("Just a moment...") 403s every path including `/robots.txt`; `career.eon.com` times out. The one genuine browser-challenge case of the nine |
+| ✅ done | **E.ON** | jobs.eon.com | SuccessFactors board, sitemap + JSON-LD (`PhenomScraper`) | 2 German ML/AI roles. `www.eon.com` sits behind a Cloudflare **managed** challenge (`cf-mitigated: challenge`) that 403s every path including `/robots.txt`, and `career.eon.com` times out - but the actual board on `jobs.eon.com` has no challenge at all |
 | ✅ done | **EnBW** | careers.enbw.com | Own careers site, sitemap + JSON-LD (`PhenomScraper`) | 3 German ML/AI roles |
 | ✅ done | **MTU Aero Engines** | jobs.mtu.de | Jobs2Web (SF) via `Jobs2WebScraper` RSS fallback | 5 German ML/AI roles |
 | ✅ done | **Sartorius** | sartorius.wd3.myworkdayjobs.com | Workday (`WorkdayScraper`, site `sartoriuscareers`) | wired; 66 postings, 0 German ML/DS currently |
@@ -90,6 +90,12 @@ Order by expected ML/AI hiring volume + Germany concentration + scraper effort:
   unthrottled - the sitemap and listing stay fine, so the symptom is "lots of
   candidates, zero jobs" rather than an obvious failure. 3s clears it. A headless
   browser is not the fix here; the block is rate-based, not fingerprint-based.
+- **A blocked corporate site does not mean a blocked board.** E.ON's `www.eon.com`
+  serves a Cloudflare managed challenge on every path, which looks like a hard
+  stop - but `jobs.eon.com` is completely unprotected. Corporate sites carry
+  marketing/bot-defence infrastructure that the ATS subdomain usually does not.
+  When a careers page challenges you, enumerate `jobs.`/`careers.`/`apply.`
+  subdomains before concluding anything.
 - **A JS-rendered careers page usually is not the job board.** lufthansagroup.careers
   is an Angular shell with zero links in the HTML; the real board is on the
   `apply.` subdomain and is plain server-rendered PHP. Grep the JS bundle for
