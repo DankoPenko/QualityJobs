@@ -453,6 +453,17 @@
     <script>
         let allJobs = [];
         let selectedCompanies = new Set();
+        let hideJuniorRoles = false;
+
+        // Student / internship roles. "intern" is word-bounded on purpose: a bare
+        // substring match also swallows "International" and "Internal", which are
+        // senior postings. "praktik" covers the German Praktikum/Praktikant, which
+        // is how most German internships here are actually titled.
+        const JUNIOR_ROLE_RE = /student|studium|praktik|\bintern(ship|s)?\b/i;
+
+        function isJuniorRole(job) {
+            return JUNIOR_ROLE_RE.test(job.title || '');
+        }
         let menuPinned = false;
 
         function formatDate(isoString) {
@@ -556,6 +567,16 @@
 
             html += `</div>`;
 
+            const juniorCount = jobs.filter(isJuniorRole).length;
+            html += `
+                <div class="filter-divider"></div>
+                <label class="select-all">
+                    <input type="checkbox" id="hide-junior" ${hideJuniorRoles ? 'checked' : ''}>
+                    <span>Hide student &amp; intern roles</span>
+                    <span class="filter-count">${juniorCount}</span>
+                </label>
+            `;
+
             html += `</div>`;
             menu.innerHTML = html;
 
@@ -570,6 +591,11 @@
                         selectedCompanies.delete(cb.value);
                     }
                 });
+                renderJobs();
+            });
+
+            document.getElementById('hide-junior').addEventListener('change', (e) => {
+                hideJuniorRoles = e.target.checked;
                 renderJobs();
             });
 
@@ -599,7 +625,9 @@
             const jobList = document.getElementById('job-list');
             const jobCount = document.getElementById('job-count');
 
-            const filteredJobs = allJobs.filter(job => selectedCompanies.has(job.company));
+            const filteredJobs = allJobs.filter(job =>
+                selectedCompanies.has(job.company) && !(hideJuniorRoles && isJuniorRole(job))
+            );
 
             jobCount.textContent = `${filteredJobs.length} position${filteredJobs.length !== 1 ? 's' : ''}`;
 
