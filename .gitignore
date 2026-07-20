@@ -14,3 +14,6 @@ applications.json
 # Gmail API credentials
 credentials.json
 token.json
+
+# Subscriber PII - synced from the Worker at runtime, must not be committed
+subscribers.json
