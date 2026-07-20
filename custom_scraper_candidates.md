@@ -24,16 +24,16 @@ backlog.
 | ✅ done | **Mercedes-Benz Group** | jobs.mercedes-benz.com | Nuxt site, sitemap + JSON-LD in an `@graph` wrapper (`PhenomScraper`, `job_url_match="/en/"`, 3s delay) | 15 German ML/AI roles |
 | ✅ done | **Munich Re** | careers.munichre.com | Sitemap + JSON-LD, mid-path title slug (`MunichReScraper` = Phenom subclass) | 3 German ML/AI roles |
 | built, disabled | **Lufthansa Group** | apply.lufthansagroup.careers | Server-rendered PHP board, sitemap + JSON-LD (`LufthansaScraper` = Phenom subclass, no slug prefilter) | Works (2 German ML/AI roles) but **not wired into `main.py`**: opaque job URLs force a fetch of all ~305 postings, ~10 min |
-| todo | **Deutsche Telekom** | careers.telekom.com | Avature likely | T-Labs / AI |
-| todo | **Schaeffler** | jobs.schaeffler.com | own / Phenom | Automotive components ML |
-| todo | **Otto Group** | jobs.otto.de / ottogroup.com | own / SF | E-comm ML, Hamburg |
+| blocked | **Deutsche Telekom** | careers.telekom.com | **Eightfold AI** (confirmed, not Avature) | Next.js SPA. `/api/apply/v2/jobs` on the careers host returns the SPA; `telekom.eightfold.ai` returns 403 `{"message":"Not authorized for PCSX"}`. Sitemap has 210 URLs, all content pages, no jobs. Needs an Eightfold scraper |
+| ✅ done | **Schaeffler** | jobs.schaeffler.com | Jobs2Web (SF) via `Jobs2WebScraper` RSS fallback | 1 German ML/AI role. HTML mode finds 0 rows - see tile-template note below |
+| blocked | **Otto Group** | ottogroup.com | own | `jobs.otto.de` does not resolve; ottogroup.com/careers is a holding page linking to sub-brand boards (bonprix, Baur, EOS, Witt). No single Otto board found - would need per-brand scrapers |
 | ✅ done | **Hensoldt** | jobs.hensoldt.net | Jobs2Web (SF) via `Jobs2WebScraper` RSS fallback | 4 German AI/Data roles. The old `hensoldt.wd3.myworkdayjobs.com` Workday tenant is dead (500 at root; the 422s were not a CSRF problem) - they moved to a Jobs2Web board |
-| todo | **Rheinmetall** | rheinmetall.com/career | own | Defense AI |
-| todo | **E.ON** | career.eon.com | likely SAP SF | Energy ML |
-| todo | **EnBW** | enbw.com/karriere | own / SF | Energy ML |
-| todo | **MTU Aero Engines** | mtu.de/careers | own | Aerospace ML |
-| todo | **Sartorius** | jobs.sartorius.com | own / Workday | Bioprocess ML |
-| todo | **Carl Zeiss Meditec** | zeiss.de/career | own | Medical imaging |
+| blocked | **Rheinmetall** | rheinmetall.recruitmentplatform.com | **Lumesse / TalentLink** | Board host returns 403 to plain requests; careers site is a Nuxt SPA. New platform, no scraper yet |
+| blocked | **E.ON** | career.eon.com / eon.com | unknown | **Cloudflare interstitial** ("Just a moment...") 403s every path including `/robots.txt`; `career.eon.com` times out. The one genuine browser-challenge case of the nine |
+| ✅ done | **EnBW** | careers.enbw.com | Own careers site, sitemap + JSON-LD (`PhenomScraper`) | 3 German ML/AI roles |
+| ✅ done | **MTU Aero Engines** | jobs.mtu.de | Jobs2Web (SF) via `Jobs2WebScraper` RSS fallback | 5 German ML/AI roles |
+| ✅ done | **Sartorius** | sartorius.wd3.myworkdayjobs.com | Workday (`WorkdayScraper`, site `sartoriuscareers`) | wired; 66 postings, 0 German ML/DS currently |
+| blocked | **Carl Zeiss Meditec** | zeiss.com/career | Own JS job-search widget | Widget loads from `jobsearch-endpoint-prd.azureedge.net`, which is a CDN for the JS bundle, not a queryable API. Backing endpoint not found from static HTML |
 | skip / low yield | **TeamViewer** | careers.teamviewer.com | migrated off SmartRecruiters - empty board | Investigate before retrying |
 
 ## Prioritisation
@@ -66,6 +66,13 @@ Order by expected ML/AI hiring volume + Germany concentration + scraper effort:
   migrated to the client-rendered "searchResultsUnify" template (BMW). The RSS
   feed includes full job descriptions inline but is capped at the latest ~20
   items per keyword with no pagination, so HTML mode is preferred where available.
+  **Newer SF template:** Schaeffler and MTU render results as
+  `<li class="job-tile" data-url="...">` containing an `<a class="jobTitle-link">`,
+  not `<tr class="data-row">`, so `_parse_search_page` returns nothing and both
+  silently fall back to RSS. Adding a tile parser would lift Schaeffler from the
+  RSS cap to its full ~700-job sitemap; the blocker is that tiles expose only
+  `section-field city` with no country token, so `_in_target_country` needs
+  another source. Worth doing - this template is spreading.
   Some tenants (Hensoldt) publish one opening under several requisition ids that
   differ only in the trailing digits, so the scraper also de-dupes on
   title + location before returning.
