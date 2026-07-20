@@ -44,6 +44,9 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add jobs.json seen_jobs.json archived_jobs.json subscribers.json
+          # subscribers.json is deliberately NOT committed: it holds subscriber
+          # emails and unsubscribe tokens. It is synced from the Worker earlier
+          # in this same job and consumed in-place, so it never needs to persist.
+          git add jobs.json seen_jobs.json archived_jobs.json
           git diff --staged --quiet || git commit -m "Update jobs [skip ci]"
           git push
