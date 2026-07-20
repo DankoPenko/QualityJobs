@@ -13,6 +13,8 @@ from .successfactors import SuccessFactorsScraper
 from .finanzinformatik import FinanzInformatikScraper
 from .revolut import RevolutScraper
 from .jobs2web import Jobs2WebScraper
+from .munichre import MunichReScraper
+from .lufthansa import LufthansaScraper
 
 __all__ = [
     "BaseScraper",
@@ -30,4 +32,6 @@ __all__ = [
     "FinanzInformatikScraper",
     "RevolutScraper",
     "Jobs2WebScraper",
+    "MunichReScraper",
+    "LufthansaScraper",
 ]

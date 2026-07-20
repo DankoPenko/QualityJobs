@@ -54,6 +54,11 @@ class PhenomScraper(BaseScraper):
 
     GERMANY_NAMES = ("germany", "deutschland")
 
+    # Whether the sitemap's job URLs contain a readable title slug that can be
+    # used to skip non-ML detail fetches. Subclasses whose URLs are opaque set
+    # this False and pay the cost of fetching every posting.
+    prefilter_by_slug: bool = True
+
     def __init__(self, company_name: str, host: str, domain: str = "",
                  job_url_match: str = "/job/", **kwargs):
         """
@@ -181,7 +186,7 @@ class PhenomScraper(BaseScraper):
                 sub_body = self._make_request(sm).text
             except Exception:
                 continue
-            for url in re.findall(r"<loc>([^<]+)</loc>", sub_body):
+            for url in self._sitemap_locs(sub_body):
                 if self.job_url_match in url and url not in seen:
                     seen.add(url)
                     job_urls.append(url)
@@ -189,18 +194,31 @@ class PhenomScraper(BaseScraper):
 
     def _scrape_urlset(self, body: str) -> list[Job]:
         """Single-sitemap <urlset> with job-detail URLs inline."""
-        job_urls = [u for u in re.findall(r"<loc>([^<]+)</loc>", body) if self.job_url_match in u]
+        job_urls = [u for u in self._sitemap_locs(body) if self.job_url_match in u]
         return self._scrape_job_url_list(job_urls)
+
+    @staticmethod
+    def _sitemap_locs(body: str) -> list[str]:
+        """Extract <loc> URLs, unescaping XML entities (&amp; in query strings)."""
+        return [html.unescape(u) for u in re.findall(r"<loc>([^<]+)</loc>", body)]
 
     def _scrape_job_url_list(self, job_urls: list[str]) -> list[Job]:
         print(f"  [{self.company_name}] Total job URLs: {len(job_urls)}")
-        candidates = [u for u in job_urls if self._is_ml_ds_title(self._slug_text(u))]
+        if self.prefilter_by_slug:
+            candidates = [u for u in job_urls if self._is_ml_ds_title(self._slug_text(u))]
+        else:
+            # Tenant's job URLs carry no readable title (e.g. Lufthansa's
+            # ?ac=jobad&id=123), so every detail page has to be fetched and
+            # filtered on its JSON-LD title instead.
+            candidates = job_urls
         print(f"  [{self.company_name}] ML/DS candidates: {len(candidates)}")
 
         all_jobs: list[Job] = []
         for url in candidates:
             posting = self._fetch_job_posting(url)
             if posting is None:
+                continue
+            if not self.prefilter_by_slug and not self._is_ml_ds_title(posting.get("title", "")):
                 continue
             germany_location = self._first_germany_location_jsonld(posting)
             if germany_location is None:
@@ -231,6 +249,10 @@ class PhenomScraper(BaseScraper):
                 data = json.loads(payload)
             except json.JSONDecodeError:
                 continue
+            # A block may be the posting itself, a list of nodes, or a Yoast
+            # style {"@graph": [...]} wrapper (Mercedes-Benz).
+            if isinstance(data, dict) and "@graph" in data:
+                data = data["@graph"]
             if isinstance(data, list):
                 data = next((d for d in data if isinstance(d, dict) and d.get("@type") == "JobPosting"), None)
             if isinstance(data, dict) and data.get("@type") == "JobPosting":
@@ -255,8 +277,12 @@ class PhenomScraper(BaseScraper):
         return None
 
     def _build_job_jsonld(self, posting: dict, url: str, location_node: dict) -> Job:
-        identifier = posting.get("identifier", {})
-        job_id = str(identifier.get("value") or url.rsplit("/", 2)[-2])
+        # schema.org allows identifier to be a PropertyValue object or a bare
+        # string (Munich Re uses the latter).
+        identifier = posting.get("identifier") or {}
+        if isinstance(identifier, dict):
+            identifier = identifier.get("value")
+        job_id = str(identifier or url.rsplit("/", 2)[-2])
         title = posting.get("title") or self._slug_text(url).strip()
 
         address = location_node.get("address", {})

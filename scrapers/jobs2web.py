@@ -131,11 +131,19 @@ class Jobs2WebScraper(BaseScraper):
         print(f"  [{self.company_name}] Candidate postings: {len(candidates)}")
 
         all_jobs: list[Job] = []
+        seen: set[tuple[str, str]] = set()
         for posting in candidates.values():
             if not self._in_target_country(posting["location"]):
                 continue
             if not self._is_ml_ds_job(posting["title"]):
                 continue
+            # Some tenants (e.g. HENSOLDT) list one opening under several
+            # requisition ids that differ only in the trailing digits, so the
+            # job id cannot collapse them - key on title + location instead.
+            key = (posting["title"].strip().lower(), posting["location"].strip().lower())
+            if key in seen:
+                continue
+            seen.add(key)
             description = posting.get("description")
             if description is None and posting.get("path"):
                 description = self._fetch_description(posting["path"])

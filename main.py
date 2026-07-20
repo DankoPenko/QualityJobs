@@ -24,6 +24,7 @@ from scrapers import (
     FinanzInformatikScraper,
     RevolutScraper,
     Jobs2WebScraper,
+    MunichReScraper,
 )
 
 # Companies running Phenom People career sites
@@ -38,6 +39,12 @@ PHENOM_COMPANIES = [
     # Deloitte's German careers site serves the same JSON-LD JobPosting detail
     # pages, but its sitemap job URLs use a "/job-" prefix (not "/job/").
     {"name": "Deloitte", "host": "job.deloitte.com", "domain": "deloitte.com", "job_url_match": "/job-"},
+    # Not Phenom, but the same sitemap + JSON-LD shape. Its job URLs are
+    # /en/{title-slug}-{id}, so job_url_match is the locale prefix. Detail pages
+    # sit behind Akamai and start returning 403 when crawled flat out, hence the
+    # delay - the sitemap and listing pages are not protected.
+    {"name": "Mercedes-Benz Group", "host": "jobs.mercedes-benz.com",
+     "domain": "mercedes-benz.com", "job_url_match": "/en/", "request_delay": 3.0},
 ]
 
 # SAP SuccessFactors Career Site Builder tenants (schema.org microdata detail
@@ -215,6 +222,7 @@ WORKDAY_COMPANIES = [
 JOBS2WEB_COMPANIES = [
     {"name": "BMW Group", "host": "jobs.bmwgroup.com", "domain": "bmwgroup.com"},
     {"name": "adidas", "host": "jobs.adidas-group.com", "domain": "adidas.com"},
+    {"name": "HENSOLDT", "host": "jobs.hensoldt.net", "domain": "hensoldt.net"},
 ]
 
 
@@ -346,6 +354,11 @@ def main():
         SnapchatScraper(country_code="DEU"),
         RevolutScraper(country_code="DEU"),
         FinanzInformatikScraper(country_code="DEU"),
+        MunichReScraper(country_code="DEU", request_delay=0.15),
+        # LufthansaScraper is implemented and working but disabled: its job URLs
+        # carry no title, so all ~305 postings must be fetched (~285KB each),
+        # taking ~10 min - far longer than every other scraper combined. Re-enable
+        # if the runtime becomes acceptable or a title-bearing listing appears.
     ])
 
     # Phenom People-based companies
@@ -356,6 +369,7 @@ def main():
             domain=company["domain"],
             job_url_match=company.get("job_url_match", "/job/"),
             country_code="DEU",
+            request_delay=company.get("request_delay", 0.0),
         ))
 
     # SAP SuccessFactors Career Site Builder tenants
