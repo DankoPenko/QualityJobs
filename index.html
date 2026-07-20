@@ -204,6 +204,34 @@
         .filter-btn.active {
             background: #0066cc;
         }
+        /* Standalone toggle sitting under the Filter button - always visible,
+           independent of the (hover-opened) filter menu. */
+        .junior-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            cursor: pointer;
+            font-size: 0.85em;
+            color: #333;
+            user-select: none;
+            width: fit-content;
+        }
+        .junior-toggle:hover {
+            background: #f5f5f5;
+        }
+        .junior-toggle input[type="checkbox"] {
+            cursor: pointer;
+            margin: 0;
+        }
+        .junior-count {
+            color: #999;
+            font-size: 0.9em;
+        }
         .filter-menu {
             position: absolute;
             top: 100%;
@@ -408,6 +436,11 @@
         <div class="filter-menu" id="filter-menu">
             <!-- Populated by JavaScript -->
         </div>
+        <label class="junior-toggle" id="junior-toggle">
+            <input type="checkbox" id="hide-junior">
+            <span>Hide student &amp; intern roles</span>
+            <span class="junior-count" id="junior-count"></span>
+        </label>
     </div>
 
     <div class="container">
@@ -463,6 +496,16 @@
 
         function isJuniorRole(job) {
             return JUNIOR_ROLE_RE.test(job.title || '');
+        }
+
+        function setupJuniorToggle(jobs) {
+            const cb = document.getElementById('hide-junior');
+            document.getElementById('junior-count').textContent = jobs.filter(isJuniorRole).length;
+            cb.checked = hideJuniorRoles;
+            cb.addEventListener('change', (e) => {
+                hideJuniorRoles = e.target.checked;
+                renderJobs();
+            });
         }
         let menuPinned = false;
 
@@ -567,16 +610,6 @@
 
             html += `</div>`;
 
-            const juniorCount = jobs.filter(isJuniorRole).length;
-            html += `
-                <div class="filter-divider"></div>
-                <label class="select-all">
-                    <input type="checkbox" id="hide-junior" ${hideJuniorRoles ? 'checked' : ''}>
-                    <span>Hide student &amp; intern roles</span>
-                    <span class="filter-count">${juniorCount}</span>
-                </label>
-            `;
-
             html += `</div>`;
             menu.innerHTML = html;
 
@@ -591,11 +624,6 @@
                         selectedCompanies.delete(cb.value);
                     }
                 });
-                renderJobs();
-            });
-
-            document.getElementById('hide-junior').addEventListener('change', (e) => {
-                hideJuniorRoles = e.target.checked;
                 renderJobs();
             });
 
@@ -675,6 +703,7 @@
 
                 buildDomainMap(allJobs);
                 buildFilterMenu(allJobs);
+                setupJuniorToggle(allJobs);
                 renderJobs();
 
             } catch (error) {
