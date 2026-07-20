@@ -45,6 +45,8 @@ PHENOM_COMPANIES = [
     # delay - the sitemap and listing pages are not protected.
     {"name": "Mercedes-Benz Group", "host": "jobs.mercedes-benz.com",
      "domain": "mercedes-benz.com", "job_url_match": "/en/", "request_delay": 3.0},
+    # Also not Phenom - own careers site, but sitemap + JSON-LD all the same.
+    {"name": "EnBW", "host": "careers.enbw.com", "domain": "enbw.com", "request_delay": 0.2},
 ]
 
 # SAP SuccessFactors Career Site Builder tenants (schema.org microdata detail
@@ -215,6 +217,7 @@ WORKDAY_COMPANIES = [
     {"name": "enercity", "tenant": "enercity", "wd": "wd3", "site": "enercity_extern", "domain": "enercity.de"},
     # Globeone Future Readiness Index 2026
     {"name": "Deutsche Bank", "tenant": "db", "wd": "wd3", "site": "DBWebsite", "domain": "db.com"},
+    {"name": "Sartorius", "tenant": "sartorius", "wd": "wd3", "site": "sartoriuscareers", "domain": "sartorius.com"},
 ]
 
 # Companies running Jobs2Web / SuccessFactors HTML career sites (BMW pattern).
@@ -223,6 +226,11 @@ JOBS2WEB_COMPANIES = [
     {"name": "BMW Group", "host": "jobs.bmwgroup.com", "domain": "bmwgroup.com"},
     {"name": "adidas", "host": "jobs.adidas-group.com", "domain": "adidas.com"},
     {"name": "HENSOLDT", "host": "jobs.hensoldt.net", "domain": "hensoldt.net"},
+    # Schaeffler and MTU run a newer SuccessFactors template whose results are
+    # <li class="job-tile"> rather than <tr class="data-row">, so the HTML mode
+    # finds nothing and both fall back to RSS (capped at ~20 items per keyword).
+    {"name": "Schaeffler", "host": "jobs.schaeffler.com", "domain": "schaeffler.com"},
+    {"name": "MTU Aero Engines", "host": "jobs.mtu.de", "domain": "mtu.de"},
 ]
 
 
