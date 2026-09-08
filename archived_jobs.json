@@ -1,5 +1,24 @@
 [
   {
+    "id": "8749859002",
+    "title": "AI Engineer - FDE (Forward Deployed Engineer)",
+    "company": "Databricks",
+    "url": "https://databricks.com/company/careers/open-positions/job?gh_jid=8749859002",
+    "location": "Munich, Germany",
+    "city": "Munich",
+    "country": "Germany",
+    "posted_date": null,
+    "updated_time": "2026-09-02T01:05:53-04:00",
+    "source": "Greenhouse:databricks",
+    "scraped_at": "2026-09-02T13:10:55.671048",
+    "domain": "databricks.com",
+    "description": "AI Engineer - FDE (Forward Deployed Engineer)\n\nReq ID: CSQ427R332\n\nWe welcome remote applicants located near our offices. Preferred locations: Munich, Germany.&nbsp;Remote location for candidates to be based in the Germany region only (not remote from any other country)\n\nMission\n\nThe AI Forward Deployed Engineering (AI FDE) team is a highly specialised customer-facing AI team at Databricks. We deliver professional services engagements to help our customers build and productionize first-of-its-kind AI applications. We work cross-functionally to shape long-term strategic priorities and initiatives alongside engineering, product, and developer relations, as well as support internal subject matter expert (SME) teams. We view our team as an ensemble: we look for individuals with strong, unique specialisations to improve the overall strength of the team. This team is the right fit for you if you love working with customers, teammates, and fueling your curiosity for the latest trends in GenAI, LLMOps, and ML more broadly.\n\nReporting to: Senior Manager - AI FDE, EMEA\n\nThe impact you will have:\n\nDevelop cutting-edge GenAI solutions, incorporating the latest techniques from Databricks AI research to solve customer problems\n\nOwn production rollouts of consumer and internally facing GenAI applications\n\nServe as a trusted technical advisor to customers across a variety of domains\n\nPresent at conferences such as Data + AI Summit, recognized as a thought leader internally and externally\n\nCollaborate cross-functionally with the product and engineering teams to influence priorities and shape the product roadmap&nbsp;\n\nWhat we look for:\n\nExperience building GenAI applications, including RAG, multi-agent systems, Text2SQL, fine-tuning, etc., with tools such as HuggingFace, LangChain, and DSPy\n\nExpertise in deploying production-grade GenAI applications, including evaluation and optimisations&nbsp;\n\nExtensive years of hands-on industry data science experience, leveraging common machine ...",
+    "salary": null,
+    "job_type": null,
+    "department": "Professional Services Operations",
+    "archived_at": "2026-09-08T22:02:06.016014"
+  },
+  {
     "id": "R0448108",
     "title": "Full Stack AI Engineer (f/m/x) - Innovation and the TDI Chief Strategy Office",
     "company": "Deutsche Bank",
