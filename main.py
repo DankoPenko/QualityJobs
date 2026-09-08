@@ -234,6 +234,14 @@ JOBS2WEB_COMPANIES = [
     # finds nothing and both fall back to RSS (capped at ~20 items per keyword).
     {"name": "Schaeffler", "host": "jobs.schaeffler.com", "domain": "schaeffler.com"},
     {"name": "MTU Aero Engines", "host": "jobs.mtu.de", "domain": "mtu.de"},
+    # Big 4. PwC and Deloitte run Phenom sites (see PHENOM_COMPANIES); the other
+    # two are classic Jobs2Web. KPMG's German tenant is on the client-rendered
+    # template, so it takes the RSS path like BMW. EY is a single global tenant
+    # whose relevance-ordered results bury the German roles, hence the location
+    # facet; its rows carry no date column, so postings land without posted_date
+    # (harmless - jobs.json sorts on scraped_at, which every scraper sets).
+    {"name": "KPMG", "host": "jobs.kpmg.de", "domain": "kpmg.de"},
+    {"name": "EY", "host": "careers.ey.com", "domain": "ey.com", "location_search": "Germany"},
 ]
 
 
@@ -354,6 +362,7 @@ def main():
             host=company["host"],
             domain=company["domain"],
             source=company["name"],
+            location_search=company.get("location_search"),
             country_code="DEU",
         ))
 

@@ -63,7 +63,8 @@ class Jobs2WebScraper(BaseScraper):
 
     def __init__(self, company_name: str, host: str, domain: str = "",
                  source: Optional[str] = None, country_code_token: str = "DE",
-                 country_name: str = "Germany", mode: str = "auto", **kwargs):
+                 country_name: str = "Germany", mode: str = "auto",
+                 location_search: Optional[str] = None, **kwargs):
         """
         Args:
             company_name: Display name of the company.
@@ -76,6 +77,11 @@ class Jobs2WebScraper(BaseScraper):
                 the last 2-letter uppercase token (``DE`` = Germany).
             country_name: Human-readable country stored on each Job.
             mode: ``"auto"`` (HTML, fall back to RSS), ``"html"`` or ``"rss"``.
+            location_search: Optional ``locationsearch`` facet for HTML mode, e.g.
+                ``"Germany"``. Global tenants (EY) return worldwide hits ordered by
+                relevance, so the German roles fall outside the page budget; the
+                facet spends those pages on the target country instead. Ignored in
+                RSS mode, which has no equivalent parameter.
         """
         self.company_name = company_name
         self.host = host.replace("https://", "").replace("http://", "").rstrip("/")
@@ -85,6 +91,7 @@ class Jobs2WebScraper(BaseScraper):
         self.country_code_token = country_code_token.upper()
         self.country_name = country_name
         self.mode = mode
+        self.location_search = location_search
         super().__init__(**kwargs)
 
     def get_headers(self) -> dict:
@@ -172,8 +179,10 @@ class Jobs2WebScraper(BaseScraper):
         """
         startrow = 0
         for _ in range(self.MAX_PAGES_PER_TERM):
-            response = self._make_request(f"{self.base_url}/search",
-                                          params={"q": term, "startrow": startrow})
+            params = {"q": term, "startrow": startrow}
+            if self.location_search:
+                params["locationsearch"] = self.location_search
+            response = self._make_request(f"{self.base_url}/search", params=params)
             postings = self._parse_search_page(response.text)
             if not postings:
                 break
@@ -206,19 +215,42 @@ class Jobs2WebScraper(BaseScraper):
             })
         return postings
 
+    _DESC_DIV_RE = re.compile(
+        r'<div[^>]*class="[^"]*jobdescription[^"]*"[^>]*>(.*?)</div>\s*(?:<div|<footer|</section|</main)',
+        re.DOTALL | re.IGNORECASE,
+    )
+    _DESC_SPAN_RE = re.compile(r'<span[^>]*class="[^"]*jobdescription[^"]*"[^>]*>', re.IGNORECASE)
+
     def _fetch_description(self, path: str) -> Optional[str]:
         url = path if path.startswith("http") else f"{self.base_url}{path}"
         try:
             response = self._make_request(url)
         except Exception:
             return None
-        match = re.search(
-            r'<div[^>]*class="[^"]*jobdescription[^"]*"[^>]*>(.*?)</div>\s*(?:<div|<footer|</section|</main)',
-            response.text, re.DOTALL | re.IGNORECASE,
-        )
-        if not match:
-            return None
-        return self._clean_html(match.group(1)) or None
+        match = self._DESC_DIV_RE.search(response.text)
+        if match:
+            return self._clean_html(match.group(1)) or None
+        # EY hangs the body off a <span class="jobdescription"> that itself
+        # contains nested <span>s, so no non-greedy pattern can delimit it -
+        # walk the tags to the matching close instead.
+        span = self._DESC_SPAN_RE.search(response.text)
+        if span:
+            body = self._balanced_slice(response.text, span.end(), "span")
+            return self._clean_html(body) or None
+        return None
+
+    @staticmethod
+    def _balanced_slice(text: str, start: int, tag: str) -> str:
+        """Return the content from ``start`` up to the matching closing ``tag``."""
+        pattern = re.compile(rf'</?{tag}\b', re.IGNORECASE)
+        depth, pos = 1, start
+        while depth:
+            match = pattern.search(text, pos)
+            if not match:
+                return text[start:]
+            depth += -1 if match.group(0).startswith("</") else 1
+            pos = match.end()
+        return text[start:match.start()]
 
     # ---------------------------------------------------------------- RSS mode
     _RSS_LOC_RE = re.compile(r'^(.*)\s+\(([^()]*)\)\s*$')
